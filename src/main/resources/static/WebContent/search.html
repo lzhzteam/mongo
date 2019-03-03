@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline - Dark Admin</title>
+
+    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/local.css" />
+
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>   
+
+      <style>
+
+        div {
+            padding-bottom:20px;
+        }
+
+    </style>
+    <script type="text/javascript">
+        //这个 请选择 选项 加的很好。
+        var obj = document.getElementById("jia");
+        var jiaArr = ["请选择","检查目的", "高血压病", "血脂异常","糖尿病史","脑卒中病史","外周血管病","吸烟史","饮酒史","体育锻炼史","心肌梗死","其他疾病史","家族史"];
+        var exampleArr = [
+        	    [],
+                ["典型心绞痛", "非典型胸部不适", "非胸痛症状","心电图异常","心脏超声异常"],//检查目的
+                ["有"],//高血压病
+                ["有"],//血脂异常
+                ["1型","2型"],//糖尿病史
+                ["有"],//脑卒中病史
+                ["有",],//外周血管病
+                ["经常吸","偶吸","过去吸，现已戒烟","从不吸"],//吸烟史
+                ["经常饮","偶饮","过去饮","从不饮"],//饮酒史
+                ["基本不锻炼","每周小于3次","每周大于等于3次"],//体育锻炼史
+                ["有"],//心肌梗死
+                ["肝功能不全","肾功能不全","肿瘤"],//其他疾病史
+                ["冠心病家族史","高脂血症家族史"],//家族史
+                
+        ];
+        window.onload = function () {
+             
+            var selJia = document.getElementById("jia");
+            //申请空间
+            selJia.length = jiaArr.length;
+            //添加元素
+            for (var i = 0; i < jiaArr.length; i++) {
+                selJia.options[i].text = jiaArr[i];
+                selJia.options[i].value = jiaArr[i];
+            }
+        }
+ 
+        function ChangeExampleSelect(index)
+        {
+            var selExa = document.getElementById("example");
+ 
+            selExa.length = exampleArr[index].length;
+ 
+            for (var i = 0; i < exampleArr[index].length; i++)
+            {
+                selExa.options[i].text = exampleArr[index][i];
+                selExa.options[i].value = exampleArr[index][i];
+            }
+        }
+        
+        function myCheck()  
+        { 
+
+              if(document.getElementById("jia").value=="请选择")  
+              {  
+                 alert("您尚未选择查询项！");  
+                 return false;  
+              }  
+
+           return true;  
+            
+        } 
+    </script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">Back to Admin</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li ><a href="index.html"><i class="fa fa-bullseye"></i> ACDH简介</a></li>
+                    <li ><a href="CCTAInsert.html"><i class="fa fa-tasks"></i> CCTA录入</a></li>
+                    <li><a href="BDTInsert.html"><i class="fa fa-globe"></i> BDT录入</a></li>
+                    <li class="selected"><a href="search.html"><i class="fa fa-list-ol"></i> 数据分析</a></li>
+                    <li><a href="CCTA.jsp"><i class="fa fa-font"></i> 病例查询</a></li>            
+                </ul>
+                <ul class="nav navbar-nav navbar-right navbar-user">
+                    <li class="dropdown messages-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Messages <span class="badge">2</span> <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">2 New Messages</li>
+                            <li class="message-preview">
+                                <a href="#">
+                                    <span class="avatar"><i class="fa fa-bell"></i></span>
+                                    <span class="message">Security alert</span>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li class="message-preview">
+                                <a href="#">
+                                    <span class="avatar"><i class="fa fa-bell"></i></span>
+                                    <span class="message">Security alert</span>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li><a href="#">Go to Inbox <span class="badge">2</span></a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown user-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Steve Miller<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><i class="fa fa-power-off"></i> Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+         <hr />
+        <div class="container">
+            <div class="page-header">
+            	
+                <h1 id="timeline">查询</h1>
+  		 	</div>
+  		 	<form action="timeline.jsp" method="post" onsubmit="return myCheck()">
+            <select id="jia" name="jia" onchange="ChangeExampleSelect(this.selectedIndex)">
+            
+    </select>
+    <select id="example" name="examplejia">
+ 
+    </select>
+    
+     <div align="center">
+    <button type="submit" class="btn btn-default">确定</button>
+    
+    </div>
+ </form>
+ </div>
+</div>
+</body>
+</html>
