@@ -4,3 +4,13 @@ spring:
       uri: mongodb://101.132.120.236:27017/TEST
       password: "abc123"
       username: "myUserAdmin"
+
+  mvc:
+    view:
+      prefix: classpasth:/templates/
+      suffix: .html
+
+  thymeleaf:
+    cache: false
+server:
+  port: 8090

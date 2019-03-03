@@ -4,5 +4,12 @@ import org.springframework.data.annotation.Id;
 
 public class BaseEntity {
     @Id
-    String id;
+    //id
+    public String id;
+
+    //姓名
+    public String name;
+
+    //性别
+    public String gender;
 }
