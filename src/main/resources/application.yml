@@ -1,9 +1,7 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://101.132.120.236:27017/TEST
-      password: "abc123"
-      username: "myUserAdmin"
+      uri: mongodb://101.132.120.236:27017/ACHD
 
   mvc:
     view:
