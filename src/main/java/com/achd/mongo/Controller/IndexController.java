@@ -27,27 +27,33 @@ public class IndexController {
         return BDTRepository.findAll();
     }
 
-    @GetMapping("/")
-    public String getIndex(HttpSession session, Model model) {
-
+    public static void injectUser(HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             user = new User("1", "未登录", "000");
         }
         model.addAttribute("user", user);
+    }
+
+    @GetMapping("/")
+    public String getIndex(HttpSession session, Model model) {
+
+        injectUser(session, model);
 
 
         return "index";
     }
 
     @GetMapping("/BDTInsert")
-    public String getBDTInsert(){
+    public String getBDTInsert(HttpSession session, Model model) {
+        injectUser(session, model);
         return "bdtinsert";
     }
 
     @GetMapping("/CCTAInsert")
-    public String getCCTAInsert(){
+    public String getCCTAInsert(HttpSession session, Model model) {
+
+        injectUser(session, model);
         return "cctainsert";
     }
-
 }

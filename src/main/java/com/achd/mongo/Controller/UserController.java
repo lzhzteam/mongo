@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
+import static com.achd.mongo.Controller.IndexController.injectUser;
+
 @Controller
 public class UserController {
 
@@ -21,11 +23,7 @@ public class UserController {
     @GetMapping("/logIn")
     public String loginGet(HttpSession session, Model model) {
 
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User("1", "未登录", "000");
-        }
-        model.addAttribute("user", user);
+        injectUser(session, model);
 
 
         String reason = (String) session.getAttribute("logFailure");//拿取loginFailure属性
@@ -59,11 +57,7 @@ public class UserController {
     @GetMapping("/logUp")
     public String logUpGet(HttpSession session, Model model) {
 
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User("1", "未登录", "000");
-        }
-        model.addAttribute("user", user);
+        injectUser(session, model);
 
 
         String reason = (String) session.getAttribute("logFailure");
