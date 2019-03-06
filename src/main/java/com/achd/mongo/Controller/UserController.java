@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
@@ -19,9 +20,12 @@ public class UserController {
 
     @GetMapping("/logIn")
     public String loginGet(HttpSession session, Model model) {
-        if (session.getAttribute("uid") != null) {                           //如果已经登陆
-            return "redirect:/";
+
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User("1", "未登录", "000");
         }
+        model.addAttribute("user", user);
 
 
         String reason = (String) session.getAttribute("logFailure");//拿取loginFailure属性
@@ -46,7 +50,7 @@ public class UserController {
             session.setAttribute("logFailure", "wrong_password");  //密码错误
             return "redirect:/logIn";                                            //扔回去重新登陆
         } else if (hadUser.getPasswordMD5().equals(user.getPasswordMD5())) {
-            session.setAttribute("uid", hadUser.getId());              //密码正确
+            session.setAttribute("user", hadUser);              //密码正确
         }
         return "redirect:/";
     }
@@ -54,6 +58,13 @@ public class UserController {
 
     @GetMapping("/logUp")
     public String logUpGet(HttpSession session, Model model) {
+
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User("1", "未登录", "000");
+        }
+        model.addAttribute("user", user);
+
 
         String reason = (String) session.getAttribute("logFailure");
 
@@ -77,8 +88,15 @@ public class UserController {
         } else {
             user_repository.save(user);                                         //成功注册
             User newUser = user_repository.findByUsername(user.getUsername());
-            session.setAttribute("uid", newUser.getId());
+            session.setAttribute("user", newUser);
             return "redirect:/";
         }
+    }
+
+
+    @RequestMapping("/logOff")
+    public String logOffReq(HttpSession session) {
+        session.removeAttribute("user");
+        return "redirect:/";
     }
 }

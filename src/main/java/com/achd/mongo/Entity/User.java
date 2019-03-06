@@ -15,9 +15,9 @@ public class User implements Serializable {
 
     private String passwordMD5;
 
-    public User(String id, String userName, String passwordMD5) {
+    public User(String id, String username, String passwordMD5) {
         this.id = id;
-        this.username = userName;
+        this.username = username;
         this.passwordMD5 = passwordMD5;
     }
 
