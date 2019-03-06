@@ -31,11 +31,26 @@
         img {
             height: 400px;
         }
-        .object-fit_fill { object-fit: fill }
-        .object-fit_contain { object-fit: contain }
-        .object-fit_cover { object-fit: cover }
-        .object-fit_none { object-fit: none }
-        .object-fit_scale-down { object-fit: scale-down }
+
+        .object-fit_fill {
+            object-fit: fill
+        }
+
+        .object-fit_contain {
+            object-fit: contain
+        }
+
+        .object-fit_cover {
+            object-fit: cover
+        }
+
+        .object-fit_none {
+            object-fit: none
+        }
+
+        .object-fit_scale-down {
+            object-fit: scale-down
+        }
     </style>
 
 
@@ -46,7 +61,7 @@
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
     <div class="navbar-nav-scroll">
         <ul class="navbar-nav bd-navbar-nav flex-row">
-            <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/">首页</a></li>
             <li class="nav-item dropdown">
                 <a aria-expanded="false" aria-haspopup="true"
                    class="nav-item nav-link dropdown-toggle mr-md-2"
@@ -58,20 +73,28 @@
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="#">病因分析</a></li>
-            <li class="nav-item"><a class="nav-link active" href="#">病例查询</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">病例查询</a></li>
 
         </ul>
     </div>
     <!--右侧个人信息-->
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item dropdown"><a aria-expanded="false"
-                                         aria-haspopup="true"
-                                         class="nav-item nav-link dropdown-toggle mr-md-2"
-                                         data-toggle="dropdown" href="#"
-                                         id="bd-versions">
-            v4.0 </a>
+        <li class="nav-item dropdown">
+            <a aria-expanded="false"
+               aria-haspopup="true"
+               class="nav-item nav-link dropdown-toggle mr-md-2"
+               data-toggle="dropdown"
+               href="#"
+               id="bd-versions"
+               th:text="${user.username}"
+            >
+                用户
+            </a>
             <div aria-labelledby="bd-versions" class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item active" href="/">Latest (4.x)</a>
+                <a class="dropdown-item" href="/logIn" th:if="${user.username}=='未登录'">登录</a>
+                <a class="dropdown-item" href="/logUp" th:if="${user.username}=='未登录'">注册</a>
+
+                <a class="dropdown-item" href="/logOff" th:if="${user.username}!='未登录'">退出</a>
             </div>
         </li>
     </ul>

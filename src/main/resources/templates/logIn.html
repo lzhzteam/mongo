@@ -4,20 +4,24 @@
     <meta charset="UTF-8">
     <title>冠心病队列研究平台</title>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <script crossorigin="anonymous" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/doc.min.css}"/>
     <script th:src="@{/bootstrap-4.2.1/js/bootstrap.min.js}"></script>
 
 
     <style>
-        html, body {
-            height: 100%;
+        body {
+            background-color: #f5f5f5;
         }
 
-        body {
+        .back {
+            height: 100%;
             display: -ms-flexbox;
             display: -webkit-box;
             display: flex;
@@ -29,7 +33,6 @@
             justify-content: center;
             padding-top: 40px;
             padding-bottom: 40px;
-            background-color: #f5f5f5;
         }
 
         .form-signin {
@@ -69,45 +72,94 @@
     </style>
 
 </head>
-<body class="text-center">
 
+<body>
 
-<!--表单-->
-<form class="form-signin card" id="form" method="post" role="form" th:action="'/log'+${log}">
-    <h1 class="h3 mb-3 font-weight-normal" th:if="${log}=='In'">
-        登录
-    </h1>
-    <h1 class="h3 mb-3 font-weight-normal" th:if="${log}=='Up'">
-        注册
-    </h1>
-    <div class="alert alert-success alert-dismissable" th:if="${logFailure}!=''">
-        <button aria-hidden="true" class="close" data-dismiss="alert" type="button">×</button>
-        <h4>
-            注意!
-        </h4> <strong>Warning!</strong>
-        <p th:text="${logFailure}"></p> <a class="alert-link" href="#">alert link</a>
-    </div>
-    <div class="form-group">
-        <label for="username">Username</label><input class="form-control" id="username" name="username"
-                                                     type="text"/>
-    </div>
-    <div class="form-group">
-        <label for="passwordMD5">Password</label><input class="form-control" id="passwordMD5"
-                                                        name="passwordMD5"
-                                                        type="password"/>
-    </div>
+<!-- 菜单 -->
+<!--左侧按钮-->
+<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+    <div class="navbar-nav-scroll">
+        <ul class="navbar-nav bd-navbar-nav flex-row">
+            <li class="nav-item "><a class="nav-link" href="/">首页</a></li>
+            <li class="nav-item dropdown">
+                <a aria-expanded="false" aria-haspopup="true"
+                   class="nav-item nav-link dropdown-toggle mr-md-2"
+                   data-toggle="dropdown" href="#" id="insert">
+                    录入信息 </a>
+                <div aria-labelledby="insert" class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="/BDTInsert">BDT</a>
+                    <a class="dropdown-item" href="/CCTAInsert">CCTA</a>
+                </div>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">病因分析</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">病例查询</a></li>
 
-    <div class="form-group" th:if="${log}=='Up'">
-        <label for="passwordMD5check">Password Repeat</label><input class="form-control"
-                                                                    id="passwordMD5check"
-                                                                    oninput="checkPasswd()"
-                                                                    type="password"/>
+        </ul>
     </div>
-    <button class="btn btn-lg btn-primary btn-block submit" th:if="${log}=='In'">登录</button>
-    <button class="btn btn-lg btn-primary btn-block submit" th:if="${log}=='Up'">注册</button>
-    <p class="mt-5 mb-3 text-muted">© 2019-2020</p>
-</form>
+    <!--右侧个人信息-->
+    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+        <li class="nav-item dropdown active">
+            <a aria-expanded="false"
+               aria-haspopup="true"
+               class="nav-item nav-link dropdown-toggle mr-md-2"
+               data-toggle="dropdown"
+               href="#"
+               id="bd-versions"
+               th:text="${user.username}"
+            >
+                用户
+            </a>
+            <div aria-labelledby="bd-versions" class="dropdown-menu dropdown-menu-right">
+                <a class="dropdown-item" href="/logIn" th:if="${user.username}=='未登录'">登录</a>
+                <a class="dropdown-item" href="/logUp" th:if="${user.username}=='未登录'">注册</a>
 
+                <a class="dropdown-item" href="/logOff" th:if="${user.username}!='未登录'">退出</a>
+            </div>
+        </li>
+    </ul>
+</header>
+<div class="back">
+
+    <!--表单-->
+    <form class="form-signin card text-center" id="form" method="post" role="form" th:action="'/log'+${log}">
+        <h1 class="h3 mb-3 font-weight-normal" th:if="${log}=='In'">
+            登录
+        </h1>
+        <h1 class="h3 mb-3 font-weight-normal" th:if="${log}=='Up'">
+            注册
+        </h1>
+        <div class="alert alert-success alert-dismissable" th:if="${logFailure}!=''">
+            <button aria-hidden="true" class="close" data-dismiss="alert" type="button">×</button>
+            <h4>
+                注意!
+            </h4>
+            <p th:text="${logFailure}"></p>
+        </div>
+        <div class="form-group">
+            <label for="username">Username</label><input class="form-control" id="username" name="username"
+                                                         type="text"/>
+        </div>
+        <div class="form-group">
+            <label for="passwordMD5">Password</label><input class="form-control" id="passwordMD5"
+                                                            name="passwordMD5"
+                                                            type="password"/>
+        </div>
+
+        <div class="form-group" th:if="${log}=='Up'">
+            <label for="passwordMD5check">Password Repeat</label><input class="form-control"
+                                                                        id="passwordMD5check"
+                                                                        oninput="checkPasswd()"
+                                                                        type="password"/>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block submit" th:if="${log}=='In'">登录</button>
+        <a class="btn btn-lg btn-secondary btn-block " href="/logUp" th:if="${log}=='In'">没有账号？注册！</a>
+
+        <button class="btn btn-lg btn-primary btn-block submit" disabled="true" th:if="${log}=='Up'">密码不一致</button>
+        <a class="btn btn-lg btn-secondary btn-block " href="/logIn" th:if="${log}=='Up'">有账号？登录！</a>
+        <p class="mt-5 mb-3 text-muted">© 2019-2020</p>
+    </form>
+
+</div>
 <script src="https://cdn.bootcss.com/blueimp-md5/2.10.0/js/md5.js"></script>
 <script th:if="${log}=='In'">
     $(document).ready(function () {
@@ -128,7 +180,7 @@
 
         if (ori_password !== ori_passwordcheck) {
             $(".submit").attr('disabled', true);
-            $(".submit").text("两次密码不一致");
+            $(".submit").text("密码不一致");
         } else {
             $(".submit").attr('disabled', false);
             $(".submit").text("注册");
