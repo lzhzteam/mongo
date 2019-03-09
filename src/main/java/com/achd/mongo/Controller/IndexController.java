@@ -1,7 +1,6 @@
 package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.BDT.BDT;
-import com.achd.mongo.Entity.User;
 import com.achd.mongo.Service.BDT_Repository;
 import com.achd.mongo.Service.User_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
+import static com.achd.mongo.Utilities.Utility.injectUser;
+
 @Controller
 public class IndexController {
 
@@ -27,13 +29,6 @@ public class IndexController {
         return BDTRepository.findAll();
     }
 
-    public static void injectUser(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = new User("1", "未登录", "000");
-        }
-        model.addAttribute("user", user);
-    }
 
     @GetMapping("/")
     public String getIndex(HttpSession session, Model model) {

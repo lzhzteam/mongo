@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
 
-import static com.achd.mongo.Controller.IndexController.injectUser;
+import static com.achd.mongo.Utilities.Utility.injectUser;
 
 @Controller
 public class UserController {
