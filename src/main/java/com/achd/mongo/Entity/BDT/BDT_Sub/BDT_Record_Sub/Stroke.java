@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Stroke {
+public class Stroke extends TableBase {
     private Integer existence;
     private String time;
     private String position;

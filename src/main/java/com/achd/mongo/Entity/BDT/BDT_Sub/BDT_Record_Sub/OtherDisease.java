@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class OtherDisease {
+public class OtherDisease extends TableBase {
     private Boolean hepaticInsufficiency;
     private Boolean renalInsufficiency;
     private Boolean tumor;

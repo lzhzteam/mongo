@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class ACHD{
+public class ACHD extends TableBase {
     private Integer existence;
     @DBRef
     private Who who;

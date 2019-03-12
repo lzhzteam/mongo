@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Purpose {
+public class Purpose extends TableBase {
     private Boolean typicalAngina;
     private Boolean atypicalChestDiscomfort;
     private Boolean non_chestPainSymptoms;

@@ -34,6 +34,9 @@ public class SearchController {
 
         model.addAttribute("BDTList", byId);
         return "CaseSearchResult";
+
+
     }
+
 
 }

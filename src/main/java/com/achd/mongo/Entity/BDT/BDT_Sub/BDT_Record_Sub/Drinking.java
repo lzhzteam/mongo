@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Drinking {
+public class Drinking extends TableBase {
     private Integer type;
 
     @DBRef

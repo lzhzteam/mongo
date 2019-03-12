@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Ps {
+public class Ps extends TableBase {
 
     @DBRef
     private Liquor liquor;

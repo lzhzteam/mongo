@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Exercise {
+public class Exercise extends TableBase {
     private Integer type;
     private Integer ps;
 

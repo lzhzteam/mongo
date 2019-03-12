@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Diabetes {
+public class Diabetes extends TableBase {
     private Integer existence;
     private Integer type;
     private Integer medication;

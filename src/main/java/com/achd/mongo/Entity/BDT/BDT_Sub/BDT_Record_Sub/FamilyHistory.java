@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class FamilyHistory {
+public class FamilyHistory extends TableBase {
     @DBRef
     private ACHD achd;
     private Integer hyperlipidemia;

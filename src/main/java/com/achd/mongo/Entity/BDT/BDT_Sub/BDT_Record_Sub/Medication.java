@@ -3,7 +3,7 @@ package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Medication {
+public class Medication extends TableBase {
     private Boolean aspirin;
     private Boolean clopidogrelSulfate;
     private Boolean nitrateDrug;

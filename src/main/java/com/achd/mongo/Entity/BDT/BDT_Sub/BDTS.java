@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.Date;
 
 @Document
-public class BDTS {
+public class BDTS extends TableBase {
 
     public String bdtsNum;
 
@@ -37,7 +37,7 @@ public class BDTS {
     @DBRef
     private Exercise exercise;
     @DBRef
-    private MyocardialInfarction myocardialInfarcation;
+    private MyocardialInfarction myocardialInfarction;
     @DBRef
     private Medication medication;
     @DBRef
@@ -48,7 +48,7 @@ public class BDTS {
     public BDTS() {
     }
 
-    public BDTS(Integer age, Date time, Integer heartRate, String bloodPressure, Integer height, Integer weight, Purpose purpose, Hypertension hypertension, Dyslipidemia dyslipidemia, Diabetes diabetes, Stroke stroke, PeripheralVascularDisease peripheralVascularDisease, Smoking smoking, Drinking drinking, Exercise exercise, MyocardialInfarction myocardialInfarcation, Medication medication, OtherDisease otherDisease, FamilyHistory familyHistory) {
+    public BDTS(Integer age, Date time, Integer heartRate, String bloodPressure, Integer height, Integer weight, Purpose purpose, Hypertension hypertension, Dyslipidemia dyslipidemia, Diabetes diabetes, Stroke stroke, PeripheralVascularDisease peripheralVascularDisease, Smoking smoking, Drinking drinking, Exercise exercise, MyocardialInfarction myocardialInfarction, Medication medication, OtherDisease otherDisease, FamilyHistory familyHistory) {
         this.age = age;
         this.time = time;
         this.heartRate = heartRate;
@@ -64,7 +64,7 @@ public class BDTS {
         this.smoking = smoking;
         this.drinking = drinking;
         this.exercise = exercise;
-        this.myocardialInfarcation = myocardialInfarcation;
+        this.myocardialInfarction = myocardialInfarction;
         this.medication = medication;
         this.otherDisease = otherDisease;
         this.familyHistory = familyHistory;
@@ -88,7 +88,7 @@ public class BDTS {
                 ", smoking=" + smoking +
                 ", drinking=" + drinking +
                 ", exercise=" + exercise +
-                ", myocardialInfarcation=" + myocardialInfarcation +
+                ", myocardialInfarcation=" + myocardialInfarction +
                 ", medication=" + medication +
                 ", otherDisease=" + otherDisease +
                 ", familyHistory=" + familyHistory +
@@ -215,12 +215,20 @@ public class BDTS {
         this.exercise = exercise;
     }
 
-    public MyocardialInfarction getMyocardialInfarcation() {
-        return myocardialInfarcation;
+    public String getBdtsNum() {
+        return bdtsNum;
     }
 
-    public void setMyocardialInfarcation(MyocardialInfarction myocardialInfarcation) {
-        this.myocardialInfarcation = myocardialInfarcation;
+    public void setBdtsNum(String bdtsNum) {
+        this.bdtsNum = bdtsNum;
+    }
+
+    public MyocardialInfarction getMyocardialInfarction() {
+        return myocardialInfarction;
+    }
+
+    public void setMyocardialInfarction(MyocardialInfarction myocardialInfarction) {
+        this.myocardialInfarction = myocardialInfarction;
     }
 
     public Medication getMedication() {
