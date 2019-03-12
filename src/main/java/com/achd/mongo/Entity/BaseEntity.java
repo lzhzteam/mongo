@@ -4,8 +4,10 @@ import org.springframework.data.annotation.Id;
 
 public class BaseEntity {
     @Id
-    //id
     public String id;
+
+    //编号
+    public String num;
 
     //姓名
     public String name;

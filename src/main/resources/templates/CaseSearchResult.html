@@ -40,6 +40,10 @@
         .object-fit_scale-down {
             object-fit: scale-down
         }
+
+        .card {
+            margin: 20px;
+        }
     </style>
 
 
@@ -93,9 +97,91 @@
         </li>
     </ul>
 </header>
+
+
 <div class="container">
     <div class="row clearfix">
+
         <div class="col-md-12 column">
+
+            <!--表格-->
+
+            <!--/*@thymesVar id="BDT" type="com.achd.mongo.Entity.BDT.BDT"*/-->
+            <div class="card" th:each="BDT:${BDTList}">
+
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">编号</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">性别</th>
+                    </tr>
+
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td scope="col" th:text="${BDT.num}">0000000001</td>
+                        <td scope="col" th:text="${BDT.name}">Last Name</td>
+                        <td scope="col" th:text="${BDT.gender}">Username</td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <div data-children=".item" id="bdts">
+                    <div class="item card " th:each="BDTS:${BDT.getBDTs()}">
+                        <div class="card-header">
+                            <a aria-expanded="true" data-parent="#bdts"
+
+                               data-toggle="collapse"
+                               th:aria-controls="'collapse'+${BDTS.bdtsNum}"
+                               th:href="'#collapse'+${BDTS.bdtsNum}"
+                               th:text="'检查'+${BDTS.bdtsNum}+'点击展开'"
+                            >
+
+                            </a>
+                        </div>
+                        <div class="collapse card-body" role="tabpanel" th:id="'collapse'+${BDTS.bdtsNum}">
+
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th scope="col">检查时间</th>
+                                    <td scope="col" th:text="${BDTS.getTime()}">2019.2.1</td>
+                                    <th scope="col">年龄</th>
+                                    <td scope="col" th:text="${BDTS.getAge()}">20</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                <tr>
+                                    <th scope="col">心率</th>
+                                    <td scope="col" th:text="${BDTS.getHeartRate()}"></td>
+                                    <th scope="col">血压</th>
+                                    <td scope="col" th:text="${BDTS.getBloodPressure()}"></td>
+                                </tr>
+
+                                <tr>
+                                    <th scope="col">身高</th>
+                                    <td scope="col" th:text="${BDTS.getHeight()}"></td>
+                                    <th scope="col">体重</th>
+                                    <td scope="col" th:text="${BDTS.getHeight()}"></td>
+                                </tr>
+                                <tr>
+                                    <th scope="col">身高</th>
+                                    <td scope="col" th:text="${BDTS.getHeight()}"></td>
+                                    <th scope="col">体重</th>
+                                    <td scope="col" th:text="${BDTS.getHeight()}"></td>
+                                </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
 
 
         </div>

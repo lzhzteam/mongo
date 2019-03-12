@@ -11,6 +11,8 @@ import java.util.ArrayList;
 
 @Document(collection = "BDT")
 public class BDT extends BaseEntity implements Serializable {
+
+
     @DBRef
     private ArrayList<BDTS> BDTs;
 
@@ -21,14 +23,24 @@ public class BDT extends BaseEntity implements Serializable {
         this.BDTs = BDTs;
     }
 
+
     @Override
     public String toString() {
         return "BDT{" +
-                "name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
-                ", BDTs=" + BDTs +
+                "BDTs=" + BDTs +
                 ", id='" + id + '\'' +
+                ", num='" + num + '\'' +
+                ", name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
                 '}';
+    }
+
+    public String getNum() {
+        return num;
+    }
+
+    public void setNum(String num) {
+        this.num = num;
     }
 
     public String getName() {

@@ -9,6 +9,9 @@ import java.util.Date;
 
 @Document
 public class BDTS {
+
+    public String bdtsNum;
+
     private Integer age;
     private Date time;
     private Integer heartRate;
