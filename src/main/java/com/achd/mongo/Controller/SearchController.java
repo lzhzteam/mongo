@@ -30,7 +30,7 @@ public class SearchController {
     public String caseSearchResultGet(HttpSession session, Model model, @PathVariable("search") String search) {
         Utility.injectUser(session, model);
 
-        List<BDT> byId = bdt_repository.findByNumContainsOrNameContains(search, search);
+        List<BDT> byId = bdt_repository.findByNumContainsOrNameContainsAllIgnoreCase(search, search);
 
         model.addAttribute("BDTList", byId);
         return "CaseSearchResult";

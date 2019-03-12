@@ -78,9 +78,14 @@
 <!-- 菜单 -->
 <!--左侧按钮-->
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+
+    <a aria-label="ACHD" class="navbar-brand mr-0 mr-md-2" href="/">
+        <img style="width: 40px; height: auto;" th:src="@{/img/logo.png}"/>
+    </a>
+
     <div class="navbar-nav-scroll">
         <ul class="navbar-nav bd-navbar-nav flex-row">
-            <li class="nav-item "><a class="nav-link" href="/">首页</a></li>
+            <li class="nav-item active"><a class="nav-link" href="/">首页</a></li>
             <li class="nav-item dropdown">
                 <a aria-expanded="false" aria-haspopup="true"
                    class="nav-item nav-link dropdown-toggle mr-md-2"
@@ -92,13 +97,13 @@
                 </div>
             </li>
             <li class="nav-item"><a class="nav-link" href="#">病因分析</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">病例查询</a></li>
+            <li class="nav-item"><a class="nav-link" href="/CaseSearch">病例查询</a></li>
 
         </ul>
     </div>
     <!--右侧个人信息-->
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item dropdown active">
+        <li class="nav-item dropdown">
             <a aria-expanded="false"
                aria-haspopup="true"
                class="nav-item nav-link dropdown-toggle mr-md-2"
@@ -118,6 +123,7 @@
         </li>
     </ul>
 </header>
+
 <div class="back">
 
     <!--表单-->
