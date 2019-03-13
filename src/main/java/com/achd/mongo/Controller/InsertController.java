@@ -1,6 +1,7 @@
 package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.BDT.BDT;
+import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
 import com.achd.mongo.Service.BDT_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import static com.achd.mongo.Utilities.Utility.injectUser;
 
@@ -35,7 +37,11 @@ public class InsertController {
 
     @PostMapping("/BDTInsert")
     @ResponseBody
-    public String BDTInsertPost(BDT bdt, HttpSession session, Model model) {
-        bdt_repository.findBDTByNum(bdt.getNum())
+    public BDT BDTInsertPost(BDT bdt, HttpSession session, Model model) {
+        BDT hadUser = bdt_repository.findBDTByNum(bdt.get编号());
+        List<BDTS> hadUserBDTs = hadUser.getBDTs();
+        hadUserBDTs.add(bdt.getBDTs().get(0));
+        bdt_repository.save(hadUser);
+        return hadUser;
     }
 }
