@@ -318,7 +318,7 @@
                                                         </tr>
                                                         <tr th:if="${BDTS.gtDiabetes().gtExistence()}==3"
                                                             th:switch="${BDTS.gtDiabetes().gtResult()}">
-                                                            <th>用药后控制异常</th>
+                                                            <th>用药后控制情况</th>
                                                             <td th:case="1">正常</td>
                                                             <td th:case="2">不正常</td>
                                                             <td th:case="3">不稳定</td>
@@ -632,22 +632,22 @@
                                                                                 </table>
                                                                             </div>
                                                                         </tr>
-
+                                                                        <tr th:switch="${BDTS.gtFamilyHistory().gtHyperlipemia()}">
+                                                                            <th>高脂血症家族史</th>
+                                                                            <td th:case="1">是</td>
+                                                                            <td th:case="2">否</td>
+                                                                        </tr>
+                                                                        <tr th:if="${BDTS.gtFamilyHistory().gtOther()}!=null">
+                                                                            <th>其他</th>
+                                                                            <td th:text="${BDTS.gtFamilyHistory().gtOther()}"></td>
+                                                                        </tr>
 
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
                                                             </td>
                                                         </tr>
-                                                        <tr th:switch="${BDTS.gtFamilyHistory().gtHyperlipemia()}">
-                                                            <th>高脂血症家族史</th>
-                                                            <td th:case="1">是</td>
-                                                            <td th:case="2">否</td>
-                                                        </tr>
-                                                        <tr th:if="${BDTS.gtFamilyHistory().gtOther()}!=null">
-                                                            <th>其他</th>
-                                                            <td th:text="${BDTS.gtFamilyHistory().gtOther()}"></td>
-                                                        </tr>
+
                                                         </tbody>
                                                     </table>
                                                 </div>
