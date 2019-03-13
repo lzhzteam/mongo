@@ -79,6 +79,7 @@
     <!--右侧个人信息-->
     <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
         <li class="nav-item dropdown">
+            <!--/*@thymesVar id="user" type="com.achd.mongo.Entity.User"*/-->
             <a aria-expanded="false"
                aria-haspopup="true"
                class="nav-item nav-link dropdown-toggle mr-md-2"
@@ -121,32 +122,544 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td scope="col" th:text="${BDT.num}">0000000001</td>
-                        <td scope="col" th:text="${BDT.姓名}">Last Name</td>
-                        <td scope="col" th:text="${BDT.性别}">Username</td>
+                        <td scope="col" th:text="${BDT.gtNum()}">0000000001</td>
+                        <td scope="col" th:text="${BDT.gtName()}">Last Name</td>
+                        <td scope="col" th:text="${BDT.gtSex()}">Username</td>
                     </tr>
                     </tbody>
                 </table>
 
                 <div data-children=".item" id="bdts">
-                    <div class="item card " th:each="BDTS:${BDT.getBDTs()}">
+                    <div class="item card " th:each="BDTS,BDTSStat:${BDT.getBDTs()}">
                         <div class="card-header">
                             <a aria-expanded="true" data-parent="#bdts"
 
                                data-toggle="collapse"
-                               th:aria-controls="'collapse'+${BDTS.bdtsNum}"
-                               th:href="'#collapse'+${BDTS.bdtsNum}"
-                               th:text="'检查'+${BDTS.bdtsNum}+'点击展开'"
+                               th:aria-controls="'collapse'+${BDTSStat.index}"
+                               th:href="'#collapse'+${BDTSStat.index}"
+                               th:text="'检查'+${BDTSStat.index}+'点击展开'"
                             >
 
                             </a>
                         </div>
-                        <div class="collapse card-body" role="tabpanel" th:id="'collapse'+${BDTS.bdtsNum}">
-                            <div th:utext="${BDTS.getTableHtml().toString()}">
+                        <div class="collapse card-body" role="tabpanel" th:id="'collapse'+${BDTSStat.index}">
+                            <div>
+                                <div>
+                                    <table class="table table-bordered table-sm table-striped">
+                                        <tbody>
+                                        <tr th:if="${BDTS.gtAge()}">
+                                            <th>年龄</th>
+                                            <td th:text="${BDTS.gtAge()}+' 岁'">56</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtTime()}">
+                                            <th>检查时间</th>
+                                            <td th:text="${BDTS.gtTime()}">Thu Mar 15 08:00:00 CST 2018</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtHeartRate()}">
+                                            <th>心率</th>
+                                            <td th:text="${BDTS.gtHeartRate()}">82</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtBloodPressure()}">
+                                            <th>血压</th>
+                                            <td th:text="${BDTS.gtBloodPressure()}+' mmHg'">180/100</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtHeight()}">
+                                            <th>身高</th>
+                                            <td th:text="${BDTS.gtHeight()}+' cm'">170</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtWeight()}">
+                                            <th>体重</th>
+                                            <td th:text="${BDTS.gtWeight()}+' kg'">45</td>
+                                        </tr>
+                                        <tr th:if="${BDTS.gtPurpose()}">
+                                            <th>检查目的</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>典型心绞痛</th>
+                                                            <td th:if="${BDTS.gtPurpose().gtTypicalangina()}">√</td>
+                                                            <td th:unless="${BDTS.gtPurpose().gtTypicalangina()}">×</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>非典型性胸部不适</th>
+                                                            <td th:if="${BDTS.gtPurpose().gtAtypicalchestdiscomfort()}">
+                                                                √
+                                                            </td>
+                                                            <td th:unless="${BDTS.gtPurpose().gtAtypicalchestdiscomfort()}">
+                                                                ×
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>非胸痛症状</th>
+                                                            <td th:if="${BDTS.gtPurpose().gtNonchestpainsymptoms()}">√
+                                                            </td>
+                                                            <td th:unless="${BDTS.gtPurpose().gtNonchestpainsymptoms()}">
+                                                                ×
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>心电图异常</th>
+                                                            <td th:if="${BDTS.gtPurpose().gtElectrocardiographicabnormality()}">
+                                                                √
+                                                            </td>
+                                                            <td th:unless="${BDTS.gtPurpose().gtElectrocardiographicabnormality()}">
+                                                                ×
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>心脏超声异常</th>
+                                                            <td th:if="${BDTS.gtPurpose().gtHeartultrasonicabnormal()}">
+                                                                √
+                                                            </td>
+                                                            <td th:unless="${BDTS.gtPurpose().gtHeartultrasonicabnormal()}">
+                                                                ×
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>其它</th>
+                                                            <td th:text="${BDTS.gtPurpose().gtOther()}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>高血压病</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtHypertension().gtExistence()}">
+                                                            <th>有无</th>
+                                                            <td th:case="1">不详</td>
+                                                            <td th:case="2">无</td>
+                                                            <td th:case="3">有</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtHypertension().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtHypertension().gtMedicine()}">
+                                                            <th>目前用药</th>
+                                                            <td th:case="1">ACEI或ARB</td>
+                                                            <td th:case="2">钙离子拮抗剂</td>
+                                                            <td th:case="3">利尿剂</td>
+                                                            <td th:case="4">受体阻滞剂</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtHypertension().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtHypertension().gtResult()}">
+                                                            <th>用药后达标情况</th>
+                                                            <td th:case="1">达标</td>
+                                                            <td th:case="2">不达标</td>
+                                                            <td th:case="3">不稳定</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>血脂异常</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtDyslipidemia().gtExistence()}">
+                                                            <th>有无</th>
+                                                            <td th:case="1">不详</td>
+                                                            <td th:case="2">无</td>
+                                                            <td th:case="3">有</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDyslipidemia().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtDyslipidemia().gtMedicine()}">
+                                                            <th>目前用药</th>
+                                                            <td th:case="1">他汀类药物</td>
+                                                            <td th:case="2">贝特类药物</td>
+                                                            <td th:case="3">依折麦布</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDyslipidemia().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtHypertension().gtResult()}">
+                                                            <th>用药后控制情况</th>
+                                                            <td th:case="1">正常</td>
+                                                            <td th:case="2">仍不正常</td>
+                                                            <td th:case="3">部分正常</td>
+                                                            <td th:case="4">不稳定</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>糖尿病史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtDiabetes().gtExistence()}">
+                                                            <th>有无</th>
+                                                            <td th:case="1">不详</td>
+                                                            <td th:case="2">无</td>
+                                                            <td th:case="3">有</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDiabetes().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtDiabetes().gtType()}">
+                                                            <th>分型</th>
+                                                            <td th:case="1">1型</td>
+                                                            <td th:case="2">2型</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDiabetes().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtDiabetes().gtMedicine()}">
+                                                            <th>目前用药</th>
+                                                            <td th:case="1">胰岛素</td>
+                                                            <td th:case="2">二甲双胍</td>
+                                                            <td th:case="3">磺脲类药物</td>
+                                                            <td th:case="4">GLP-1类似物</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDiabetes().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtDiabetes().gtResult()}">
+                                                            <th>用药后控制异常</th>
+                                                            <td th:case="1">正常</td>
+                                                            <td th:case="2">不正常</td>
+                                                            <td th:case="3">不稳定</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>脑卒中病史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtStroke().gtExistence()}">
+                                                            <th>有无</th>
+                                                            <td th:case="1">不详</td>
+                                                            <td th:case="2">无</td>
+                                                            <td th:case="3">有</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtStroke().gtExistence()}==3">
+                                                            <th>发生时间</th>
+                                                            <td th:text="${BDTS.gtStroke().gtTime()}">2018-01</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtStroke().gtExistence()}==3">
+                                                            <th>发生部位</th>
+                                                            <td th:text="${BDTS.gtStroke().gtPosition()}">null</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtStroke().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtStroke().gtType()}">
+                                                            <th>类型</th>
+                                                            <td th:case="1">缺血性卒中</td>
+                                                            <td th:case="2">出血性卒中</td>
+                                                            <td th:case="3">TIA发作</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>外周血管病</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtPeripheralVascularDisease().gtExistence()}">
+                                                            <th>有无</th>
+                                                            <td th:case="1">不详</td>
+                                                            <td th:case="2">无</td>
+                                                            <td th:case="3">有</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtPeripheralVascularDisease().gtExistence()}==3">
+                                                            <th>发生时间</th>
+                                                            <td th:text="${BDTS.gtPeripheralVascularDisease().gtTime()}">
+                                                                2017-05
+                                                            </td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtPeripheralVascularDisease().gtExistence()}==3">
+                                                            <th>发生部位</th>
+                                                            <td th:text="${BDTS.gtPeripheralVascularDisease().gtPosition()}">
+                                                                下肢血管
+                                                            </td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtPeripheralVascularDisease().gtExistence()}==3"
+                                                            th:switch="${BDTS.gtPeripheralVascularDisease().gtType()}">
+                                                            <th>类型</th>
+                                                            <td th:case="1">静脉</td>
+                                                            <td th:case="2">动脉</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>吸烟史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtSmoking().gtFrequency()}">
+                                                            <th th:case="1">经常吸</th>
+                                                            <th th:case="2">偶吸</th>
+                                                            <th th:case="3">过去吸，现已戒烟</th>
+                                                            <th th:case="4">从不吸</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtSmoking().gtFrequency()}==1">
+                                                            <td th:text="'每天 '+${BDTS.gtSmoking().gtNumber()}+' 根，共 '+${BDTS.gtSmoking().gtYear()}+' 年'"></td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtSmoking().gtFrequency()}==3">
+                                                            <td th:text="'戒烟 '+${BDTS.gtSmoking().gtPastYear()}+' 年， '+${BDTS.gtSmoking().gtPastMonth()}+' 月'"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>饮酒史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtDrinking().gtFrequency()}">
+                                                            <th>频率</th>
+                                                            <td th:case="1">经常饮</td>
+                                                            <td th:case="2">偶饮</td>
+                                                            <td th:case="3">过去饮，现已戒酒</td>
+                                                            <td th:case="4">从不饮</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDrinking().gtFrequency()}==1">
+                                                            <th>经常饮</th>
+                                                            <td>
+                                                                <div>
+                                                                    <table class="table table-bordered table-sm table-striped">
+                                                                        <tbody>
+                                                                        <tr>
+                                                                            <th>白酒</th>
+                                                                            <td>
+                                                                                <div>
+                                                                                    <table class="table table-bordered table-sm table-striped">
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <th>毫升</th>
+                                                                                            <td th:text="${BDTS.gtDrinking().gtAlways().gtLiquor().gtMl()+'ml'}">
+                                                                                                100
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        <tr>
+                                                                                            <th>度数</th>
+                                                                                            <td th:text="${BDTS.gtDrinking().gtAlways().gtLiquor().gtDegree()+'度'}">
+                                                                                                32
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>红酒</th>
+                                                                            <td th:text="${BDTS.gtDrinking().gtAlways().gtRedwine()}+'ml'">
+                                                                                0
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>啤酒</th>
+                                                                            <td th:text="${BDTS.gtDrinking().gtAlways().gtBeer()}+'ml'">
+                                                                                0
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th>黄酒</th>
+                                                                            <td th:text="${BDTS.gtDrinking().gtAlways().gtYellowwine()}+'ml'">
+                                                                                0
+                                                                            </td>
+                                                                        </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtDrinking().gtFrequency()}==3">
+                                                            <td th:text="'已戒酒 '+${BDTS.gtDrinking().gtYears()}+' 年'">
+                                                                null
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>体育锻炼史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:switch="${BDTS.gtExercise().gtFrequency()}">
+                                                            <th>频率</th>
+                                                            <td th:case="1">基本不锻炼</td>
+                                                            <td th:case="2">每周小于3次</td>
+                                                            <td th:case="3">每周大于等于3次</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtExercise().gtFrequency()}!=1"
+                                                            th:switch="${BDTS.gtExercise().gtDuration()}">
+                                                            <th>时长</th>
+                                                            <td th:case="1">小于1小时</td>
+                                                            <td th:case="2">大于等于1小时</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>心肌梗死</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:if="${BDTS.gtMyocardialInfarction().gtExistence()}==1">
+                                                            <td>无</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtMyocardialInfarction().gtExistence()}==2">
+                                                            <th>发生年月</th>
+                                                            <td th:text="${BDTS.gtMyocardialInfarction().gtYearMonth()}">
+                                                                2017-08
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>目前服药</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:if="${BDTS.gtMedication().gtAspirin()}">
+                                                            <th>阿司匹林</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtMedication().gtClopidogrelhydrogen()}">
+                                                            <th>硫酸氢氯吡格雷</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtMedication().gtNitricether()}">
+                                                            <th>硝酸酯类药物</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtMedication().gtWarfarin()}">
+                                                            <th>华法林等抗凝药</th>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>其他疾病史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr th:if="${BDTS.gtOtherDisease().gtHepaticinsufficiency()}">
+                                                            <th>肝功能不全</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtOtherDisease().gtHepaticinsufficiency()}">
+                                                            <th>肾功能不全</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtOtherDisease().gtHepaticinsufficiency()}">
+                                                            <th>肿瘤</th>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtOtherDisease().gtHepaticinsufficiency()}">
+                                                            <td th:text="${BDTS.gtOtherDisease().gtOther()}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>家族史</th>
+                                            <td>
+                                                <div>
+                                                    <table class="table table-bordered table-sm table-striped">
+                                                        <tbody>
+                                                        <tr>
+                                                            <th>冠心病家族史</th>
+                                                            <td>
+                                                                <div>
+                                                                    <table class="table table-bordered table-sm table-striped">
+                                                                        <tbody>
+                                                                        <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtExistence()==2}">
+                                                                            <td>无</td>
+                                                                        </tr>
+                                                                        <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtExistence()==1}">
+                                                                            <div>
+                                                                                <table class="table table-bordered table-sm table-striped">
+                                                                                    <tbody>
+                                                                                    <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtWho().gtFather()!=null}">
+                                                                                        <th>父亲</th>
+                                                                                        <td th:text="'发病年龄 '+${BDTS.gtFamilyHistory().gtACHD().gtWho().gtFather()}+' 岁'">
+                                                                                            20
+                                                                                        </td>
+                                                                                    </tr>
 
+                                                                                    <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtWho().gtMother()!=null}">
+                                                                                        <th>母亲</th>
+                                                                                        <td th:text="'发病年龄 '+${BDTS.gtFamilyHistory().gtACHD().gtWho().gtMother()}+' 岁'">
+                                                                                            20
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtWho().gtCousin()!=null}">
+                                                                                        <th>兄弟姐妹</th>
+                                                                                        <td th:text="'发病年龄 '+${BDTS.gtFamilyHistory().gtACHD().gtWho().gtCousin()}+' 岁'">
+                                                                                            20
+                                                                                        </td>
+                                                                                    </tr>
+
+                                                                                    <tr th:if="${BDTS.gtFamilyHistory().gtACHD().gtWho().gtChild()!=null}">
+                                                                                        <th>子女</th>
+                                                                                        <td th:text="'发病年龄 '+${BDTS.gtFamilyHistory().gtACHD().gtWho().gtChild()}+' 岁'">
+                                                                                            20
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </tr>
+
+
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr th:switch="${BDTS.gtFamilyHistory().gtHyperlipemia()}">
+                                                            <th>高脂血症家族史</th>
+                                                            <td th:case="1">是</td>
+                                                            <td th:case="2">否</td>
+                                                        </tr>
+                                                        <tr th:if="${BDTS.gtFamilyHistory().gtOther()}!=null">
+                                                            <th>其他</th>
+                                                            <td th:text="${BDTS.gtFamilyHistory().gtOther()}"></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-
                         </div>
+
+
                     </div>
                 </div>
 
