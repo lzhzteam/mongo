@@ -7,17 +7,17 @@ public class Diabetes extends TableBase {
     private Integer 有无;
     private Integer 分型;
     private Integer 目前用药;
-    private Integer 用药后控制异常;
+    private Integer 用药后控制情况;
 
 
     public Diabetes() {
     }
 
-    public Diabetes(Integer 有无, Integer 分型, Integer 目前用药, Integer 用药后控制异常) {
+    public Diabetes(Integer 有无, Integer 分型, Integer 目前用药, Integer 用药后控制情况) {
         this.有无 = 有无;
         this.分型 = 分型;
         this.目前用药 = 目前用药;
-        this.用药后控制异常 = 用药后控制异常;
+        this.用药后控制情况 = 用药后控制情况;
     }
 
     public Integer get有无() {
@@ -44,12 +44,12 @@ public class Diabetes extends TableBase {
         this.目前用药 = 目前用药;
     }
 
-    public Integer get用药后控制异常() {
-        return 用药后控制异常;
+    public Integer get用药后控制情况() {
+        return 用药后控制情况;
     }
 
-    public void set用药后控制异常(Integer 用药后控制异常) {
-        this.用药后控制异常 = 用药后控制异常;
+    public void set用药后控制情况(Integer 用药后控制情况) {
+        this.用药后控制情况 = 用药后控制情况;
     }
 
 
@@ -78,10 +78,10 @@ public class Diabetes extends TableBase {
     }
 
     public Integer gtResult() {
-        return 用药后控制异常;
+        return 用药后控制情况;
     }
 
     public void stResult(Integer 用药后控制异常) {
-        this.用药后控制异常 = 用药后控制异常;
+        this.用药后控制情况 = 用药后控制异常;
     }
 }
