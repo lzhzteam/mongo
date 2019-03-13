@@ -3,7 +3,6 @@ package com.achd.mongo.Entity.BDT;
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
 import com.achd.mongo.Entity.BaseEntity;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 public class BDT extends BaseEntity implements Serializable {
 
 
-    @DBRef
+    //@DBRef
     private ArrayList<BDTS> BDTs;
 
     public BDT() {

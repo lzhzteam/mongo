@@ -8,7 +8,7 @@ import java.util.List;
 
 @RepositoryRestResource
 public interface BDT_Repository extends MongoRepository<BDT, String> {
-    List<BDT> findByNumContainsOrNameContainsAllIgnoreCase(String num, String name);
+    List<BDT> findBy编号ContainsOr姓名ContainsAllIgnoreCase(String num, String name);
 
-    BDT findBDTByNum(String num);
+    BDT findBDTBy编号(String num);
 }

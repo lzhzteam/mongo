@@ -1,12 +1,11 @@
 package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class ACHD extends TableBase {
     private Integer 有无;
-    @DBRef
+    //@DBRef
     private Who 谁;
 
     public ACHD() {

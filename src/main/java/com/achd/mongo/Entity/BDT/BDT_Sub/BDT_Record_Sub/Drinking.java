@@ -1,13 +1,12 @@
 package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Drinking extends TableBase {
     private Integer 频率;
 
-    @DBRef
+    //    @DBRef
     private Ps 经常饮;
 
     private Integer 过去饮年;

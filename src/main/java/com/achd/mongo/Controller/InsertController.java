@@ -38,7 +38,7 @@ public class InsertController {
     @PostMapping("/BDTInsert")
     @ResponseBody
     public BDT BDTInsertPost(BDT bdt, HttpSession session, Model model) {
-        BDT hadUser = bdt_repository.findBDTByNum(bdt.get编号());
+        BDT hadUser = bdt_repository.findBDTBy编号(bdt.get编号());
         List<BDTS> hadUserBDTs = hadUser.getBDTs();
         hadUserBDTs.add(bdt.getBDTs().get(0));
         bdt_repository.save(hadUser);

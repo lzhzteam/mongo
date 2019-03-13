@@ -2,45 +2,47 @@ package com.achd.mongo.Entity.BDT.BDT_Sub;
 
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub.*;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
+import java.util.Date;
 
 @Document
 public class BDTS extends TableBase {
-
+    @Id
+    private String id;
+    
     private Integer 年龄;
     private Date 检查时间;
     private Integer 心率;
     private String 血压;
     private Integer 身高;
     private Integer 体重;
-    @DBRef
+    ////@DBRef
     private Purpose 检查目的;
-    @DBRef
+    //@DBRef
     private Hypertension 高血压病;
-    @DBRef
+    //@DBRef
     private Dyslipidemia 血脂异常;
-    @DBRef
+    //@DBRef
     private Diabetes 糖尿病史;
-    @DBRef
+    //@DBRef
     private Stroke 脑卒中病史;
-    @DBRef
+    //@DBRef
     private PeripheralVascularDisease 外周血管病;
-    @DBRef
+    //@DBRef
     private Smoking 吸烟史;
-    @DBRef
+    //@DBRef
     private Drinking 饮酒史;
-    @DBRef
+    //@DBRef
     private Exercise 体育锻炼史;
-    @DBRef
+    //@DBRef
     private MyocardialInfarction 心肌梗死;
-    @DBRef
+    //@DBRef
     private Medication 目前服药;
-    @DBRef
+    //@DBRef
     private OtherDisease 其他疾病史;
-    @DBRef
+    //@DBRef
     private FamilyHistory 家族史;
 
     public BDTS() {

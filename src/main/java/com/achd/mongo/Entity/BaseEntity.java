@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 
 public class BaseEntity {
     @Id
+
     public String id;
 
     //编号

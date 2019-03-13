@@ -78,25 +78,42 @@
                 </tr>
             </table>
 
-            <form name="form1" action="./GetBDTFormServlet" method="post" onsubmit="return myCheck()">
-                <table width="100%" border="0" cellspacing="1" cellpadding="4" bgcolor="#cccccc" class="tabtop13" align="center">
+            <form action="./BDTInsert" method="post" name="form1" onsubmit="return myCheck()">
+                <table class="table">
                     <tr>
                         <td>ID</td>
-                        <td colspan="3"><input type="text" name="ID" style="width:300px;border:0px;border-bottom:#000000 1px solid;"></td>
+                        <td colspan="3"><input name="编号" style="width:300px;border:0px;border-bottom:#000000 1px solid;"
+                                               type="text"></td>
+                        <td>姓名</td>
+                        <td colspan="3"><input name="姓名" style="width:300px;border:0px;border-bottom:#000000 1px solid;"
+                                               type="text"></td>
+                        <td>性别</td>
+                        <td colspan="3"><input name="性别" style="width:300px;border:0px;border-bottom:#000000 1px solid;"
+                                               type="text"></td>
                         <td>时间</td>
-                        <td colspan="3"><input type="date" name="时间" style="width:300px;border:0px;border-bottom:#000000 1px solid;"></td>
+                        <td colspan="3"><input name="BDTs[0].时间"
+                                               style="width:300px;border:0px;border-bottom:#000000 1px solid;"
+                                               type="date"></td>
                     </tr>
                     <tr><td colspan="8">&nbsp;</td></tr>
                     <tr>
                         <td>心率</td>
-                        <td><input type="text" name="心率" style="width:100px;border:0px;border-bottom:#000000 1px solid;"></td>
+                        <td><input name="BDTs[0].心率" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
+                                   type="text"></td>
                         <td>血压</td>
-                        <td><input type="text" name="血压" style="width:100px;border:0px;border-bottom:#000000 1px solid;">mmHG</td>
+                        <td><input name="BDTs[0].血压" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
+                                   type="text">mmHG
+                        </td>
                         <td>身高</td>
-                        <td><input type="text" name="身高" style="width:100px;border:0px;border-bottom:#000000 1px solid;">cm</td>
+                        <td><input name="BDTs[0].身高" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
+                                   type="text">cm
+                        </td>
                         <td>体重</td>
-                        <td><input type="text" name="体重" style="width:100px;border:0px;border-bottom:#000000 1px solid;">kg</td>
+                        <td><input name="BDTs[0].体重" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
+                                   type="text">kg
+                        </td>
                     </tr>
+                    <!--
                     <tr><td colspan="8">&nbsp;</td></tr>
                     <tr>
                         <td>检查目的</td>
@@ -295,6 +312,7 @@
                             <input type="text" name="家族病史其他" style="width:200px;border:0px;border-bottom:#000000 1px solid;">
                         </td>
                     </tr>
+                    -->
                 </table>
                 <div align="center"><input type="reset" value="重置">
                     <input type="submit" value="提交"></div>

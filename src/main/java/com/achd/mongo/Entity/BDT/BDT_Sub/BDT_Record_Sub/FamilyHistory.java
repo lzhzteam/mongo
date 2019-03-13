@@ -1,11 +1,10 @@
 package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class FamilyHistory extends TableBase {
-    @DBRef
+    //    @DBRef
     private ACHD 冠心病家族史;
     private Integer 高脂血症家族史;
     private String 其它;
