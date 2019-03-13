@@ -35,30 +35,6 @@ public class BDT extends BaseEntity implements Serializable {
                 '}';
     }
 
-    public String getNum() {
-        return 编号;
-    }
-
-    public void setNum(String num) {
-        this.编号 = num;
-    }
-
-    public String getName() {
-        return 姓名;
-    }
-
-    public void setName(String name) {
-        this.姓名 = name;
-    }
-
-    public String getGender() {
-        return 性别;
-    }
-
-    public void setGender(String gender) {
-        this.性别 = gender;
-    }
-
     public ArrayList<BDTS> getBDTs() {
         return BDTs;
     }
@@ -67,7 +43,5 @@ public class BDT extends BaseEntity implements Serializable {
         this.BDTs = BDTs;
     }
 
-    public void addBDT(BDTS bdts) {
-        this.BDTs.add(bdts);
-    }
+
 }

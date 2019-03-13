@@ -14,4 +14,37 @@ public class BaseEntity {
 
     //性别
     public String 性别;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String get编号() {
+        return 编号;
+    }
+
+    public void set编号(String 编号) {
+        this.编号 = 编号;
+    }
+
+    public String get姓名() {
+        return 姓名;
+    }
+
+    public void set姓名(String 姓名) {
+        this.姓名 = 姓名;
+    }
+
+    public String get性别() {
+        return 性别;
+    }
+
+    public void set性别(String 性别) {
+        this.性别 = 性别;
+    }
 }

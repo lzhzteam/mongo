@@ -39,18 +39,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/BDTInsert")
-    public String getBDTInsert(HttpSession session, Model model) {
-        injectUser(session, model);
-        return "bdtinsert";
-    }
 
-    @GetMapping("/CCTAInsert")
-    public String getCCTAInsert(HttpSession session, Model model) {
-
-        injectUser(session, model);
-        return "cctainsert";
-    }
 
 //    @GetMapping("/TestInsert")
 //    public BDT test(HttpSession session, Model model) {
