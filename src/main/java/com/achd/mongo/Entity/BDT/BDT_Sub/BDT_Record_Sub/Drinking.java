@@ -5,43 +5,45 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Drinking extends TableBase {
-    private Integer type;
+    private Integer 频率;
 
     @DBRef
-    private Ps ps;
+    private Ps 经常饮;
 
+    private Integer 过去饮年;
 
 
 
     public Drinking() {
     }
 
-    public Drinking(Integer type, Ps ps) {
-        this.type = type;
-        this.ps = ps;
+    public Drinking(Integer 频率, Ps 经常饮, Integer 过去饮年) {
+        this.频率 = 频率;
+        this.经常饮 = 经常饮;
+        this.过去饮年 = 过去饮年;
     }
 
-    @Override
-    public String toString() {
-        return "Drinking{" +
-                "type=" + type +
-                ", ps=" + ps +
-                '}';
+    public Integer get频率() {
+        return 频率;
     }
 
-    public Integer getType() {
-        return type;
+    public void set频率(Integer 频率) {
+        this.频率 = 频率;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public Ps get经常饮() {
+        return 经常饮;
     }
 
-    public Ps getPs() {
-        return ps;
+    public void set经常饮(Ps 经常饮) {
+        this.经常饮 = 经常饮;
     }
 
-    public void setPs(Ps ps) {
-        this.ps = ps;
+    public Integer get过去饮年() {
+        return 过去饮年;
+    }
+
+    public void set过去饮年(Integer 过去饮年) {
+        this.过去饮年 = 过去饮年;
     }
 }

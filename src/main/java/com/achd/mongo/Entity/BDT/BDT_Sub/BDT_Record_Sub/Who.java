@@ -4,38 +4,50 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Who extends TableBase {
-    private Integer father;
-    private Integer mother;
+    private Integer 父亲;
+    private Integer 母亲;
+    private Integer 兄弟姐妹;
+    private Integer 子女;
 
     public Who() {
     }
 
-    public Who(Integer father, Integer mother) {
-        this.father = father;
-        this.mother = mother;
+    public Who(Integer 父亲, Integer 母亲, Integer 兄弟姐妹, Integer 子女) {
+        this.父亲 = 父亲;
+        this.母亲 = 母亲;
+        this.兄弟姐妹 = 兄弟姐妹;
+        this.子女 = 子女;
     }
 
-    @Override
-    public String toString() {
-        return "Who{" +
-                "father=" + father +
-                ", mother=" + mother +
-                '}';
+    public Integer get父亲() {
+        return 父亲;
     }
 
-    public Integer getFather() {
-        return father;
+    public void set父亲(Integer 父亲) {
+        this.父亲 = 父亲;
     }
 
-    public void setFather(Integer father) {
-        this.father = father;
+    public Integer get母亲() {
+        return 母亲;
     }
 
-    public Integer getMother() {
-        return mother;
+    public void set母亲(Integer 母亲) {
+        this.母亲 = 母亲;
     }
 
-    public void setMother(Integer mother) {
-        this.mother = mother;
+    public Integer get兄弟姐妹() {
+        return 兄弟姐妹;
+    }
+
+    public void set兄弟姐妹(Integer 兄弟姐妹) {
+        this.兄弟姐妹 = 兄弟姐妹;
+    }
+
+    public Integer get子女() {
+        return 子女;
+    }
+
+    public void set子女(Integer 子女) {
+        this.子女 = 子女;
     }
 }

@@ -7,11 +7,11 @@ public class BaseEntity {
     public String id;
 
     //编号
-    public String num;
+    public String 编号;
 
     //姓名
-    public String name;
+    public String 姓名;
 
     //性别
-    public String gender;
+    public String 性别;
 }

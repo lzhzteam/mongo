@@ -4,38 +4,60 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Smoking extends TableBase {
-    private Integer type;
-    private String ps;
+    private Integer 频率;
+    private Integer 经常吸支数;
+    private Integer 经常吸年;
+    private Integer 过去吸年;
+    private Integer 过去吸月;
 
     public Smoking() {
     }
 
-    public Smoking(Integer type, String ps) {
-        this.type = type;
-        this.ps = ps;
+    public Smoking(Integer 频率, Integer 经常吸支数, Integer 经常吸年, Integer 过去吸年, Integer 过去吸月) {
+        this.频率 = 频率;
+        this.经常吸支数 = 经常吸支数;
+        this.经常吸年 = 经常吸年;
+        this.过去吸年 = 过去吸年;
+        this.过去吸月 = 过去吸月;
     }
 
-    @Override
-    public String toString() {
-        return "Smoking{" +
-                "type=" + type +
-                ", ps='" + ps + '\'' +
-                '}';
+    public Integer get频率() {
+        return 频率;
     }
 
-    public Integer getType() {
-        return type;
+    public void set频率(Integer 频率) {
+        this.频率 = 频率;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public Integer get经常吸支数() {
+        return 经常吸支数;
     }
 
-    public String getPs() {
-        return ps;
+    public void set经常吸支数(Integer 经常吸支数) {
+        this.经常吸支数 = 经常吸支数;
     }
 
-    public void setPs(String ps) {
-        this.ps = ps;
+    public Integer get经常吸年() {
+        return 经常吸年;
+    }
+
+    public void set经常吸年(Integer 经常吸年) {
+        this.经常吸年 = 经常吸年;
+    }
+
+    public Integer get过去吸年() {
+        return 过去吸年;
+    }
+
+    public void set过去吸年(Integer 过去吸年) {
+        this.过去吸年 = 过去吸年;
+    }
+
+    public Integer get过去吸月() {
+        return 过去吸月;
+    }
+
+    public void set过去吸月(Integer 过去吸月) {
+        this.过去吸月 = 过去吸月;
     }
 }

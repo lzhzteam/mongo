@@ -4,60 +4,50 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Medication extends TableBase {
-    private Boolean aspirin;
-    private Boolean clopidogrelSulfate;
-    private Boolean nitrateDrug;
-    private Boolean warfarin;
+    private Boolean 阿司匹林;
+    private Boolean 硫酸氢氯吡格雷;
+    private Boolean 硝酸酯类药物;
+    private Boolean 华法林等抗凝药;
 
     public Medication() {
     }
 
-    public Medication(Boolean aspirin, Boolean clopidogrelSulfate, Boolean nitrateDrug, Boolean warfarin) {
-        this.aspirin = aspirin;
-        this.clopidogrelSulfate = clopidogrelSulfate;
-        this.nitrateDrug = nitrateDrug;
-        this.warfarin = warfarin;
+    public Medication(Boolean 阿司匹林, Boolean 硫酸氢氯吡格雷, Boolean 硝酸酯类药物, Boolean 华法林等抗凝药) {
+        this.阿司匹林 = 阿司匹林;
+        this.硫酸氢氯吡格雷 = 硫酸氢氯吡格雷;
+        this.硝酸酯类药物 = 硝酸酯类药物;
+        this.华法林等抗凝药 = 华法林等抗凝药;
     }
 
-    @Override
-    public String toString() {
-        return "Medication{" +
-                "aspirin=" + aspirin +
-                ", clopidogrelSulfate=" + clopidogrelSulfate +
-                ", nitrateDrug=" + nitrateDrug +
-                ", warfarin=" + warfarin +
-                '}';
+    public Boolean get阿司匹林() {
+        return 阿司匹林;
     }
 
-    public Boolean getAspirin() {
-        return aspirin;
+    public void set阿司匹林(Boolean 阿司匹林) {
+        this.阿司匹林 = 阿司匹林;
     }
 
-    public void setAspirin(Boolean aspirin) {
-        this.aspirin = aspirin;
+    public Boolean get硫酸氢氯吡格雷() {
+        return 硫酸氢氯吡格雷;
     }
 
-    public Boolean getClopidogrelSulfate() {
-        return clopidogrelSulfate;
+    public void set硫酸氢氯吡格雷(Boolean 硫酸氢氯吡格雷) {
+        this.硫酸氢氯吡格雷 = 硫酸氢氯吡格雷;
     }
 
-    public void setClopidogrelSulfate(Boolean clopidogrelSulfate) {
-        this.clopidogrelSulfate = clopidogrelSulfate;
+    public Boolean get硝酸酯类药物() {
+        return 硝酸酯类药物;
     }
 
-    public Boolean getNitrateDrug() {
-        return nitrateDrug;
+    public void set硝酸酯类药物(Boolean 硝酸酯类药物) {
+        this.硝酸酯类药物 = 硝酸酯类药物;
     }
 
-    public void setNitrateDrug(Boolean nitrateDrug) {
-        this.nitrateDrug = nitrateDrug;
+    public Boolean get华法林等抗凝药() {
+        return 华法林等抗凝药;
     }
 
-    public Boolean getWarfarin() {
-        return warfarin;
-    }
-
-    public void setWarfarin(Boolean warfarin) {
-        this.warfarin = warfarin;
+    public void set华法林等抗凝药(Boolean 华法林等抗凝药) {
+        this.华法林等抗凝药 = 华法林等抗凝药;
     }
 }

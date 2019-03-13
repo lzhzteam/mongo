@@ -1,80 +1,70 @@
 package com.achd.mongo.Entity.CCTA.CCTA_Sub;
 
 public class CCTAs {
-    private Integer age;
-    private String no;
-    private Boolean coronaryArtery;
-    private Integer position;
-    private Integer length;
-    private Integer plaque;
-    private Double Stenosis;
+    private Integer 年龄;
+    private Boolean 冠状动脉CT是否异常;
+    private Integer 病变位置;
+    private Integer 病变长度;
+    private Integer 斑块特征;
+    private Double 狭窄度;
 
     public CCTAs() {
     }
 
-    public CCTAs(Integer age, String no, Boolean coronaryArtery, Integer position, Integer length, Integer plaque, Double stenosis) {
-        this.age = age;
-        this.no = no;
-        this.coronaryArtery = coronaryArtery;
-        this.position = position;
-        this.length = length;
-        this.plaque = plaque;
-        Stenosis = stenosis;
+    public CCTAs(Integer 年龄, Boolean 冠状动脉CT是否异常, Integer 病变位置, Integer 病变长度, Integer 斑块特征, Double 狭窄度) {
+        this.年龄 = 年龄;
+        this.冠状动脉CT是否异常 = 冠状动脉CT是否异常;
+        this.病变位置 = 病变位置;
+        this.病变长度 = 病变长度;
+        this.斑块特征 = 斑块特征;
+        this.狭窄度 = 狭窄度;
     }
 
-    public Integer getAge() {
-        return age;
+    public Integer get年龄() {
+        return 年龄;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void set年龄(Integer 年龄) {
+        this.年龄 = 年龄;
     }
 
-    public String getNo() {
-        return no;
+    public Boolean get冠状动脉CT是否异常() {
+        return 冠状动脉CT是否异常;
     }
 
-    public void setNo(String no) {
-        this.no = no;
+    public void set冠状动脉CT是否异常(Boolean 冠状动脉CT是否异常) {
+        this.冠状动脉CT是否异常 = 冠状动脉CT是否异常;
     }
 
-    public Boolean getCoronaryArtery() {
-        return coronaryArtery;
+    public Integer get病变位置() {
+        return 病变位置;
     }
 
-    public void setCoronaryArtery(Boolean coronaryArtery) {
-        this.coronaryArtery = coronaryArtery;
+    public void set病变位置(Integer 病变位置) {
+        this.病变位置 = 病变位置;
     }
 
-    public Integer getPosition() {
-        return position;
+    public Integer get病变长度() {
+        return 病变长度;
     }
 
-    public void setPosition(Integer position) {
-        this.position = position;
+    public void set病变长度(Integer 病变长度) {
+        this.病变长度 = 病变长度;
     }
 
-    public Integer getLength() {
-        return length;
+    public Integer get斑块特征() {
+        return 斑块特征;
     }
 
-    public void setLength(Integer length) {
-        this.length = length;
+    public void set斑块特征(Integer 斑块特征) {
+        this.斑块特征 = 斑块特征;
     }
 
-    public Integer getPlaque() {
-        return plaque;
+    public Double get狭窄度() {
+        return 狭窄度;
     }
 
-    public void setPlaque(Integer plaque) {
-        this.plaque = plaque;
-    }
-
-    public Double getStenosis() {
-        return Stenosis;
-    }
-
-    public void setStenosis(Double stenosis) {
-        Stenosis = stenosis;
+    public void set狭窄度(Double 狭窄度) {
+        this.狭窄度 = 狭窄度;
     }
 }

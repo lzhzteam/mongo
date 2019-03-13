@@ -4,60 +4,50 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class OtherDisease extends TableBase {
-    private Boolean hepaticInsufficiency;
-    private Boolean renalInsufficiency;
-    private Boolean tumor;
-    private String others;
-
-    public OtherDisease(Boolean hepaticInsufficiency, Boolean renalInsufficiency, Boolean tumor, String others) {
-        this.hepaticInsufficiency = hepaticInsufficiency;
-        this.renalInsufficiency = renalInsufficiency;
-        this.tumor = tumor;
-        this.others = others;
-    }
+    private Boolean 肝功能不全;
+    private Boolean 肾功能不全;
+    private Boolean 肿瘤;
+    private String 其它;
 
     public OtherDisease() {
     }
 
-    @Override
-    public String toString() {
-        return "OtherDisease{" +
-                "hepaticInsufficiency=" + hepaticInsufficiency +
-                ", renalInsufficiency=" + renalInsufficiency +
-                ", tumor=" + tumor +
-                ", others='" + others + '\'' +
-                '}';
+    public OtherDisease(Boolean 肝功能不全, Boolean 肾功能不全, Boolean 肿瘤, String 其它) {
+        this.肝功能不全 = 肝功能不全;
+        this.肾功能不全 = 肾功能不全;
+        this.肿瘤 = 肿瘤;
+        this.其它 = 其它;
     }
 
-    public Boolean getHepaticInsufficiency() {
-        return hepaticInsufficiency;
+    public Boolean get肝功能不全() {
+        return 肝功能不全;
     }
 
-    public void setHepaticInsufficiency(Boolean hepaticInsufficiency) {
-        this.hepaticInsufficiency = hepaticInsufficiency;
+    public void set肝功能不全(Boolean 肝功能不全) {
+        this.肝功能不全 = 肝功能不全;
     }
 
-    public Boolean getRenalInsufficiency() {
-        return renalInsufficiency;
+    public Boolean get肾功能不全() {
+        return 肾功能不全;
     }
 
-    public void setRenalInsufficiency(Boolean renalInsufficiency) {
-        this.renalInsufficiency = renalInsufficiency;
+    public void set肾功能不全(Boolean 肾功能不全) {
+        this.肾功能不全 = 肾功能不全;
     }
 
-    public Boolean getTumor() {
-        return tumor;
+    public Boolean get肿瘤() {
+        return 肿瘤;
     }
 
-    public void setTumor(Boolean tumor) {
-        this.tumor = tumor;
+    public void set肿瘤(Boolean 肿瘤) {
+        this.肿瘤 = 肿瘤;
     }
 
-    public String getOthers() {
-        return others;
+    public String get其它() {
+        return 其它;
     }
 
-    public void setOthers(String others) {
-        this.others = others;
+    public void set其它(String 其它) {
+        this.其它 = 其它;
     }
 }

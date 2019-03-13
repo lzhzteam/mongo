@@ -7,63 +7,52 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Ps extends TableBase {
 
     @DBRef
-    private Liquor liquor;
+    private Liquor 白酒;
 
-    private Integer redWine;
-    private Integer beer;
-    private Integer yellowWine;
+    private Integer 红酒;
+    private Integer 啤酒;
+    private Integer 黄酒;
 
 
     public Ps() {
     }
 
-
-    @Override
-    public String toString() {
-        return "Ps{" +
-                "liquor=" + liquor +
-                ", redWine=" + redWine +
-                ", beer=" + beer +
-                ", yellowWine=" + yellowWine +
-                '}';
+    public Ps(Liquor 白酒, Integer 红酒, Integer 啤酒, Integer 黄酒) {
+        this.白酒 = 白酒;
+        this.红酒 = 红酒;
+        this.啤酒 = 啤酒;
+        this.黄酒 = 黄酒;
     }
 
-    public Ps(Liquor liquor, Integer redWine, Integer beer, Integer yellowWine) {
-        this.liquor = liquor;
-        this.redWine = redWine;
-        this.beer = beer;
-        this.yellowWine = yellowWine;
+    public Liquor get白酒() {
+        return 白酒;
     }
 
-    public Liquor getLiquor() {
-        return liquor;
+    public void set白酒(Liquor 白酒) {
+        this.白酒 = 白酒;
     }
 
-    public void setLiquor(Liquor liquor) {
-        this.liquor = liquor;
+    public Integer get红酒() {
+        return 红酒;
     }
 
-    public Integer getRedWine() {
-        return redWine;
+    public void set红酒(Integer 红酒) {
+        this.红酒 = 红酒;
     }
 
-    public void setRedWine(Integer redWine) {
-        this.redWine = redWine;
+    public Integer get啤酒() {
+        return 啤酒;
     }
 
-    public Integer getBeer() {
-        return beer;
+    public void set啤酒(Integer 啤酒) {
+        this.啤酒 = 啤酒;
     }
 
-    public void setBeer(Integer beer) {
-        this.beer = beer;
+    public Integer get黄酒() {
+        return 黄酒;
     }
 
-    public Integer getYellowWine() {
-        return yellowWine;
-    }
-
-    public void setYellowWine(Integer yellowWine) {
-        this.yellowWine = yellowWine;
+    public void set黄酒(Integer 黄酒) {
+        this.黄酒 = 黄酒;
     }
 }

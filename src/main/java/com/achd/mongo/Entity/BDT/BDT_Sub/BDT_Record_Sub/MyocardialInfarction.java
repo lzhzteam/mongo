@@ -4,38 +4,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class MyocardialInfarction extends TableBase {
-    private Integer existence;
-    private String time;
+    private Integer 有无;
+    private String 年月;
 
     public MyocardialInfarction() {
     }
 
-    public MyocardialInfarction(Integer existence, String time) {
-        this.existence = existence;
-        this.time = time;
+    public MyocardialInfarction(Integer 有无, String 年月) {
+        this.有无 = 有无;
+        this.年月 = 年月;
     }
 
-    @Override
-    public String toString() {
-        return "MyocardialInfarction{" +
-                "existence=" + existence +
-                ", time='" + time + '\'' +
-                '}';
+    public Integer get有无() {
+        return 有无;
     }
 
-    public Integer getExistence() {
-        return existence;
+    public void set有无(Integer 有无) {
+        this.有无 = 有无;
     }
 
-    public void setExistence(Integer existence) {
-        this.existence = existence;
+    public String get年月() {
+        return 年月;
     }
 
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
+    public void set年月(String 年月) {
+        this.年月 = 年月;
     }
 }

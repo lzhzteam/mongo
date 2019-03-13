@@ -5,253 +5,218 @@ import com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub.*;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Document
 public class BDTS extends TableBase {
 
-    public String bdtsNum;
-
-    private Integer age;
-    private Date time;
-    private Integer heartRate;
-    private String bloodPressure;
-    private Integer height;
-    private Integer weight;
+    private Integer 年龄;
+    private Date 检查时间;
+    private Integer 心率;
+    private String 血压;
+    private Integer 身高;
+    private Integer 体重;
     @DBRef
-    private Purpose purpose;
+    private Purpose 检查目的;
     @DBRef
-    private Hypertension hypertension;
+    private Hypertension 高血压病;
     @DBRef
-    private Dyslipidemia dyslipidemia;
+    private Dyslipidemia 血脂异常;
     @DBRef
-    private Diabetes diabetes;
+    private Diabetes 糖尿病史;
     @DBRef
-    private Stroke stroke;
+    private Stroke 脑卒中病史;
     @DBRef
-    private PeripheralVascularDisease peripheralVascularDisease;
+    private PeripheralVascularDisease 外周血管病;
     @DBRef
-    private Smoking smoking;
+    private Smoking 吸烟史;
     @DBRef
-    private Drinking drinking;
+    private Drinking 饮酒史;
     @DBRef
-    private Exercise exercise;
+    private Exercise 体育锻炼史;
     @DBRef
-    private MyocardialInfarction myocardialInfarction;
+    private MyocardialInfarction 心肌梗死;
     @DBRef
-    private Medication medication;
+    private Medication 目前服药;
     @DBRef
-    private OtherDisease otherDisease;
+    private OtherDisease 其他疾病史;
     @DBRef
-    private FamilyHistory familyHistory;
+    private FamilyHistory 家族史;
 
     public BDTS() {
     }
 
-    public BDTS(Integer age, Date time, Integer heartRate, String bloodPressure, Integer height, Integer weight, Purpose purpose, Hypertension hypertension, Dyslipidemia dyslipidemia, Diabetes diabetes, Stroke stroke, PeripheralVascularDisease peripheralVascularDisease, Smoking smoking, Drinking drinking, Exercise exercise, MyocardialInfarction myocardialInfarction, Medication medication, OtherDisease otherDisease, FamilyHistory familyHistory) {
-        this.age = age;
-        this.time = time;
-        this.heartRate = heartRate;
-        this.bloodPressure = bloodPressure;
-        this.height = height;
-        this.weight = weight;
-        this.purpose = purpose;
-        this.hypertension = hypertension;
-        this.dyslipidemia = dyslipidemia;
-        this.diabetes = diabetes;
-        this.stroke = stroke;
-        this.peripheralVascularDisease = peripheralVascularDisease;
-        this.smoking = smoking;
-        this.drinking = drinking;
-        this.exercise = exercise;
-        this.myocardialInfarction = myocardialInfarction;
-        this.medication = medication;
-        this.otherDisease = otherDisease;
-        this.familyHistory = familyHistory;
+    public BDTS(Integer 年龄, Date 检查时间, Integer 心率, String 血压, Integer 身高, Integer 体重, Purpose 检查目的, Hypertension 高血压病, Dyslipidemia 血脂异常, Diabetes 糖尿病史, Stroke 脑卒中病史, PeripheralVascularDisease 外周血管病, Smoking 吸烟史, Drinking 饮酒史, Exercise 体育锻炼史, MyocardialInfarction 心肌梗死, Medication 目前服药, OtherDisease 其他疾病史, FamilyHistory 家族史) {
+        this.年龄 = 年龄;
+        this.检查时间 = 检查时间;
+        this.心率 = 心率;
+        this.血压 = 血压;
+        this.身高 = 身高;
+        this.体重 = 体重;
+        this.检查目的 = 检查目的;
+        this.高血压病 = 高血压病;
+        this.血脂异常 = 血脂异常;
+        this.糖尿病史 = 糖尿病史;
+        this.脑卒中病史 = 脑卒中病史;
+        this.外周血管病 = 外周血管病;
+        this.吸烟史 = 吸烟史;
+        this.饮酒史 = 饮酒史;
+        this.体育锻炼史 = 体育锻炼史;
+        this.心肌梗死 = 心肌梗死;
+        this.目前服药 = 目前服药;
+        this.其他疾病史 = 其他疾病史;
+        this.家族史 = 家族史;
     }
 
-    @Override
-    public String toString() {
-        return "BDTS{" +
-                "age=" + age +
-                ", time=" + time +
-                ", heartRate=" + heartRate +
-                ", bloodPressure='" + bloodPressure + '\'' +
-                ", height=" + height +
-                ", weight=" + weight +
-                ", purpose=" + purpose +
-                ", hypertension=" + hypertension +
-                ", dyslipidemia=" + dyslipidemia +
-                ", diabetes=" + diabetes +
-                ", stroke=" + stroke +
-                ", peripheralVascularDisease=" + peripheralVascularDisease +
-                ", smoking=" + smoking +
-                ", drinking=" + drinking +
-                ", exercise=" + exercise +
-                ", myocardialInfarcation=" + myocardialInfarction +
-                ", medication=" + medication +
-                ", otherDisease=" + otherDisease +
-                ", familyHistory=" + familyHistory +
-                '}';
+    public Integer get年龄() {
+        return 年龄;
     }
 
-    public Integer getAge() {
-        return age;
+    public void set年龄(Integer 年龄) {
+        this.年龄 = 年龄;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public Date get检查时间() {
+        return 检查时间;
     }
 
-    public Date getTime() {
-        return time;
+    public void set检查时间(Date 检查时间) {
+        this.检查时间 = 检查时间;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public Integer get心率() {
+        return 心率;
     }
 
-    public Integer getHeartRate() {
-        return heartRate;
+    public void set心率(Integer 心率) {
+        this.心率 = 心率;
     }
 
-    public void setHeartRate(Integer heartRate) {
-        this.heartRate = heartRate;
+    public String get血压() {
+        return 血压;
     }
 
-    public String getBloodPressure() {
-        return bloodPressure;
+    public void set血压(String 血压) {
+        this.血压 = 血压;
     }
 
-    public void setBloodPressure(String bloodPressure) {
-        this.bloodPressure = bloodPressure;
+    public Integer get身高() {
+        return 身高;
     }
 
-    public Integer getHeight() {
-        return height;
+    public void set身高(Integer 身高) {
+        this.身高 = 身高;
     }
 
-    public void setHeight(Integer height) {
-        this.height = height;
+    public Integer get体重() {
+        return 体重;
     }
 
-    public Integer getWeight() {
-        return weight;
+    public void set体重(Integer 体重) {
+        this.体重 = 体重;
     }
 
-    public void setWeight(Integer weight) {
-        this.weight = weight;
+    public Purpose get检查目的() {
+        return 检查目的;
     }
 
-    public Purpose getPurpose() {
-        return purpose;
+    public void set检查目的(Purpose 检查目的) {
+        this.检查目的 = 检查目的;
     }
 
-    public void setPurpose(Purpose purpose) {
-        this.purpose = purpose;
+    public Hypertension get高血压病() {
+        return 高血压病;
     }
 
-    public Hypertension getHypertension() {
-        return hypertension;
+    public void set高血压病(Hypertension 高血压病) {
+        this.高血压病 = 高血压病;
     }
 
-    public void setHypertension(Hypertension hypertension) {
-        this.hypertension = hypertension;
+    public Dyslipidemia get血脂异常() {
+        return 血脂异常;
     }
 
-    public Dyslipidemia getDyslipidemia() {
-        return dyslipidemia;
+    public void set血脂异常(Dyslipidemia 血脂异常) {
+        this.血脂异常 = 血脂异常;
     }
 
-    public void setDyslipidemia(Dyslipidemia dyslipidemia) {
-        this.dyslipidemia = dyslipidemia;
+    public Diabetes get糖尿病史() {
+        return 糖尿病史;
     }
 
-    public Diabetes getDiabetes() {
-        return diabetes;
+    public void set糖尿病史(Diabetes 糖尿病史) {
+        this.糖尿病史 = 糖尿病史;
     }
 
-    public void setDiabetes(Diabetes diabetes) {
-        this.diabetes = diabetes;
+    public Stroke get脑卒中病史() {
+        return 脑卒中病史;
     }
 
-    public Stroke getStroke() {
-        return stroke;
+    public void set脑卒中病史(Stroke 脑卒中病史) {
+        this.脑卒中病史 = 脑卒中病史;
     }
 
-    public void setStroke(Stroke stroke) {
-        this.stroke = stroke;
+    public PeripheralVascularDisease get外周血管病() {
+        return 外周血管病;
     }
 
-    public PeripheralVascularDisease getPeripheralVascularDisease() {
-        return peripheralVascularDisease;
+    public void set外周血管病(PeripheralVascularDisease 外周血管病) {
+        this.外周血管病 = 外周血管病;
     }
 
-    public void setPeripheralVascularDisease(PeripheralVascularDisease peripheralVascularDisease) {
-        this.peripheralVascularDisease = peripheralVascularDisease;
+    public Smoking get吸烟史() {
+        return 吸烟史;
     }
 
-    public Smoking getSmoking() {
-        return smoking;
+    public void set吸烟史(Smoking 吸烟史) {
+        this.吸烟史 = 吸烟史;
     }
 
-    public void setSmoking(Smoking smoking) {
-        this.smoking = smoking;
+    public Drinking get饮酒史() {
+        return 饮酒史;
     }
 
-    public Drinking getDrinking() {
-        return drinking;
+    public void set饮酒史(Drinking 饮酒史) {
+        this.饮酒史 = 饮酒史;
     }
 
-    public void setDrinking(Drinking drinking) {
-        this.drinking = drinking;
+    public Exercise get体育锻炼史() {
+        return 体育锻炼史;
     }
 
-    public Exercise getExercise() {
-        return exercise;
+    public void set体育锻炼史(Exercise 体育锻炼史) {
+        this.体育锻炼史 = 体育锻炼史;
     }
 
-    public void setExercise(Exercise exercise) {
-        this.exercise = exercise;
+    public MyocardialInfarction get心肌梗死() {
+        return 心肌梗死;
     }
 
-    public String getBdtsNum() {
-        return bdtsNum;
+    public void set心肌梗死(MyocardialInfarction 心肌梗死) {
+        this.心肌梗死 = 心肌梗死;
     }
 
-    public void setBdtsNum(String bdtsNum) {
-        this.bdtsNum = bdtsNum;
+    public Medication get目前服药() {
+        return 目前服药;
     }
 
-    public MyocardialInfarction getMyocardialInfarction() {
-        return myocardialInfarction;
+    public void set目前服药(Medication 目前服药) {
+        this.目前服药 = 目前服药;
     }
 
-    public void setMyocardialInfarction(MyocardialInfarction myocardialInfarction) {
-        this.myocardialInfarction = myocardialInfarction;
+    public OtherDisease get其他疾病史() {
+        return 其他疾病史;
     }
 
-    public Medication getMedication() {
-        return medication;
+    public void set其他疾病史(OtherDisease 其他疾病史) {
+        this.其他疾病史 = 其他疾病史;
     }
 
-    public void setMedication(Medication medication) {
-        this.medication = medication;
+    public FamilyHistory get家族史() {
+        return 家族史;
     }
 
-    public OtherDisease getOtherDisease() {
-        return otherDisease;
-    }
-
-    public void setOtherDisease(OtherDisease otherDisease) {
-        this.otherDisease = otherDisease;
-    }
-
-    public FamilyHistory getFamilyHistory() {
-        return familyHistory;
-    }
-
-    public void setFamilyHistory(FamilyHistory familyHistory) {
-        this.familyHistory = familyHistory;
+    public void set家族史(FamilyHistory 家族史) {
+        this.家族史 = 家族史;
     }
 }

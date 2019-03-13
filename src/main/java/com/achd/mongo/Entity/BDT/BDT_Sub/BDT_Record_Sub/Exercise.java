@@ -4,38 +4,30 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Exercise extends TableBase {
-    private Integer type;
-    private Integer ps;
+    private Integer 频率;
+    private Integer 时常;
 
     public Exercise() {
     }
 
-    public Exercise(Integer type, Integer ps) {
-        this.type = type;
-        this.ps = ps;
+    public Exercise(Integer 频率, Integer 时常) {
+        this.频率 = 频率;
+        this.时常 = 时常;
     }
 
-    @Override
-    public String toString() {
-        return "Exercise{" +
-                "type=" + type +
-                ", ps=" + ps +
-                '}';
+    public Integer get频率() {
+        return 频率;
     }
 
-    public Integer getType() {
-        return type;
+    public void set频率(Integer 频率) {
+        this.频率 = 频率;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public Integer get时常() {
+        return 时常;
     }
 
-    public Integer getPs() {
-        return ps;
-    }
-
-    public void setPs(Integer ps) {
-        this.ps = ps;
+    public void set时常(Integer 时常) {
+        this.时常 = 时常;
     }
 }

@@ -4,61 +4,51 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Diabetes extends TableBase {
-    private Integer existence;
-    private Integer type;
-    private Integer medication;
-    private Integer compliance;
+    private Integer 有无;
+    private Integer 分型;
+    private Integer 目前用药;
+    private Integer 用药后控制异常;
 
 
     public Diabetes() {
     }
 
-    public Diabetes(Integer existence, Integer type, Integer medication, Integer compliance) {
-        this.existence = existence;
-        this.type = type;
-        this.medication = medication;
-        this.compliance = compliance;
+    public Diabetes(Integer 有无, Integer 分型, Integer 目前用药, Integer 用药后控制异常) {
+        this.有无 = 有无;
+        this.分型 = 分型;
+        this.目前用药 = 目前用药;
+        this.用药后控制异常 = 用药后控制异常;
     }
 
-    @Override
-    public String toString() {
-        return "Diabetes{" +
-                "existence=" + existence +
-                ", type=" + type +
-                ", medication=" + medication +
-                ", compliance=" + compliance +
-                '}';
+    public Integer get有无() {
+        return 有无;
     }
 
-    public Integer getExistence() {
-        return existence;
+    public void set有无(Integer 有无) {
+        this.有无 = 有无;
     }
 
-    public void setExistence(Integer existence) {
-        this.existence = existence;
+    public Integer get分型() {
+        return 分型;
     }
 
-    public Integer getType() {
-        return type;
+    public void set分型(Integer 分型) {
+        this.分型 = 分型;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public Integer get目前用药() {
+        return 目前用药;
     }
 
-    public Integer getMedication() {
-        return medication;
+    public void set目前用药(Integer 目前用药) {
+        this.目前用药 = 目前用药;
     }
 
-    public void setMedication(Integer medication) {
-        this.medication = medication;
+    public Integer get用药后控制异常() {
+        return 用药后控制异常;
     }
 
-    public Integer getCompliance() {
-        return compliance;
-    }
-
-    public void setCompliance(Integer compliance) {
-        this.compliance = compliance;
+    public void set用药后控制异常(Integer 用药后控制异常) {
+        this.用药后控制异常 = 用药后控制异常;
     }
 }

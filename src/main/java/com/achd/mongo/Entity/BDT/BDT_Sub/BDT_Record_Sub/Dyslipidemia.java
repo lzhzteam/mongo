@@ -4,50 +4,41 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Dyslipidemia extends TableBase {
-    private Integer existence;
-    private Integer medication;
-    private Integer compliance;
+    private Integer 有无;
+    private Integer 目前用药;
+    private Integer 用药后控制情况;
 
 
     public Dyslipidemia() {
     }
 
-    public Dyslipidemia(Integer existence, Integer medication, Integer compliance) {
-        this.existence = existence;
-        this.medication = medication;
-        this.compliance = compliance;
+    public Dyslipidemia(Integer 有无, Integer 目前用药, Integer 用药后控制情况) {
+        this.有无 = 有无;
+        this.目前用药 = 目前用药;
+        this.用药后控制情况 = 用药后控制情况;
     }
 
-    @Override
-    public String toString() {
-        return "Dyslipidemia{" +
-                "existence=" + existence +
-                ", medication=" + medication +
-                ", compliance=" + compliance +
-                '}';
+    public Integer get有无() {
+        return 有无;
     }
 
-    public Integer getExistence() {
-        return existence;
+    public void set有无(Integer 有无) {
+        this.有无 = 有无;
     }
 
-    public void setExistence(Integer existence) {
-        this.existence = existence;
+    public Integer get目前用药() {
+        return 目前用药;
     }
 
-    public Integer getMedication() {
-        return medication;
+    public void set目前用药(Integer 目前用药) {
+        this.目前用药 = 目前用药;
     }
 
-    public void setMedication(Integer medication) {
-        this.medication = medication;
+    public Integer get用药后控制情况() {
+        return 用药后控制情况;
     }
 
-    public Integer getCompliance() {
-        return compliance;
-    }
-
-    public void setCompliance(Integer compliance) {
-        this.compliance = compliance;
+    public void set用药后控制情况(Integer 用药后控制情况) {
+        this.用药后控制情况 = 用药后控制情况;
     }
 }

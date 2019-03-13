@@ -29,34 +29,34 @@ public class BDT extends BaseEntity implements Serializable {
         return "BDT{" +
                 "BDTs=" + BDTs +
                 ", id='" + id + '\'' +
-                ", num='" + num + '\'' +
-                ", name='" + name + '\'' +
-                ", gender='" + gender + '\'' +
+                ", 编号='" + 编号 + '\'' +
+                ", 姓名='" + 姓名 + '\'' +
+                ", 性别='" + 性别 + '\'' +
                 '}';
     }
 
     public String getNum() {
-        return num;
+        return 编号;
     }
 
     public void setNum(String num) {
-        this.num = num;
+        this.编号 = num;
     }
 
     public String getName() {
-        return name;
+        return 姓名;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.姓名 = name;
     }
 
     public String getGender() {
-        return gender;
+        return 性别;
     }
 
     public void setGender(String gender) {
-        this.gender = gender;
+        this.性别 = gender;
     }
 
     public ArrayList<BDTS> getBDTs() {

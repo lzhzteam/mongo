@@ -10,4 +10,5 @@ import java.util.List;
 public interface BDT_Repository extends MongoRepository<BDT, String> {
     List<BDT> findByNumContainsOrNameContainsAllIgnoreCase(String num, String name);
 
+    BDT findBDTByNum(String num);
 }

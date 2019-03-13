@@ -4,82 +4,70 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Purpose extends TableBase {
-    private Boolean typicalAngina;
-    private Boolean atypicalChestDiscomfort;
-    private Boolean non_chestPainSymptoms;
-    private Boolean abnormalECG;
-    private Boolean abnormalHeartUltrasound;
-    private String others;
+    private Boolean 点型心绞痛;
+    private Boolean 非典型性胸部不适;
+    private Boolean 非胸痛症状;
+    private Boolean 心电图异常;
+    private Boolean 心脏超声异常;
+    private String 其它;
 
     public Purpose() {
     }
 
-    public Purpose(Boolean typicalAngina, Boolean atypicalChestDiscomfort, Boolean non_chestPainSymptoms, Boolean abnormalECG, Boolean abnormalHeartUltrasound, String others) {
-        this.typicalAngina = typicalAngina;
-        this.atypicalChestDiscomfort = atypicalChestDiscomfort;
-        this.non_chestPainSymptoms = non_chestPainSymptoms;
-        this.abnormalECG = abnormalECG;
-        this.abnormalHeartUltrasound = abnormalHeartUltrasound;
-        this.others = others;
+    public Purpose(Boolean 点型心绞痛, Boolean 非典型性胸部不适, Boolean 非胸痛症状, Boolean 心电图异常, Boolean 心脏超声异常, String 其它) {
+        this.点型心绞痛 = 点型心绞痛;
+        this.非典型性胸部不适 = 非典型性胸部不适;
+        this.非胸痛症状 = 非胸痛症状;
+        this.心电图异常 = 心电图异常;
+        this.心脏超声异常 = 心脏超声异常;
+        this.其它 = 其它;
     }
 
-    @Override
-    public String toString() {
-        return "Purpose{" +
-                "typicalAngina=" + typicalAngina +
-                ", atypicalChestDiscomfort=" + atypicalChestDiscomfort +
-                ", non_chestPainSymptoms=" + non_chestPainSymptoms +
-                ", abnormalECG=" + abnormalECG +
-                ", abnormalHeartUltrasound=" + abnormalHeartUltrasound +
-                ", others='" + others + '\'' +
-                '}';
+    public Boolean get点型心绞痛() {
+        return 点型心绞痛;
     }
 
-    public Boolean getTypicalAngina() {
-        return typicalAngina;
+    public void set点型心绞痛(Boolean 点型心绞痛) {
+        this.点型心绞痛 = 点型心绞痛;
     }
 
-    public void setTypicalAngina(Boolean typicalAngina) {
-        this.typicalAngina = typicalAngina;
+    public Boolean get非典型性胸部不适() {
+        return 非典型性胸部不适;
     }
 
-    public Boolean getAtypicalChestDiscomfort() {
-        return atypicalChestDiscomfort;
+    public void set非典型性胸部不适(Boolean 非典型性胸部不适) {
+        this.非典型性胸部不适 = 非典型性胸部不适;
     }
 
-    public void setAtypicalChestDiscomfort(Boolean atypicalChestDiscomfort) {
-        this.atypicalChestDiscomfort = atypicalChestDiscomfort;
+    public Boolean get非胸痛症状() {
+        return 非胸痛症状;
     }
 
-    public Boolean getNon_chestPainSymptoms() {
-        return non_chestPainSymptoms;
+    public void set非胸痛症状(Boolean 非胸痛症状) {
+        this.非胸痛症状 = 非胸痛症状;
     }
 
-    public void setNon_chestPainSymptoms(Boolean non_chestPainSymptoms) {
-        this.non_chestPainSymptoms = non_chestPainSymptoms;
+    public Boolean get心电图异常() {
+        return 心电图异常;
     }
 
-    public Boolean getAbnormalECG() {
-        return abnormalECG;
+    public void set心电图异常(Boolean 心电图异常) {
+        this.心电图异常 = 心电图异常;
     }
 
-    public void setAbnormalECG(Boolean abnormalECG) {
-        this.abnormalECG = abnormalECG;
+    public Boolean get心脏超声异常() {
+        return 心脏超声异常;
     }
 
-    public Boolean getAbnormalHeartUltrasound() {
-        return abnormalHeartUltrasound;
+    public void set心脏超声异常(Boolean 心脏超声异常) {
+        this.心脏超声异常 = 心脏超声异常;
     }
 
-    public void setAbnormalHeartUltrasound(Boolean abnormalHeartUltrasound) {
-        this.abnormalHeartUltrasound = abnormalHeartUltrasound;
+    public String get其它() {
+        return 其它;
     }
 
-    public String getOthers() {
-        return others;
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
+    public void set其它(String 其它) {
+        this.其它 = 其它;
     }
 }

@@ -6,49 +6,40 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class FamilyHistory extends TableBase {
     @DBRef
-    private ACHD achd;
-    private Integer hyperlipidemia;
-    private String others;
+    private ACHD 冠心病家族史;
+    private Integer 高脂血症家族史;
+    private String 其它;
 
     public FamilyHistory() {
     }
 
-    public FamilyHistory(ACHD achd, Integer hyperlipidemia, String others) {
-        this.achd = achd;
-        this.hyperlipidemia = hyperlipidemia;
-        this.others = others;
+    public FamilyHistory(ACHD 冠心病家族史, Integer 高脂血症家族史, String 其它) {
+        this.冠心病家族史 = 冠心病家族史;
+        this.高脂血症家族史 = 高脂血症家族史;
+        this.其它 = 其它;
     }
 
-    @Override
-    public String toString() {
-        return "FamilyHistory{" +
-                "Achd=" + achd +
-                ", hyperlipidemia=" + hyperlipidemia +
-                ", others='" + others + '\'' +
-                '}';
+    public ACHD get冠心病家族史() {
+        return 冠心病家族史;
     }
 
-    public ACHD getAchd() {
-        return achd;
+    public void set冠心病家族史(ACHD 冠心病家族史) {
+        this.冠心病家族史 = 冠心病家族史;
     }
 
-    public void setAchd(ACHD achd) {
-        this.achd = achd;
+    public Integer get高脂血症家族史() {
+        return 高脂血症家族史;
     }
 
-    public Integer getHyperlipidemia() {
-        return hyperlipidemia;
+    public void set高脂血症家族史(Integer 高脂血症家族史) {
+        this.高脂血症家族史 = 高脂血症家族史;
     }
 
-    public void setHyperlipidemia(Integer hyperlipidemia) {
-        this.hyperlipidemia = hyperlipidemia;
+    public String get其它() {
+        return 其它;
     }
 
-    public String getOthers() {
-        return others;
-    }
-
-    public void setOthers(String others) {
-        this.others = others;
+    public void set其它(String 其它) {
+        this.其它 = 其它;
     }
 }
