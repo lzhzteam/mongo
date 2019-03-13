@@ -19,6 +19,7 @@ public class PeripheralVascularDisease extends TableBase {
         this.类型 = 类型;
     }
 
+
     public Integer get有无() {
         return 有无;
     }
@@ -48,6 +49,38 @@ public class PeripheralVascularDisease extends TableBase {
     }
 
     public void set类型(Integer 类型) {
+        this.类型 = 类型;
+    }
+
+    public Integer gtExistence() {
+        return 有无;
+    }
+
+    public void stExistence(Integer 有无) {
+        this.有无 = 有无;
+    }
+
+    public String gtTime() {
+        return 发生时间;
+    }
+
+    public void stTime(String 发生时间) {
+        this.发生时间 = 发生时间;
+    }
+
+    public String gtPosition() {
+        return 发生部位;
+    }
+
+    public void stPosition(String 发生部位) {
+        this.发生部位 = 发生部位;
+    }
+
+    public Integer gtType() {
+        return 类型;
+    }
+
+    public void stType(Integer 类型) {
         this.类型 = 类型;
     }
 }

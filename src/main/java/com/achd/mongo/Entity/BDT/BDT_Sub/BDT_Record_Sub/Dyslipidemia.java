@@ -41,4 +41,31 @@ public class Dyslipidemia extends TableBase {
     public void set用药后控制情况(Integer 用药后控制情况) {
         this.用药后控制情况 = 用药后控制情况;
     }
+
+
+    public Integer gtExistence() {
+        return 有无;
+    }
+
+    public void stExistence(Integer 有无) {
+        this.有无 = 有无;
+    }
+
+    public Integer gtMedicine() {
+        return 目前用药;
+    }
+
+    public void stMedicine(Integer 目前用药) {
+        this.目前用药 = 目前用药;
+    }
+
+    public Integer gtResult() {
+        return 用药后控制情况;
+    }
+
+    public void stResult(Integer 用药后控制情况) {
+        this.用药后控制情况 = 用药后控制情况;
+    }
+
+
 }

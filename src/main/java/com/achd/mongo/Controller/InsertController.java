@@ -39,9 +39,14 @@ public class InsertController {
     @ResponseBody
     public BDT BDTInsertPost(BDT bdt, HttpSession session, Model model) {
         BDT hadUser = bdt_repository.findBDTBy编号(bdt.get编号());
-        List<BDTS> hadUserBDTs = hadUser.getBDTs();
-        hadUserBDTs.add(bdt.getBDTs().get(0));
-        bdt_repository.save(hadUser);
-        return hadUser;
+        if (hadUser == null) {
+            bdt_repository.save(bdt);
+        } else {
+            List<BDTS> hadUserBDTs = hadUser.getBDTs();
+            hadUserBDTs.add(bdt.getBDTs().get(0));
+            bdt_repository.save(hadUser);
+        }
+        return bdt;
     }
+
 }

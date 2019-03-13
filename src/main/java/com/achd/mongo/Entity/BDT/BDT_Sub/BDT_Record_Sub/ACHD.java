@@ -31,4 +31,21 @@ public class ACHD extends TableBase {
     public void set谁(Who 谁) {
         this.谁 = 谁;
     }
+
+
+    public Integer gtExistence() {
+        return 有无;
+    }
+
+    public void stExistence(Integer 有无) {
+        this.有无 = 有无;
+    }
+
+    public Who gtWho() {
+        return 谁;
+    }
+
+    public void stWho(Who 谁) {
+        this.谁 = 谁;
+    }
 }

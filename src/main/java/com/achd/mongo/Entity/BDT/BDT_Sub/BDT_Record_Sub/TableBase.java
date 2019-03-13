@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 public class TableBase {
 
 
-    public StringBuilder getTableHtml() {
+    public StringBuilder gtTableHtml() {
 
         StringBuilder resultDiv = new StringBuilder("<div>\n" +
                 "<table class=\"table table-bordered table-sm table-striped\">\n");
@@ -41,7 +41,7 @@ public class TableBase {
 
                     TableBase t = ((TableBase) fields[j].get(this));
                     if (t != null) {
-                        resultDiv.append(t.getTableHtml());
+                        resultDiv.append(t.gtTableHtml());
                     } else {
                         resultDiv.append("空");
                     }

@@ -60,4 +60,48 @@ public class Smoking extends TableBase {
     public void set过去吸月(Integer 过去吸月) {
         this.过去吸月 = 过去吸月;
     }
+
+
+    public Integer gtFrequency() {
+        return 频率;
+    }
+
+    public void stFrequency(Integer 频率) {
+        this.频率 = 频率;
+    }
+
+    public Integer gtNumber() {
+        return 经常吸支数;
+    }
+
+    public void stNumber(Integer 经常吸支数) {
+        this.经常吸支数 = 经常吸支数;
+    }
+
+    public Integer gtYear() {
+        return 经常吸年;
+    }
+
+    public void stYear(Integer 经常吸年) {
+        this.经常吸年 = 经常吸年;
+    }
+
+    public Integer gtPastYear() {
+        return 过去吸年;
+    }
+
+    public void stPastYear(Integer 过去吸年) {
+        this.过去吸年 = 过去吸年;
+    }
+
+    public Integer gtPastMonth() {
+        return 过去吸月;
+    }
+
+    public void stPastMonth(Integer 过去吸月) {
+        this.过去吸月 = 过去吸月;
+    }
+
+
+
 }

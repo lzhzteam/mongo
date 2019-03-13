@@ -50,4 +50,38 @@ public class Medication extends TableBase {
     public void set华法林等抗凝药(Boolean 华法林等抗凝药) {
         this.华法林等抗凝药 = 华法林等抗凝药;
     }
+
+
+    public Boolean gtAspirin() {
+        return 阿司匹林;
+    }
+
+    public void stAspirin(Boolean 阿司匹林) {
+        this.阿司匹林 = 阿司匹林;
+    }
+
+    public Boolean gtClopidogrelhydrogen() {
+        return 硫酸氢氯吡格雷;
+    }
+
+    public void stClopidogrelhydrogen(Boolean 硫酸氢氯吡格雷) {
+        this.硫酸氢氯吡格雷 = 硫酸氢氯吡格雷;
+    }
+
+    public Boolean gtNitricether() {
+        return 硝酸酯类药物;
+    }
+
+    public void stNitricether(Boolean 硝酸酯类药物) {
+        this.硝酸酯类药物 = 硝酸酯类药物;
+    }
+
+    public Boolean gtWarfarin() {
+        return 华法林等抗凝药;
+    }
+
+    public void stWarfarin(Boolean 华法林等抗凝药) {
+        this.华法林等抗凝药 = 华法林等抗凝药;
+    }
+
 }

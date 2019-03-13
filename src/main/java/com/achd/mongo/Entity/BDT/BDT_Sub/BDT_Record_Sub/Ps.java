@@ -54,4 +54,37 @@ public class Ps extends TableBase {
     public void set黄酒(Integer 黄酒) {
         this.黄酒 = 黄酒;
     }
+
+
+    public Liquor gtLiquor() {
+        return 白酒;
+    }
+
+    public void stLiquor(Liquor 白酒) {
+        this.白酒 = 白酒;
+    }
+
+    public Integer gtRedwine() {
+        return 红酒;
+    }
+
+    public void stRedwine(Integer 红酒) {
+        this.红酒 = 红酒;
+    }
+
+    public Integer gtBeer() {
+        return 啤酒;
+    }
+
+    public void stBeer(Integer 啤酒) {
+        this.啤酒 = 啤酒;
+    }
+
+    public Integer gtYellowwine() {
+        return 黄酒;
+    }
+
+    public void stYellowwine(Integer 黄酒) {
+        this.黄酒 = 黄酒;
+    }
 }

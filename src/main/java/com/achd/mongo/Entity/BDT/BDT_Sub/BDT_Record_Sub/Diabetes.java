@@ -51,4 +51,37 @@ public class Diabetes extends TableBase {
     public void set用药后控制异常(Integer 用药后控制异常) {
         this.用药后控制异常 = 用药后控制异常;
     }
+
+
+    public Integer gtExistence() {
+        return 有无;
+    }
+
+    public void stExistence(Integer 有无) {
+        this.有无 = 有无;
+    }
+
+    public Integer gtType() {
+        return 分型;
+    }
+
+    public void stType(Integer 分型) {
+        this.分型 = 分型;
+    }
+
+    public Integer gtMedicine() {
+        return 目前用药;
+    }
+
+    public void stMedicine(Integer 目前用药) {
+        this.目前用药 = 目前用药;
+    }
+
+    public Integer gtResult() {
+        return 用药后控制异常;
+    }
+
+    public void stResult(Integer 用药后控制异常) {
+        this.用药后控制异常 = 用药后控制异常;
+    }
 }

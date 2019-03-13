@@ -4,7 +4,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
 public class Purpose extends TableBase {
-    private Boolean 点型心绞痛;
+    private Boolean 典型心绞痛;
     private Boolean 非典型性胸部不适;
     private Boolean 非胸痛症状;
     private Boolean 心电图异常;
@@ -14,8 +14,8 @@ public class Purpose extends TableBase {
     public Purpose() {
     }
 
-    public Purpose(Boolean 点型心绞痛, Boolean 非典型性胸部不适, Boolean 非胸痛症状, Boolean 心电图异常, Boolean 心脏超声异常, String 其它) {
-        this.点型心绞痛 = 点型心绞痛;
+    public Purpose(Boolean 典型心绞痛, Boolean 非典型性胸部不适, Boolean 非胸痛症状, Boolean 心电图异常, Boolean 心脏超声异常, String 其它) {
+        this.典型心绞痛 = 典型心绞痛;
         this.非典型性胸部不适 = 非典型性胸部不适;
         this.非胸痛症状 = 非胸痛症状;
         this.心电图异常 = 心电图异常;
@@ -23,12 +23,12 @@ public class Purpose extends TableBase {
         this.其它 = 其它;
     }
 
-    public Boolean get点型心绞痛() {
-        return 点型心绞痛;
+    public Boolean get典型心绞痛() {
+        return 典型心绞痛;
     }
 
-    public void set点型心绞痛(Boolean 点型心绞痛) {
-        this.点型心绞痛 = 点型心绞痛;
+    public void set典型心绞痛(Boolean 典型心绞痛) {
+        this.典型心绞痛 = 典型心绞痛;
     }
 
     public Boolean get非典型性胸部不适() {
@@ -70,4 +70,56 @@ public class Purpose extends TableBase {
     public void set其它(String 其它) {
         this.其它 = 其它;
     }
+
+
+    public Boolean gtTypicalangina() {
+        return 典型心绞痛;
+    }
+
+    public void stTypicalangina(Boolean 点型心绞痛) {
+        this.典型心绞痛 = 点型心绞痛;
+    }
+
+    public Boolean gtAtypicalchestdiscomfort() {
+        return 非典型性胸部不适;
+    }
+
+    public void stAtypicalchestdiscomfort(Boolean 非典型性胸部不适) {
+        this.非典型性胸部不适 = 非典型性胸部不适;
+    }
+
+    public Boolean gtNonchestpainsymptoms() {
+        return 非胸痛症状;
+    }
+
+    public void stNonchestpainsymptoms(Boolean 非胸痛症状) {
+        this.非胸痛症状 = 非胸痛症状;
+    }
+
+    public Boolean gtElectrocardiographicabnormality() {
+        return 心电图异常;
+    }
+
+    public void stElectrocardiographicabnormality(Boolean 心电图异常) {
+        this.心电图异常 = 心电图异常;
+    }
+
+    public Boolean gtHeartultrasonicabnormal() {
+        return 心脏超声异常;
+    }
+
+    public void stHeartultrasonicabnormal(Boolean 心脏超声异常) {
+        this.心脏超声异常 = 心脏超声异常;
+    }
+
+    public String gtOther() {
+        return 其它;
+    }
+
+    public void stOther(String 其它) {
+        this.其它 = 其它;
+    }
+
+
+
 }

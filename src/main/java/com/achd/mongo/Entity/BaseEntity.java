@@ -4,7 +4,6 @@ import org.springframework.data.annotation.Id;
 
 public class BaseEntity {
     @Id
-
     public String id;
 
     //编号
@@ -29,6 +28,7 @@ public class BaseEntity {
         return 编号;
     }
 
+
     public void set编号(String 编号) {
         this.编号 = 编号;
     }
@@ -47,5 +47,34 @@ public class BaseEntity {
 
     public void set性别(String 性别) {
         this.性别 = 性别;
+    }
+
+
+    public void stNum(String 编号) {
+        this.编号 = 编号;
+    }
+
+    public String gtNum() {
+        return 编号;
+    }
+
+
+    public void stName(String 姓名) {
+        this.姓名 = 姓名;
+    }
+
+
+    public String gtName() {
+        return 姓名;
+    }
+
+
+    public void stSex(String 性别) {
+        this.性别 = 性别;
+    }
+
+
+    public String gtSex() {
+        return 性别;
     }
 }

@@ -50,4 +50,39 @@ public class OtherDisease extends TableBase {
     public void set其它(String 其它) {
         this.其它 = 其它;
     }
+
+
+    public Boolean gtHepaticinsufficiency() {
+        return 肝功能不全;
+    }
+
+    public void stHepaticinsufficiency(Boolean 肝功能不全) {
+        this.肝功能不全 = 肝功能不全;
+    }
+
+    public Boolean gtRenalinadequacy() {
+        return 肾功能不全;
+    }
+
+    public void stRenalinadequacy(Boolean 肾功能不全) {
+        this.肾功能不全 = 肾功能不全;
+    }
+
+    public Boolean gtTumor() {
+        return 肿瘤;
+    }
+
+    public void stTumor(Boolean 肿瘤) {
+        this.肿瘤 = 肿瘤;
+    }
+
+    public String gtOther() {
+        return 其它;
+    }
+
+    public void stOther(String 其它) {
+        this.其它 = 其它;
+    }
+
+
 }

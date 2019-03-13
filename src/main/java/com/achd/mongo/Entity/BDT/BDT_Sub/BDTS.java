@@ -221,4 +221,160 @@ public class BDTS extends TableBase {
     public void set家族史(FamilyHistory 家族史) {
         this.家族史 = 家族史;
     }
+
+
+    ////////////////呕//////
+
+
+    public Integer gtAge() {
+        return 年龄;
+    }
+
+    public void stAge(Integer 年龄) {
+        this.年龄 = 年龄;
+    }
+
+    public Date gtTime() {
+        return 检查时间;
+    }
+
+    public void stTime(Date 检查时间) {
+        this.检查时间 = 检查时间;
+    }
+
+    public Integer gtHeartRate() {
+        return 心率;
+    }
+
+    public void stHeartRate(Integer 心率) {
+        this.心率 = 心率;
+    }
+
+    public String gtBloodPressure() {
+        return 血压;
+    }
+
+    public void stBloodPressure(String 血压) {
+        this.血压 = 血压;
+    }
+
+    public Integer gtHeight() {
+        return 身高;
+    }
+
+    public void stHeight(Integer 身高) {
+        this.身高 = 身高;
+    }
+
+    public Integer gtWeight() {
+        return 体重;
+    }
+
+    public void stWeight(Integer 体重) {
+        this.体重 = 体重;
+    }
+
+    public Purpose gtPurpose() {
+        return 检查目的;
+    }
+
+    public void stPurpose(Purpose 检查目的) {
+        this.检查目的 = 检查目的;
+    }
+
+    public Hypertension gtHypertension() {
+        return 高血压病;
+    }
+
+    public void stHypertension(Hypertension 高血压病) {
+        this.高血压病 = 高血压病;
+    }
+
+    public Dyslipidemia gtDyslipidemia() {
+        return 血脂异常;
+    }
+
+    public void stDyslipidemia(Dyslipidemia 血脂异常) {
+        this.血脂异常 = 血脂异常;
+    }
+
+    public Diabetes gtDiabetes() {
+        return 糖尿病史;
+    }
+
+    public void stDiabetes(Diabetes 糖尿病史) {
+        this.糖尿病史 = 糖尿病史;
+    }
+
+    public Stroke gtStroke() {
+        return 脑卒中病史;
+    }
+
+    public void stStroke(Stroke 脑卒中病史) {
+        this.脑卒中病史 = 脑卒中病史;
+    }
+
+    public PeripheralVascularDisease gtPeripheralVascularDisease() {
+        return 外周血管病;
+    }
+
+    public void stPeripheralVascularDisease(PeripheralVascularDisease 外周血管病) {
+        this.外周血管病 = 外周血管病;
+    }
+
+    public Smoking gtSmoking() {
+        return 吸烟史;
+    }
+
+    public void stSmoking(Smoking 吸烟史) {
+        this.吸烟史 = 吸烟史;
+    }
+
+    public Drinking gtDrinking() {
+        return 饮酒史;
+    }
+
+    public void stDrinking(Drinking 饮酒史) {
+        this.饮酒史 = 饮酒史;
+    }
+
+    public Exercise gtExercise() {
+        return 体育锻炼史;
+    }
+
+    public void stExercise(Exercise 体育锻炼史) {
+        this.体育锻炼史 = 体育锻炼史;
+    }
+
+    public MyocardialInfarction gtMyocardialInfarction() {
+        return 心肌梗死;
+    }
+
+    public void stMyocardialInfarction(MyocardialInfarction 心肌梗死) {
+        this.心肌梗死 = 心肌梗死;
+    }
+
+    public Medication gtMedication() {
+        return 目前服药;
+    }
+
+    public void stMedication(Medication 目前服药) {
+        this.目前服药 = 目前服药;
+    }
+
+    public OtherDisease gtOtherDisease() {
+        return 其他疾病史;
+    }
+
+    public void stOtherDisease(OtherDisease 其他疾病史) {
+        this.其他疾病史 = 其他疾病史;
+    }
+
+    public FamilyHistory gtFamilyHistory() {
+        return 家族史;
+    }
+
+    public void stFamilyHistory(FamilyHistory 家族史) {
+        this.家族史 = 家族史;
+    }
 }

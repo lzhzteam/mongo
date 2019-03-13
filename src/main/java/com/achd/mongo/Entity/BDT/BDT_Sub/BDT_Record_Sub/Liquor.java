@@ -30,4 +30,22 @@ public class Liquor extends TableBase {
     public void set度数(Integer 度数) {
         this.度数 = 度数;
     }
+
+    public Integer gtMl() {
+        return 毫升;
+    }
+
+    public void stMl(Integer 毫升) {
+        this.毫升 = 毫升;
+    }
+
+    public Integer gtDegree() {
+        return 度数;
+    }
+
+    public void stDegree(Integer 度数) {
+        this.度数 = 度数;
+    }
+
+
 }

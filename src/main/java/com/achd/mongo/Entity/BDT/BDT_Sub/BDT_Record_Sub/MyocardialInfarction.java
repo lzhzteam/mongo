@@ -30,4 +30,23 @@ public class MyocardialInfarction extends TableBase {
     public void set年月(String 年月) {
         this.年月 = 年月;
     }
+
+
+    public Integer gtExistence() {
+        return 有无;
+    }
+
+    public void stExistence(Integer 有无) {
+        this.有无 = 有无;
+    }
+
+    public String gtYearMonth() {
+        return 年月;
+    }
+
+    public void stYearMonth(String 年月) {
+        this.年月 = 年月;
+    }
+
+
 }

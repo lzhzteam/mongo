@@ -45,4 +45,29 @@ public class Drinking extends TableBase {
     public void set过去饮年(Integer 过去饮年) {
         this.过去饮年 = 过去饮年;
     }
+
+
+    public Integer gtFrequency() {
+        return 频率;
+    }
+
+    public void stFrequency(Integer 频率) {
+        this.频率 = 频率;
+    }
+
+    public Ps gtAlways() {
+        return 经常饮;
+    }
+
+    public void stAlways(Ps 经常饮) {
+        this.经常饮 = 经常饮;
+    }
+
+    public Integer gtYears() {
+        return 过去饮年;
+    }
+
+    public void stYears(Integer 过去饮年) {
+        this.过去饮年 = 过去饮年;
+    }
 }

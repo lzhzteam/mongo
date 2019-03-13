@@ -41,4 +41,29 @@ public class FamilyHistory extends TableBase {
     public void set其它(String 其它) {
         this.其它 = 其它;
     }
+
+
+    public ACHD gtACHD() {
+        return 冠心病家族史;
+    }
+
+    public void stACHD(ACHD 冠心病家族史) {
+        this.冠心病家族史 = 冠心病家族史;
+    }
+
+    public Integer gtHyperlipemia() {
+        return 高脂血症家族史;
+    }
+
+    public void stHyperlipemia(Integer 高脂血症家族史) {
+        this.高脂血症家族史 = 高脂血症家族史;
+    }
+
+    public String gtOther() {
+        return 其它;
+    }
+
+    public void stOther(String 其它) {
+        this.其它 = 其它;
+    }
 }
