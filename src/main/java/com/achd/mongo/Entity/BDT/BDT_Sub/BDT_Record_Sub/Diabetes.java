@@ -81,7 +81,7 @@ public class Diabetes extends TableBase {
         return 用药后控制情况;
     }
 
-    public void stResult(Integer 用药后控制异常) {
-        this.用药后控制情况 = 用药后控制异常;
+    public void stResult(Integer 用药后控制情况) {
+        this.用药后控制情况 = 用药后控制情况;
     }
 }
