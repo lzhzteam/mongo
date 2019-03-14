@@ -77,7 +77,6 @@ public class InsertController {
     public Map<String, Object> autoFillCCTA(HttpServletRequest request, HttpServletResponse response) {
         String num = request.getParameter("num");
         CCTA ccta = ccta_repository.findCCTABy编号(num);
-        System.out.println(num);
         Map<String, Object> map = new HashMap<>();
         if (ccta == null) {
             map.put("exist", false);
