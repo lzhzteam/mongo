@@ -2,14 +2,51 @@
 <html lang="en"  xmlns:th ="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#num").blur(function () {
+                var num = $("#num").val();
+                if (num.length !== 10) {
+                    $("#name").val("");
+                    $("#gender").val("");
+                    $("#name").removeAttr("disabled");
+                    $("#gender").removeAttr("disabled");
+                } else {
+                    $.ajax({
+                        type: "POST",
+                        url: "/autoFill",
+                        data: {num: num},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.exist) {
+                                $("#name").val(data.name);
+                                $("#gender").val(data.gender);
+                                $("#name").attr("disabled", "disabled");
+                                $("#gender").attr("disabled", "disabled");
+                            } else {
+                                $("#name").val("");
+                                $("#gender").val("");
+                                $("#name").removeAttr("disabled");
+                                $("#gender").removeAttr("disabled");
+                            }
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    })
+                }
+            });
+        });
+    </script>
     <script th:src="@{js/BDT.js}"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <script crossorigin="anonymous"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script crossorigin="anonymous"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <!--<script crossorigin="anonymous"-->
+    <!--integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
+    <!--src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
     <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/bootstrap.css}"/>
     <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/doc.min.css}"/>
     <script th:src="@{/bootstrap-4.2.1/js/bootstrap.min.js}"></script>
@@ -82,13 +119,17 @@
                 <table class="table">
                     <tr>
                         <td>ID</td>
-                        <td><input name="编号" style="border:0px;border-bottom:#000000 1px solid;" type="text"></td>
+                        <td><input id="num" maxlength="10" name="编号" oninput="value=value.replace(/[^\d]/g,'')"
+                                   style="border:0px;border-bottom:#000000 1px solid;" type="text"></td>
                         <td>姓名</td>
-                        <td><input name="姓名" style="border:0px;border-bottom:#000000 1px solid;" type="text"></td>
+                        <td><input id="name" name="姓名" style="border:0px;border-bottom:#000000 1px solid;" type="text">
+                        </td>
                         <td>性别</td>
-                        <td><input name="性别" style="border:0px;border-bottom:#000000 1px solid;" type="text"></td>
+                        <td><input id="gender" name="性别" style="border:0px;border-bottom:#000000 1px solid;"
+                                   type="text"></td>
                         <td>时间</td>
-                        <td colspan="4"><input name="BDTs[0].时间" style="border:0px;border-bottom:#000000 1px solid;"
+                        <td colspan="4"><input class="date-picker" id="date1" name="BDTs[0].时间"
+                                               style="border:0px;border-bottom:#000000 1px solid;"
                                                type="date"></td>
                     </tr>
                     <tr>

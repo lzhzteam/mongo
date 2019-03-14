@@ -1,11 +1,15 @@
 /**
  * 
  */
-设置默认时间;
-var mydateInput = document.getElementById("aDate");
-var date = new Date();
-var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-mydateInput.value = dateString;
+//设置默认时间;
+// var mydateInput = document.getElementById("date1");
+// var date = new Date();
+// mydateInput.value = date;
+// var defaultDate = document.querySelectorAll('.date-picker');
+// for (var i = 0; i<defaultDate.length; i++) {
+//   defaultDate[i].valueAsDate = new Date();
+// }
+
 // 高血压病
 function show1(obj)
 {
