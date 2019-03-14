@@ -1,5 +1,8 @@
 package com.achd.mongo.Entity.CCTA.CCTA_Sub;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 public class CCTAs {
     private Integer 年龄;
     private Boolean 冠状动脉CT是否异常;

@@ -2,7 +2,6 @@ package com.achd.mongo.Entity.CCTA;
 
 import com.achd.mongo.Entity.BaseEntity;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 
 @Document(collection = "CCTA")
 public class CCTA extends BaseEntity implements Serializable {
-    @DBRef
+    //@DBRef
     private ArrayList<CCTAs> CCTAs;
 
     public CCTA() {

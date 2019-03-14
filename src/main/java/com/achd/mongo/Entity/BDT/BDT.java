@@ -11,7 +11,6 @@ import java.util.ArrayList;
 @Document(collection = "BDT")
 public class BDT extends BaseEntity implements Serializable {
 
-
     //@DBRef
     private ArrayList<BDTS> BDTs;
 

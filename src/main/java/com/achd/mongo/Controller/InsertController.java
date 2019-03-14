@@ -3,6 +3,7 @@ package com.achd.mongo.Controller;
 import com.achd.mongo.Entity.BDT.BDT;
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
 import com.achd.mongo.Entity.CCTA.CCTA;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
 import com.achd.mongo.Service.BDT_Repository;
 import com.achd.mongo.Service.CCTA_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,6 @@ public class InsertController {
 
     @GetMapping("/CCTAInsert")
     public String getCCTAInsert(HttpSession session, Model model) {
-
         injectUser(session, model);
         return "cctainsert";
     }
@@ -54,6 +54,21 @@ public class InsertController {
             bdt_repository.save(hadUser);
         }
         return bdt;
+    }
+
+    @PostMapping("/CCTAInsert")
+    @ResponseBody
+    public CCTA CCTAInsertPost(CCTA ccta, HttpSession session, Model model) {
+        CCTA hadCCTA = ccta_repository.findCCTABy编号(ccta.get编号());
+        if (hadCCTA == null) {
+            ccta_repository.save(ccta);
+        } else {
+            List<CCTAs> hadUserCCTAs = hadCCTA.getCCTAs();
+            hadUserCCTAs.add(ccta.getCCTAs().get(0));
+            ccta_repository.save(hadCCTA);
+        }
+
+        return ccta;
     }
 
     @RequestMapping(value = "/autoFillBDT", method = RequestMethod.POST)

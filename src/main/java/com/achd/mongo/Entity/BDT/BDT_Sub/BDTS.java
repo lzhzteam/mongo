@@ -2,16 +2,12 @@ package com.achd.mongo.Entity.BDT.BDT_Sub;
 
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub.*;
-import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
 @Document
 public class BDTS extends TableBase {
-    @Id
-    private String id;
-    
     private Integer 年龄;
     private Date 检查时间;
     private Integer 心率;
