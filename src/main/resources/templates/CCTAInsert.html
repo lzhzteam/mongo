@@ -2,6 +2,44 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#num").blur(function () {
+                var num = $("#num").val();
+                if (num.length !== 10) {
+                    $("#name").val("");
+                    $("#gender").val("");
+                    $("#name").removeAttr("disabled");
+                    $("#gender").removeAttr("disabled");
+                } else {
+                    alert("123");
+                    $.ajax({
+                        type: "POST",
+                        url: "/autoFillCCTA",
+                        data: {num: num},
+                        dataType: "json",
+                        success: function (data) {
+                            if (data.exist) {
+                                $("#name").val(data.name);
+                                $("#gender").val(data.gender);
+                                $("#name").attr("disabled", "disabled");
+                                $("#gender").attr("disabled", "disabled");
+                            } else {
+                                $("#name").val("");
+                                $("#gender").val("");
+                                $("#name").removeAttr("disabled");
+                                $("#gender").removeAttr("disabled");
+                            }
+                        },
+                        error: function (err) {
+                            alert(err);
+                        }
+                    })
+                }
+            });
+        });
+    </script>
 
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
     <script crossorigin="anonymous"
@@ -73,250 +111,142 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
 
-            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                    <td align="center" class="biaoti" height="60">冠心病患者基线资料表</td>
-                </tr>
-            </table>
+            <h3 align="center" style="margin: 50px">冠心病患者基线资料表</h3>
 
             <form action="./GetBDTFormServlet" method="post" name="form1" onsubmit="return myCheck()">
-                <table align="center" bgcolor="#cccccc" border="0" cellpadding="4" cellspacing="1" class="tabtop13"
-                       width="100%">
+                <table class="table">
                     <tr>
                         <td>ID</td>
-                        <td colspan="3"><input name="ID" style="width:300px;border:0px;border-bottom:#000000 1px solid;"
-                                               type="text"></td>
-                        <td>时间</td>
-                        <td colspan="3"><input name="时间" style="width:300px;border:0px;border-bottom:#000000 1px solid;"
-                                               type="date"></td>
+                        <td colspan="7"><input id="num" maxlength="10" name="编号"
+                                               oninput="value=value.replace(/[^\d]/g,'')"
+                                               style="border:0;border-bottom:#000000 1px solid;" type="text"></td>
                     </tr>
                     <tr>
-                        <td>心率</td>
-                        <td><input name="心率" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
+                        <td>姓名</td>
+                        <td><input id="name" name="姓名" style="border:0;border-bottom:#000000 1px solid;" type="text">
+                        </td>
+                        <td>性别</td>
+                        <td><input id="gender" name="性别" style="border:0;border-bottom:#000000 1px solid;"
                                    type="text"></td>
-                        <td>血压</td>
-                        <td><input name="血压" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
-                                   type="text">mmHG
-                        </td>
-                        <td>身高</td>
-                        <td><input name="身高" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
-                                   type="text">cm
-                        </td>
-                        <td>体重</td>
-                        <td><input name="体重" style="width:100px;border:0px;border-bottom:#000000 1px solid;"
-                                   type="text">kg
-                        </td>
+                        <td>年龄</td>
+                        <td><input name="CCTAs[0].年龄" style="border:0;border-bottom:#000000 1px solid;"
+                                   type="text"></td>
+                        <td>时间</td>
+                        <td><input class="date-picker" id="date1" name="CCTAs[0].检查时间"
+                                   style="border:0;border-bottom:#000000 1px solid;"
+                                   type="date"></td>
                     </tr>
                     <tr>
-                        <td>检查目的</td>
+                        <td>冠状动脉CT<br>是否异常</td>
                         <td colspan="9">
+                            <input checked name="CCTAs[0].冠状动脉CT是否异常" onclick="exist(this)" type="radio" value="true">是
                             &nbsp&nbsp&nbsp
-                            典型心绞痛：&nbsp&nbsp&nbsp
-                            <input name="典型心绞痛" type="radio" value="true">是
-                            <input checked name="典型心绞痛" type="radio" value="false">否
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            非典型胸部不适：
-                            <input name="非典型胸部不适" type="radio" value="true">是
-                            <input checked name="非典型胸部不适" type="radio" value="false">否
+                            <input name="CCTAs[0].冠状动脉CT是否异常" onclick="exist(this)" type="radio" value="false">否
+                        </td>
+                    </tr>
+                    <tr id="location">
+                        <td><br><br>病变位置<br><br></td>
+                        <td>
+                            <input checked name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="1">右冠中端
                             <br>
-                            &nbsp&nbsp&nbsp
-                            非胸痛症状：&nbsp&nbsp&nbsp
-                            <input name="非胸痛症状" type="radio" value="true">是
-                            <input checked name="非胸痛症状" type="radio" value="false">否
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            心电图异常：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            <input name="心电图异常" type="radio" value="true">是
-                            <input checked name="心电图异常" type="radio" value="false">否
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="2">右冠近段
                             <br>
-                            &nbsp&nbsp&nbsp
-                            心脏超声异常：
-                            <input name="心脏超声异常" type="radio" value="true">是
-                            <input checked name="心脏超声异常" type="radio" value="false">否
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-                            其他:
-                            <input name="检查目的其他" style="width:200px;border:0px;border-bottom:#000000 1px solid;"
-                                   type="text">
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="3">右冠远段
                             <br>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>高血压病</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="高血压病" onclick="show1(this)" type="radio" value="1">不详
-                            &nbsp&nbsp&nbsp
-                            <input name="高血压病" onclick="show1(this)" type="radio" value="2">无
-                            &nbsp&nbsp&nbsp
-                            <input name="高血压病" onclick="show1(this);" type="radio" value="3">有
-                            <span id=showMessage></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>血脂异常</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="血脂异常" onclick="show2(this);" type="radio" value="1">不详
-                            &nbsp&nbsp&nbsp
-                            <input name="血脂异常" onclick="show2(this);" type="radio" value="2">无
-                            &nbsp&nbsp&nbsp
-                            <input name="血脂异常" onclick="show2(this);" type="radio" value="3">有
-                            <span id=showMessage2></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>糖尿病史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="糖尿病史" onclick="show3(this);" type="radio" value="1">不详
-                            &nbsp&nbsp&nbsp
-                            <input name="糖尿病史" onclick="show3(this);" type="radio" value="2">无
-                            &nbsp&nbsp&nbsp
-                            <input name="糖尿病史" onclick="show3(this);" type="radio" value="3">有
-                            <span id=showMessage3></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>脑卒中病史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="脑卒中病史" onclick="show4(this);" type="radio" value="1">不详
-                            &nbsp&nbsp&nbsp
-                            <input name="脑卒中病史" onclick="show4(this);" type="radio" value="2">无
-                            &nbsp&nbsp&nbsp
-                            <input name="脑卒中病史" onclick="show4(this);" type="radio" value="3">有
-                            <span id=showMessage4></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>外周血管病</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="外周血管病" onclick="show5(this);" type="radio" value="1">不详
-                            &nbsp&nbsp&nbsp
-                            <input name="外周血管病" onclick="show5(this);" type="radio" value="2">无
-                            &nbsp&nbsp&nbsp
-                            <input name="外周血管病" onclick="show5(this);" type="radio" value="3">有
-                            <span id=showMessage5></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>吸烟史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input name="吸烟史" onclick="show6(this);" type="radio" value="1">经常吸
-                            <span id=showMessage6_1></span>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="4">右冠来源的后降支
                             <br>
-                            &nbsp&nbsp&nbsp
-                            <input name="吸烟史" onclick="show6(this);" type="radio" value="2">偶吸（平均每天不足一只）
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="5">左主干
+                        </td>
+                        <td align="center" colspan="2">
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="6">前降支近段
                             <br>
-                            &nbsp&nbsp&nbsp
-                            <input name="吸烟史" onclick="show6(this);" type="radio" value="3">过去吸，现已戒烟
-                            <span id=showMessage6_2></span>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="7">前降支中段
                             <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="8">前降支远段
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="9">第一对角支
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="10">第二对角支
+                        </td>
+                        <td align="center" colspan="2">
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="11">回旋支近段
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="12">第一钝缘支
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="13">回旋支远段
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="14">第二钝缘支
+                        </td>
+                        <td colspan="2">
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="15">回旋支来源的后降支
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="16">右冠来源的左室后支
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="17">回旋支来源的左室后支
+                            <br>
+                            <input name="CCTAs[0].病变位置" style="margin-right: 20px" type="radio" value="18">中间支
+                        </td>
+                    </tr>
+                    <tr id="length">
+                        <td>病变长度</td>
+                        <td colspan="9">
+                            <input checked name="CCTAs[0].病变长度" type="radio" value="1">局限(小于1mm)
                             &nbsp&nbsp&nbsp
-                            <input checked name="吸烟史" onclick="show6(this);" type="radio" value="4">从不吸
+                            <input name="CCTAs[0].病变长度" type="radio" value="2">节段(10mm - 20mm)
+                            &nbsp&nbsp&nbsp
+                            <input name="CCTAs[0].病变长度" type="radio" value="3">弥漫(大于20mm)
+                        </td>
+                    </tr>
+                    <tr id="feature">
+                        <td>斑块特征</td>
+                        <td colspan="9">
+                            <input checked name="CCTAs[0].斑块特征" type="radio" value="1">钙化斑块
+                            &nbsp&nbsp&nbsp
+                            <input name="CCTAs[0].斑块特征" type="radio" value="2">非钙化斑块
+                            &nbsp&nbsp&nbsp
+                            <input name="CCTAs[0].斑块特征" type="radio" value="3">混合斑块
+                        </td>
+                    </tr>
+                    <tr id="width">
+                        <td>狭窄度</td>
+                        <td colspan="9">
+                            <input name="CCTAs[0].狭窄度" style="border:0;border-bottom:#000000 1px solid;"
+                                   type="text"> mm
                         </td>
                     </tr>
                     <tr>
-                        <td>饮酒史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input name="饮酒史" onclick="show7(this);" type="radio" value="1">经常饮
-                            <span id=showMessage7_1></span>
-                            <br>
-                            &nbsp&nbsp&nbsp
-                            <input name="饮酒史" onclick="show7(this);" type="radio" value="2">偶饮（<1次/周）
-                            <br>
-                            &nbsp&nbsp&nbsp
-                            <input name="饮酒史" onclick="show7(this);" type="radio" value="3">过去饮
-                            <span id=showMessage7_2></span>
-                            <br>
-                            &nbsp&nbsp&nbsp
-                            <input checked name="饮酒史" onclick="show7(this);" type="radio" value="4">从不饮
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>体育锻炼史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="体育锻炼史" onclick="show8(this);" type="radio" value="1">基本不锻炼
-                            &nbsp&nbsp&nbsp
-                            <input name="体育锻炼史" onclick="show8(this);" type="radio" value="2">每周小于三次
-                            &nbsp&nbsp&nbsp
-                            <input name="体育锻炼史" onclick="show8(this);" type="radio" value="3">每周大于等于三次
-                            <span id=showMessage8></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>心肌梗死</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input checked name="心肌梗死" onclick="show9(this);" type="radio" value="1">无
-                            &nbsp&nbsp&nbsp
-                            <input name="心肌梗死" onclick="show9(this);" type="radio" value="2">有
-                            <span id=showMessage9></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>目前服药</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input name="目前服药" type="checkbox" value="1">阿司匹林
-                            &nbsp&nbsp&nbsp
-                            <input name="目前服药" type="checkbox" value="2">硫酸氢氯吡格雷
-                            &nbsp&nbsp&nbsp
-                            <input name="目前服药" type="checkbox" value="3">硝酸酯类药物
-                            &nbsp&nbsp&nbsp
-                            <input name="目前服药" type="checkbox" value="4">华法林等抗凝药
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>其他疾病史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            <input name="其他疾病史" type="checkbox" value="1">肝功能不全
-                            &nbsp&nbsp&nbsp
-                            <input name="其他疾病史" type="checkbox" value="2">肾功能不全
-                            &nbsp&nbsp&nbsp
-                            <input name="其他疾病史" type="checkbox" value="3">肿瘤
-                            &nbsp&nbsp&nbsp
-                            <input name="其他疾病史" onclick="show10(this);" type="checkbox" value="4">其他
-                            <span id=showMessage10></span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>家族史</td>
-                        <td colspan="9">
-                            &nbsp&nbsp&nbsp
-                            冠心病家族史：
-                            <input name="冠心病家族史" onclick="show11(this)" type="radio" value="1">有
-                            &nbsp&nbsp&nbsp
-                            <input checked name="冠心病家族史" onclick="show11(this)" type="radio" value="0">无
-                            <span id=showMessage11></span>
-                            <br>
-                            &nbsp&nbsp&nbsp
-                            高脂血症家族史：
-                            <input name="高脂血症家族史" type="radio" value="1">有
-                            &nbsp&nbsp&nbsp
-                            <input checked name="高脂血症家族史" type="radio" value="0">无
-                            <br>
-                            &nbsp&nbsp&nbsp
-                            其他：
-                            <input name="家族病史其他" style="width:200px;border:0px;border-bottom:#000000 1px solid;"
-                                   type="text">
-                        </td>
+                        <td colspan="8"></td>
                     </tr>
                 </table>
-                <div align="center"><input type="reset" value="重置">
-                    <input type="submit" value="提交"></div>
+                <div align="center" style="margin-bottom: 100px">
+                    <input class="btn btn-primary" style="margin-right: 100px" type="reset" value="重置">
+                    <input class="btn btn-primary" type="submit" value="提交">
+                </div>
             </form>
 
 
         </div>
     </div>
-
-
-
 </div>
+<script>
+    function exist(obj) {
+        var location = document.getElementById("location");
+        var length = document.getElementById("length");
+        var feature = document.getElementById("feature");
+        var width = document.getElementById("width");
+        var radioValue = obj.value;
+        if (radioValue === "true") {
+            location.style.display = "table-row";
+            length.style.display = "table-row";
+            feature.style.display = "table-row";
+            width.style.display = "table-row";
+        } else {
+            location.style.display = "none";
+            length.style.display = "none";
+            feature.style.display = "none";
+            width.style.display = "none";
+        }
+    }
+</script>
 </body>
 </html>
