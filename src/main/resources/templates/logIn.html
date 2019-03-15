@@ -79,6 +79,7 @@
 <!--左侧按钮-->
 <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
 
+    <!--/*@thymesVar id="user" type="com.achd.mongo.Entity.User"*/-->
     <a aria-label="ACHD" class="navbar-brand mr-0 mr-md-2" href="/">
         <img style="width: 40px; height: auto;" th:src="@{/img/logo.png}"/>
     </a>
@@ -142,13 +143,12 @@
             <p th:text="${logFailure}"></p>
         </div>
         <div class="form-group">
-            <label for="username">Username</label><input class="form-control" id="username" name="username"
-                                                         type="text"/>
+            <label for="username">Username</label>
+            <input class="form-control" id="username" name="username" type="text"/>
         </div>
         <div class="form-group">
-            <label for="passwordMD5">Password</label><input class="form-control" id="passwordMD5"
-                                                            name="passwordMD5"
-                                                            type="password"/>
+            <label for="passwordMD5">Password</label>
+            <input class="form-control" id="passwordMD5" name="passwordMD5" type="password"/>
         </div>
 
         <div class="form-group" th:if="${log}=='Up'">
