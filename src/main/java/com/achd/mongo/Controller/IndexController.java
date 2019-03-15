@@ -41,11 +41,4 @@ public class IndexController {
 
 
 
-//    @GetMapping("/TestInsert")
-//    public BDT test(HttpSession session, Model model) {
-//        BDT bdt = new BDT();
-//        bdt.setNum("123");
-//        BDTRepository.save(bdt);
-//        return BDTRepository.findBDTByNum("123");
-//    }
 }

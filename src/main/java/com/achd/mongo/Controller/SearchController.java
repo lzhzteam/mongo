@@ -2,6 +2,7 @@ package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.BDT.BDT;
 import com.achd.mongo.Service.BDT_Repository;
+import com.achd.mongo.Utilities.RequireAuth;
 import com.achd.mongo.Utilities.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,8 @@ public class SearchController {
     @Autowired
     BDT_Repository bdt_repository;
 
+
+    @RequireAuth
     @GetMapping("/CaseSearch")
     public String caseSearchGet(HttpSession session, Model model) {
 
@@ -26,6 +29,8 @@ public class SearchController {
         return "CaseSearch";
     }
 
+
+    @RequireAuth
     @GetMapping("/CaseSearch/{search}")
     public String caseSearchResultGet(HttpSession session, Model model, @PathVariable("search") String search) {
         Utility.injectUser(session, model);

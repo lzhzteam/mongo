@@ -6,6 +6,7 @@ import com.achd.mongo.Entity.CCTA.CCTA;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
 import com.achd.mongo.Service.BDT_Repository;
 import com.achd.mongo.Service.CCTA_Repository;
+import com.achd.mongo.Utilities.RequireAuth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,12 +30,14 @@ public class InsertController {
     @Autowired
     CCTA_Repository ccta_repository;
 
+    @RequireAuth
     @GetMapping("/BDTInsert")
     public String getBDTInsert(HttpSession session, Model model) {
         injectUser(session, model);
         return "bdtinsert";
     }
 
+    @RequireAuth
     @GetMapping("/CCTAInsert")
     public String getCCTAInsert(HttpSession session, Model model) {
         injectUser(session, model);
@@ -42,6 +45,7 @@ public class InsertController {
     }
 
 
+    @RequireAuth
     @PostMapping("/BDTInsert")
     @ResponseBody
     public BDT BDTInsertPost(BDT bdt, HttpSession session, Model model) {
@@ -56,6 +60,7 @@ public class InsertController {
         return bdt;
     }
 
+    @RequireAuth
     @PostMapping("/CCTAInsert")
     @ResponseBody
     public CCTA CCTAInsertPost(CCTA ccta, HttpSession session, Model model) {
