@@ -91,28 +91,31 @@
         <h1 class="h3 mb-3 font-weight-normal" th:if="${log}=='Up'">
             注册
         </h1>
+
+        <!--错误提示-->
         <div class="alert alert-success alert-dismissable" th:if="${logFailure}!=''">
             <button aria-hidden="true" class="close" data-dismiss="alert" type="button">×</button>
-            <h4>
-                注意!
+            <h4 th:text="${logFailure}">
+                Error!
             </h4>
-            <p th:text="${logFailure}"></p>
         </div>
+
+
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username">用户名</label>
             <input class="form-control" id="username" name="username" type="text"/>
         </div>
         <div class="form-group">
-            <label for="passwordMD5">Password</label>
+            <label for="passwordMD5">密码</label>
             <input class="form-control" id="passwordMD5" name="passwordMD5" type="password"/>
         </div>
-
+        <!--重复密码-->
         <div class="form-group" th:if="${log}=='Up'">
-            <label for="passwordMD5check">Password Repeat</label><input class="form-control"
-                                                                        id="passwordMD5check"
-                                                                        oninput="checkPasswd()"
-                                                                        type="password"/>
+            <label for="passwordMD5check">重复密码</label>
+            <input class="form-control" id="passwordMD5check" oninput="checkPasswd()" type="password"/>
         </div>
+
+
         <button class="btn btn-lg btn-primary btn-block submit" th:if="${log}=='In'">登录</button>
         <a class="btn btn-lg btn-secondary btn-block " href="/logUp" th:if="${log}=='In'">没有账号？注册！</a>
 
@@ -157,6 +160,7 @@
             let ori_password = $("#passwordMD5").val();
             let password = md5(ori_password);
             $("#passwordMD5").val(password);
+            $("#passwordMD5check").val(password);
             $("#form").submit();
         });
     });

@@ -42,10 +42,10 @@ public class UserController {
     public String logInPost(User user, HttpSession session, Model model) {
         User hadUser = user_repository.findByUsername(user.getUsername());   //通过username查找用户
         if (hadUser == null) {                                               //如果数据库按照username没查到这个用户
-            session.setAttribute("logFailure", "null_user");   //向session里放置loginFailure=null_user这样一个属性
+            session.setAttribute("logFailure", "没有这个用户");   //向session里放置loginFailure=null_user这样一个属性
             return "redirect:/logIn";                                          //扔回去重新登陆
         } else if (!hadUser.getPasswordMD5().equals(user.getPasswordMD5())) {
-            session.setAttribute("logFailure", "wrong_password");  //密码错误
+            session.setAttribute("logFailure", "密码错误");  //密码错误
             return "redirect:/logIn";                                            //扔回去重新登陆
         } else if (hadUser.getPasswordMD5().equals(user.getPasswordMD5())) {
             session.setAttribute("user", hadUser);              //密码正确

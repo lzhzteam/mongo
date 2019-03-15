@@ -23,11 +23,11 @@ public class LogAspect {
         System.out.println("-------需要登陆------");
 
         if (session.getAttribute("user") == null) {
+            session.setAttribute("logFailure", "请先登录");
             return "redirect:/logIn";
         }
 
-        String pro = (String) joinPoint.proceed();
-        return pro;
+        return joinPoint.proceed();
     }
 
 
