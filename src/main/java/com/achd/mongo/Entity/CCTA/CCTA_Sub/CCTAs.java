@@ -70,4 +70,56 @@ public class CCTAs {
     public void set狭窄度(Double 狭窄度) {
         this.狭窄度 = 狭窄度;
     }
+
+
+    public Integer gtAge() {
+        return 年龄;
+    }
+
+    public void stAge(Integer 年龄) {
+        this.年龄 = 年龄;
+    }
+
+    public Boolean gtCoronaryArtery() {
+        return 冠状动脉CT是否异常;
+    }
+
+    public void stCoronaryArtery(Boolean 冠状动脉CT是否异常) {
+        this.冠状动脉CT是否异常 = 冠状动脉CT是否异常;
+    }
+
+    public Integer gtPosition() {
+        return 病变位置;
+    }
+
+    public void stPosition(Integer 病变位置) {
+        this.病变位置 = 病变位置;
+    }
+
+    public Integer gtLong() {
+        return 病变长度;
+    }
+
+    public void stLong(Integer 病变长度) {
+        this.病变长度 = 病变长度;
+    }
+
+    public Integer gtFeature() {
+        return 斑块特征;
+    }
+
+    public void stFeature(Integer 斑块特征) {
+        this.斑块特征 = 斑块特征;
+    }
+
+    public Double gtNarrow() {
+        return 狭窄度;
+    }
+
+    public void stNarrow(Double 狭窄度) {
+        this.狭窄度 = 狭窄度;
+    }
+
+
+
 }

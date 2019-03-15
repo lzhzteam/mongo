@@ -51,57 +51,12 @@
 <body>
 
 <!-- 菜单 -->
-<!--左侧按钮-->
-<header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
-
-    <a aria-label="ACHD" class="navbar-brand mr-0 mr-md-2" href="/">
-        <img style="width: 40px; height: auto;" th:src="@{/img/logo.png}"/>
-    </a>
-
-    <div class="navbar-nav-scroll">
-        <ul class="navbar-nav bd-navbar-nav flex-row">
-            <li class="nav-item active"><a class="nav-link" href="/">首页</a></li>
-            <li class="nav-item dropdown">
-                <a aria-expanded="false" aria-haspopup="true"
-                   class="nav-item nav-link dropdown-toggle mr-md-2"
-                   data-toggle="dropdown" href="#" id="insert">
-                    录入信息 </a>
-                <div aria-labelledby="insert" class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="/BDTInsert">BDT</a>
-                    <a class="dropdown-item" href="/CCTAInsert">CCTA</a>
-                </div>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="#">病因分析</a></li>
-            <li class="nav-item"><a class="nav-link" href="/CaseSearch">病例查询</a></li>
-
-        </ul>
-    </div>
-    <!--右侧个人信息-->
-    <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-        <li class="nav-item dropdown">
-            <!--/*@thymesVar id="user" type="com.achd.mongo.Entity.User"*/-->
-            <a aria-expanded="false"
-               aria-haspopup="true"
-               class="nav-item nav-link dropdown-toggle mr-md-2"
-               data-toggle="dropdown"
-               href="#"
-               id="bd-versions"
-               th:text="${user.username}"
-            >
-                用户
-            </a>
-            <div aria-labelledby="bd-versions" class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item" href="/logIn" th:if="${user.username}=='未登录'">登录</a>
-                <a class="dropdown-item" href="/logUp" th:if="${user.username}=='未登录'">注册</a>
-
-                <a class="dropdown-item" href="/logOff" th:if="${user.username}!='未登录'">退出</a>
-            </div>
-        </li>
-    </ul>
-</header>
+<!--/*@thymesVar id="user" type="com.achd.mongo.Entity.User"*/-->
+<header th:replace="Header::headerNav(search,${user})"></header>
 
 
 <div class="container">
+
     <div class="row">
 
         <ul class="col-md-12 column">
