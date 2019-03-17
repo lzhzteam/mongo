@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class Test_Repository {
 
@@ -23,8 +25,13 @@ public class Test_Repository {
                 Criteria.where("检查目的.非胸痛症状").is(false)
         ));
 
+        query.fields().include("编号");
+
+
         long l = new Test_Repository().countBDT(query);
+        List<BDT> bdts = new Test_Repository().mongoTemplate.find(query, BDT.class);
         System.out.println(l);
+        System.out.println(bdts);
 
     }
 
