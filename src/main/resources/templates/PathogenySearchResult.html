@@ -30,86 +30,502 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-12 column">
+            <!--&lt;!&ndash;对照表&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center">发病率对照表</h3>-->
 
-            <h3 align="center" style="margin: 50px"></h3>
+            <!--<table class="table table-striped">-->
+            <!--<tbody>-->
+            <!--<tr>-->
+            <!--<td colspan="4" th:text="${search1}"></td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td rowspan="2">-->
+            <!--<div th:text="${search2}"></div>-->
+            <!--<br>-->
+            <!--<div th:text="${} + '人'"></div>-->
+            <!--</td>-->
+            <!--<td colspan="2">-->
+            <!--<div style="float: left">冠心病患者</div>-->
+            <!--<div style="float: right" th:text="${} + 人"></div>-->
+            <!--</td>-->
+            <!--<td rowspan="2">-->
+            <!--<div>发病率</div>-->
+            <!--<div th:text="${} + '%'"></div>-->
+            <!--</td>-->
+            <!--<td rowspan="4">-->
+            <!--<br><div>比率</div>-->
+            <!--<br><div th:text="${} + ':' + ${}"></div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td colspan="2">-->
+            <!--<div style="float: left">非冠心病患者</div>-->
+            <!--<div style="float: right" th:text="${} + 人"></div>-->
+            <!--</td>-->
+            <!--<td rowspan="2">-->
+            <!--<div>发病率</div>-->
+            <!--<div th:text="${} + '%'"></div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td rowspan="2">-->
+            <!--<div>其它</div>-->
+            <!--<br>-->
+            <!--<div th:text="${} + '人'"></div>-->
+            <!--</td>-->
+            <!--<td colspan="2">-->
+            <!--<div style="float: left">冠心病患者</div>-->
+            <!--<div style="float: right" th:text="${} + 人"></div>-->
+            <!--</td>-->
+            <!--<td rowspan="2">-->
+            <!--<div>发病率</div>-->
+            <!--<div th:text="${} + '%'"></div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--<tr>-->
+            <!--<td colspan="2">-->
+            <!--<div style="float: left">非冠心病患者</div>-->
+            <!--<div style="float: right" th:text="${} + 人"></div>-->
+            <!--</td>-->
+            <!--<td rowspan="2">-->
+            <!--<div>发病率</div>-->
+            <!--<div th:text="${} + '%'"></div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--</tbody>-->
+            <!--</table>-->
+            <!--</div>-->
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i>直方图</h3>
-                        </div>
-                        <div class="panel-body">
-                            <div id="main" style="width: 100%;height: auto"></div>
-                            <!-- 柱形图 -->
-                            <script th:inline="javascript" type="text/javascript">
-                                // 基于准备好的dom，初始化echarts实例
-                                var myChart = echarts.init(document.getElementById('main'));
+            <!--&lt;!&ndash;病变位置&ndash;&gt;-->
+            <!--&lt;!&ndash;柱状图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>直方图</h3>-->
+            <!--<div id="location1" style="width: 100%;height: 500px"></div>-->
+            <!--&lt;!&ndash; 柱形图 &ndash;&gt;-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('location1'));-->
 
-                                // 基于准备好的dom，初始化echarts实例
-                                var a = [[${aaaaa}]];
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var data = [[${location}]];-->
+            <!--var score = [[${locationScore}]];-->
 
-                                alert(a[0]);
+            <!--var option = {-->
+            <!--dataset: {-->
+            <!--source: [-->
+            <!--['score', 'amount', 'product'],-->
+            <!--[score[0], data[0], '右冠中段'],-->
+            <!--[score[1], data[1], '右冠近段'],-->
+            <!--[score[2], data[2], '右冠远段'],-->
+            <!--[score[3], data[3], '右冠来源的后降支'],-->
+            <!--[score[4], data[4], '左主干'],-->
+            <!--[score[5], data[5], '前降支近段'],-->
+            <!--[score[6], data[6], '前降支中段'],-->
+            <!--[score[7], data[7], '前降支远段'],-->
+            <!--[score[8], data[8], '第一对角支'],-->
+            <!--[score[9], data[9], '第二对角支'],-->
+            <!--[score[10], data[10], '回旋支近段'],-->
+            <!--[score[11], data[11], '第一钝缘支'],-->
+            <!--[score[12], data[12], '回旋支远段'],-->
+            <!--[score[13], data[13], '第二钝缘支'],-->
+            <!--[score[14], data[14], '回旋支来源的后降支'],-->
+            <!--[score[15], data[15], '右冠来源的左室后支'],-->
+            <!--[score[16], data[16], '回旋支来源的左室后支'],-->
+            <!--[score[17], data[17], '中间支']-->
+            <!--]-->
+            <!--},-->
+            <!--grid: {containLabel: true},-->
+            <!--xAxis: {name: 'amount'},-->
+            <!--yAxis: {type: 'category'},-->
+            <!--visualMap: {-->
+            <!--orient: 'horizontal',-->
+            <!--left: 'center',-->
+            <!--min: 10,-->
+            <!--max: 100,-->
+            <!--text: ['High Score', 'Low Score'],-->
+            <!--// Map the score column to color-->
+            <!--dimension: 0,-->
+            <!--inRange: {-->
+            <!--color: ['#D7DA8B', '#E15457']-->
+            <!--}-->
+            <!--},-->
+            <!--series: [-->
+            <!--{-->
+            <!--type: 'bar',-->
+            <!--encode: {-->
+            <!--// Map the "amount" column to X axis.-->
+            <!--x: 'amount',-->
+            <!--// Map the "product" column to Y axis-->
+            <!--y: 'product'-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
 
-                                var option = {
-                                    dataset: {
-                                        source: [
-                                            ['score', 'amount', 'product'],
-                                            [89.3, a[0], '右冠中段'],
-                                            [57.1, 78254, '右冠近段'],
-                                            [74.4, 41032, '右冠远段'],
-                                            [50.1, 12755, '右冠来源的后降支'],
-                                            [89.7, 20145, '左主干'],
-                                            [68.1, 79146, '前降支近段'],
-                                            [19.6, 91852, '前降支中段'],
-                                            [10.6, 101852, '前降支远段'],
-                                            [32.7, 20112, '第一对角支'],
-                                            [89.3, 58212, '第二对角支'],
-                                            [57.1, 78254, '回旋支近段'],
-                                            [74.4, 41032, '第一钝缘支'],
-                                            [50.1, 12755, '回旋支远段'],
-                                            [89.7, 20145, '第二钝缘支'],
-                                            [68.1, 79146, '回旋支来源的后降支'],
-                                            [19.6, 91852, '右冠来源的左室后支'],
-                                            [10.6, 101852, '回旋支来源的左室后支'],
-                                            [32.7, 20112, '中间支']
-                                        ]
-                                    },
-                                    grid: {containLabel: true},
-                                    xAxis: {name: 'amount'},
-                                    yAxis: {type: 'category'},
-                                    visualMap: {
-                                        orient: 'horizontal',
-                                        left: 'center',
-                                        min: 10,
-                                        max: 100,
-                                        text: ['High Score', 'Low Score'],
-                                        // Map the score column to color
-                                        dimension: 0,
-                                        inRange: {
-                                            color: ['#D7DA8B', '#E15457']
-                                        }
-                                    },
-                                    series: [
-                                        {
-                                            type: 'bar',
-                                            encode: {
-                                                // Map the "amount" column to X axis.
-                                                x: 'amount',
-                                                // Map the "product" column to Y axis
-                                                y: 'product'
-                                            }
-                                        }
-                                    ]
-                                };
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
 
-                                // 使用刚指定的配置项和数据显示图表。
-                                myChart.setOption(option);
+            <!--</script>-->
 
-                            </script>
+            <!--</div>-->
+            <!--</div>-->
 
-                        </div>
-                    </div>
-                </div>
+            <!--&lt;!&ndash;扇形图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>扇形图</h3>-->
+            <!--<div id="location2" style="width: 100%;height: 500px"></div>-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('location2'));-->
+
+            <!--var data = [[${data}]];-->
+
+            <!--option = {-->
+            <!--title: {-->
+            <!--text: '病变位置',-->
+            <!--left: 'center'-->
+            <!--},-->
+            <!--tooltip : {-->
+            <!--trigger: 'item',-->
+            <!--formatter: "{a} <br/>{b} : {c} ({d}%)"-->
+            <!--},-->
+            <!--legend: {-->
+            <!--type: 'scroll',-->
+            <!--orient: 'vertical',-->
+            <!--right: -30,-->
+            <!--top: 20,-->
+            <!--bottom: 20,-->
+            <!--data: ["右冠中段","右冠近段","右冠远段","右冠来源的后降支","左主干","前降支近段",-->
+            <!--"前降支中段","前降支远段","第一对角支","第二对角支","回旋支近段","第一钝缘支",-->
+            <!--"回旋支远段","第二钝缘支","回旋支来源的后降支","右冠来源的左室后支","回旋支来源的左室后支","中间支"]-->
+            <!--},-->
+            <!--series : [-->
+            <!--{-->
+            <!--type: 'pie',-->
+            <!--radius : '65%',-->
+            <!--center: ['50%', '50%'],-->
+            <!--selectedMode: 'single',-->
+            <!--data:[-->
+            <!--{value:data[0], name: '右冠中段'},-->
+            <!--{value:data[1], name: '右冠近段'},-->
+            <!--{value:data[2], name: '右冠远段'},-->
+            <!--{value:data[3], name: '右冠来源的后降支'},-->
+            <!--{value:data[4], name: '左主干'},-->
+            <!--{value:data[5], name: '前降支近段'},-->
+            <!--{value:data[6], name: '前降支中段'},-->
+            <!--{value:data[7], name: '前降支远段'},-->
+            <!--{value:data[8], name: '第一对角支'},-->
+            <!--{value:data[9], name: '第二对角支'},-->
+            <!--{value:data[10], name: '回旋支近段'},-->
+            <!--{value:data[11], name: '第一钝缘支'},-->
+            <!--{value:data[12], name: '回旋支远段'},-->
+            <!--{value:data[13], name: '第二钝缘支'},-->
+            <!--{value:data[14], name: '回旋支来源的后降支'},-->
+            <!--{value:data[15], name: '右冠来源的左室后支'},-->
+            <!--{value:data[16], name: '回旋支来源的左室后支'},-->
+            <!--{value:data[17], name: '中间支'}-->
+            <!--],-->
+            <!--itemStyle: {-->
+            <!--emphasis: {-->
+            <!--shadowBlur: 10,-->
+            <!--shadowOffsetX: 0,-->
+            <!--shadowColor: 'rgba(0, 0, 0, 0.5)'-->
+            <!--}-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
+
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;病变长度&ndash;&gt;-->
+            <!--&lt;!&ndash;柱状图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>直方图</h3>-->
+            <!--<div id="length1" style="width: 100%;height: 500px"></div>-->
+            <!--&lt;!&ndash; 柱形图 &ndash;&gt;-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('length1'));-->
+
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var data = [[${length}]];-->
+            <!--var score = [[${lengthScore}]];-->
+
+            <!--var option = {-->
+            <!--dataset: {-->
+            <!--source: [-->
+            <!--['score', 'amount', 'product'],-->
+            <!--[score[0], data[0], '局限(小于1mm)'],-->
+            <!--[score[1], data[1], '局限(小于1mm)'],-->
+            <!--[score[2], data[2], '弥漫(大于20mm)']-->
+            <!--]-->
+            <!--},-->
+            <!--grid: {containLabel: true},-->
+            <!--xAxis: {name: 'amount'},-->
+            <!--yAxis: {type: 'category'},-->
+            <!--visualMap: {-->
+            <!--orient: 'horizontal',-->
+            <!--left: 'center',-->
+            <!--min: 10,-->
+            <!--max: 100,-->
+            <!--text: ['High Score', 'Low Score'],-->
+            <!--// Map the score column to color-->
+            <!--dimension: 0,-->
+            <!--inRange: {-->
+            <!--color: ['#D7DA8B', '#E15457']-->
+            <!--}-->
+            <!--},-->
+            <!--series: [-->
+            <!--{-->
+            <!--type: 'bar',-->
+            <!--encode: {-->
+            <!--// Map the "amount" column to X axis.-->
+            <!--x: 'amount',-->
+            <!--// Map the "product" column to Y axis-->
+            <!--y: 'product'-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
+
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;扇形图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>扇形图</h3>-->
+            <!--<div id="length2" style="width: 100%;height: 500px"></div>-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('length2'));-->
+
+            <!--var data = [[${length}]];-->
+
+            <!--option = {-->
+            <!--title: {-->
+            <!--text: '病变长度',-->
+            <!--left: 'center'-->
+            <!--},-->
+            <!--tooltip : {-->
+            <!--trigger: 'item',-->
+            <!--formatter: "{a} <br/>{b} : {c} ({d}%)"-->
+            <!--},-->
+            <!--legend: {-->
+            <!--type: 'scroll',-->
+            <!--orient: 'vertical',-->
+            <!--right: -30,-->
+            <!--top: 20,-->
+            <!--bottom: 20,-->
+            <!--data: ["局限(小于1mm)","节段(10mm - 20mm)","弥漫(大于20mm)"]-->
+            <!--},-->
+            <!--series : [-->
+            <!--{-->
+            <!--type: 'pie',-->
+            <!--radius : '65%',-->
+            <!--center: ['50%', '50%'],-->
+            <!--selectedMode: 'single',-->
+            <!--data:[-->
+            <!--{value:data[0], name: '局限(小于1mm)'},-->
+            <!--{value:data[1], name: '节段(10mm - 20mm)'},-->
+            <!--{value:data[2], name: '弥漫(大于20mm)'}-->
+            <!--],-->
+            <!--itemStyle: {-->
+            <!--emphasis: {-->
+            <!--shadowBlur: 10,-->
+            <!--shadowOffsetX: 0,-->
+            <!--shadowColor: 'rgba(0, 0, 0, 0.5)'-->
+            <!--}-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
+
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;斑块特征&ndash;&gt;-->
+            <!--&lt;!&ndash;柱状图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>直方图</h3>-->
+            <!--<div id="feature1" style="width: 100%;height: 500px"></div>-->
+            <!--&lt;!&ndash; 柱形图 &ndash;&gt;-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('feature1'));-->
+
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var data = [[${feature}]];-->
+            <!--var score = [[${featureScore}]];-->
+
+            <!--var option = {-->
+            <!--dataset: {-->
+            <!--source: [-->
+            <!--['score', 'amount', 'product'],-->
+            <!--[score[0], data[0], '钙化斑块'],-->
+            <!--[score[1], data[1], '非钙化斑块'],-->
+            <!--[score[2], data[2], '混合斑块']-->
+            <!--]-->
+            <!--},-->
+            <!--grid: {containLabel: true},-->
+            <!--xAxis: {name: 'amount'},-->
+            <!--yAxis: {type: 'category'},-->
+            <!--visualMap: {-->
+            <!--orient: 'horizontal',-->
+            <!--left: 'center',-->
+            <!--min: 10,-->
+            <!--max: 100,-->
+            <!--text: ['High Score', 'Low Score'],-->
+            <!--// Map the score column to color-->
+            <!--dimension: 0,-->
+            <!--inRange: {-->
+            <!--color: ['#D7DA8B', '#E15457']-->
+            <!--}-->
+            <!--},-->
+            <!--series: [-->
+            <!--{-->
+            <!--type: 'bar',-->
+            <!--encode: {-->
+            <!--// Map the "amount" column to X axis.-->
+            <!--x: 'amount',-->
+            <!--// Map the "product" column to Y axis-->
+            <!--y: 'product'-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
+
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;扇形图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>扇形图</h3>-->
+            <!--<div id="feature2" style="width: 100%;height: 500px"></div>-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('feature2'));-->
+
+            <!--var data = [[${feature}]];-->
+
+            <!--option = {-->
+            <!--title: {-->
+            <!--text: '斑块特征',-->
+            <!--left: 'center'-->
+            <!--},-->
+            <!--tooltip : {-->
+            <!--trigger: 'item',-->
+            <!--formatter: "{a} <br/>{b} : {c} ({d}%)"-->
+            <!--},-->
+            <!--legend: {-->
+            <!--type: 'scroll',-->
+            <!--orient: 'vertical',-->
+            <!--right: -30,-->
+            <!--top: 20,-->
+            <!--bottom: 20,-->
+            <!--data: ["钙化斑块","非钙化斑块","混合斑块"]-->
+            <!--},-->
+            <!--series : [-->
+            <!--{-->
+            <!--type: 'pie',-->
+            <!--radius : '65%',-->
+            <!--center: ['50%', '50%'],-->
+            <!--selectedMode: 'single',-->
+            <!--data:[-->
+            <!--{value:data[0], name: '钙化斑块'},-->
+            <!--{value:data[1], name: '非钙化斑块'},-->
+            <!--{value:data[2], name: '混合斑块'}-->
+            <!--],-->
+            <!--itemStyle: {-->
+            <!--emphasis: {-->
+            <!--shadowBlur: 10,-->
+            <!--shadowOffsetX: 0,-->
+            <!--shadowColor: 'rgba(0, 0, 0, 0.5)'-->
+            <!--}-->
+            <!--}-->
+            <!--}-->
+            <!--]-->
+            <!--};-->
+
+            <!--// 使用刚指定的配置项和数据显示图表。-->
+            <!--myChart.setOption(option);-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;狭窄度&ndash;&gt;-->
+            <!--&lt;!&ndash;折线图&ndash;&gt;-->
+            <!--<div>-->
+            <!--<h3 align="center" style="margin: 50px"></h3>-->
+            <!--<div>-->
+            <!--<h3>直方图</h3>-->
+            <!--<div id="width" style="width: 100%;height: 500px"></div>-->
+            <!--&lt;!&ndash; 柱形图 &ndash;&gt;-->
+            <!--<script th:inline="javascript" type="text/javascript">-->
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var myChart = echarts.init(document.getElementById('width'));-->
+
+            <!--// 基于准备好的dom，初始化echarts实例-->
+            <!--var data = [[${width}]];-->
+
+            <!--option = {-->
+            <!--xAxis: {-->
+            <!--type: 'category',-->
+            <!--data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']-->
+            <!--},-->
+            <!--yAxis: {-->
+            <!--type: 'value'-->
+            <!--},-->
+            <!--series: [{-->
+            <!--data: [820, 932, 901, 934, 1290, 1330, 1320],-->
+            <!--type: 'line',-->
+            <!--smooth: true-->
+            <!--}]-->
+            <!--};-->
+
+            <!--</script>-->
+
+            <!--</div>-->
+            <!--</div>-->
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

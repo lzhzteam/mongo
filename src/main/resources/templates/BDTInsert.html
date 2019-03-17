@@ -15,7 +15,7 @@
                 } else {
                     $.ajax({
                         type: "POST",
-                        url: "/autoFillBDT",
+                        url: "/autoFill",
                         data: {num: num},
                         dataType: "json",
                         success: function (data) {
@@ -114,8 +114,8 @@
                         <td colspan="9">
                             &nbsp&nbsp&nbsp
                             典型心绞痛：&nbsp&nbsp&nbsp
-                            <input name="BDTs[0].检查目的.点型心绞痛" type="radio" value="true">是&nbsp&nbsp&nbsp
-                            <input checked name="BDTs[0].检查目的.点型心绞痛" type="radio" value="false">否
+                            <input name="BDTs[0].检查目的.典型心绞痛" type="radio" value="true">是&nbsp&nbsp&nbsp
+                            <input checked name="BDTs[0].检查目的.典型心绞痛" type="radio" value="false">否
                             &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                             非典型胸部不适：
                             <input name="BDTs[0].检查目的.非典型性胸部不适" type="radio" value="true">是&nbsp&nbsp&nbsp

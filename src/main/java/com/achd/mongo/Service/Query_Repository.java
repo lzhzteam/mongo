@@ -10,13 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class Test_Repository {
-
+public class Query_Repository {
 
     private MongoTemplate mongoTemplate;
 
-
-    public Test_Repository() {
+    public Query_Repository() {
         mongoTemplate = new MongoTemplate(new MongoClient("101.132.120.236", 27017), "ACHD");
     }
 
@@ -27,12 +25,21 @@ public class Test_Repository {
 
         query.fields().include("编号");
 
-
-        long l = new Test_Repository().countBDT(query);
-        List<BDT> bdts = new Test_Repository().mongoTemplate.find(query, BDT.class);
+        long l = new Query_Repository().countBDT(query);
+        List<BDT> bdts = new Query_Repository().mongoTemplate.find(query, BDT.class);
         System.out.println(l);
         System.out.println(bdts);
 
+    }
+
+    public List<BDT> getNum(String name, Object value) {
+        Query query = new Query(Criteria.where("BDTs").elemMatch(
+                Criteria.where(name).is(value)
+        ));
+        query.fields().include("编号");
+        List<BDT> bdts = new Query_Repository().mongoTemplate.find(query, BDT.class);
+
+        return bdts;
     }
 
     public long countBDT(Query query) {
