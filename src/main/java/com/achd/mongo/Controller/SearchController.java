@@ -1,9 +1,7 @@
 package com.achd.mongo.Controller;
 
-import com.achd.mongo.Entity.BDT.BDT;
-import com.achd.mongo.Entity.CCTA.CCTA;
-import com.achd.mongo.Service.BDT_Repository;
-import com.achd.mongo.Service.CCTA_Repository;
+import com.achd.mongo.Entity.BaseEntity;
+import com.achd.mongo.Service.BaseEntity_Repository;
 import com.achd.mongo.Service.Query_Repository;
 import com.achd.mongo.Utilities.RequireAuth;
 import com.achd.mongo.Utilities.Utility;
@@ -29,28 +27,21 @@ import static com.achd.mongo.Utilities.Utility.injectUser;
 public class SearchController {
 
     @Autowired
-    CCTA_Repository ccta_repository;
+    BaseEntity_Repository baseEntity_repository;
 
-    @Autowired
-    BDT_Repository bdt_repository;
 
     @RequestMapping(value = "/autoFill", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> get_autoFillBDT(HttpServletRequest request, HttpServletResponse response) {
         String num = request.getParameter("num");
-        BDT bdt = bdt_repository.findBDTBy编号(num);
-        CCTA ccta = ccta_repository.findCCTABy编号(num);
+        BaseEntity baseEntity = baseEntity_repository.findBaseEntitiyBy编号(num);
         Map<String, Object> map = new HashMap<>();
-        if (bdt == null && ccta == null) {
+        if (baseEntity == null) {
             map.put("exist", false);
-        } else if (ccta == null) {
-            map.put("exist", true);
-            map.put("name", bdt.get姓名());
-            map.put("gender", bdt.get性别());
         } else {
             map.put("exist", true);
-            map.put("name", ccta.get姓名());
-            map.put("gender", ccta.get性别());
+            map.put("name", baseEntity.get姓名());
+            map.put("gender", baseEntity.get性别());
         }
         return map;
     }
@@ -75,7 +66,7 @@ public class SearchController {
         String search1 = request.getParameter("search1");
         String search2 = request.getParameter("search2");
 
-        List<BDT> bdts = new ArrayList<>();
+        List<BaseEntity> baseEntities = new ArrayList<>();
 
         Query_Repository query_repository = new Query_Repository();
 
@@ -139,11 +130,11 @@ public class SearchController {
                 break;
         }
 
-        bdts = query_repository.getNum(name, value);
+        baseEntities = query_repository.getNum(name, value);
 
         List<String> nums = new ArrayList<>();
-        for (int i = 0; i < bdts.size(); i++) {
-            nums.add(bdts.get(i).get编号());
+        for (int i = 0; i < baseEntities.size(); i++) {
+            nums.add(baseEntities.get(i).get编号());
         }
 
 //        System.out.println(ccta_repository.countCCTABy编号InAAndCCTAs冠状动脉是否异常(

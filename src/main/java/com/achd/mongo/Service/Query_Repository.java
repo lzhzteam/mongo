@@ -1,6 +1,6 @@
 package com.achd.mongo.Service;
 
-import com.achd.mongo.Entity.BDT.BDT;
+import com.achd.mongo.Entity.BaseEntity;
 import com.mongodb.MongoClient;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -26,23 +26,23 @@ public class Query_Repository {
         query.fields().include("编号");
 
         long l = new Query_Repository().countBDT(query);
-        List<BDT> bdts = new Query_Repository().mongoTemplate.find(query, BDT.class);
+        List<BaseEntity> baseEntities = new Query_Repository().mongoTemplate.find(query, BaseEntity.class);
         System.out.println(l);
-        System.out.println(bdts);
+        System.out.println(baseEntities);
 
     }
 
-    public List<BDT> getNum(String name, Object value) {
+    public List<BaseEntity> getNum(String name, Object value) {
         Query query = new Query(Criteria.where("BDTs").elemMatch(
                 Criteria.where(name).is(value)
         ));
         query.fields().include("编号");
-        List<BDT> bdts = new Query_Repository().mongoTemplate.find(query, BDT.class);
+        List<BaseEntity> baseEntities = new Query_Repository().mongoTemplate.find(query, BaseEntity.class);
 
-        return bdts;
+        return baseEntities;
     }
 
     public long countBDT(Query query) {
-        return mongoTemplate.count(query, BDT.class);
+        return mongoTemplate.count(query, BaseEntity.class);
     }
 }

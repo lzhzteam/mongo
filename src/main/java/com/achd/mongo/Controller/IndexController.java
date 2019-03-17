@@ -1,7 +1,7 @@
 package com.achd.mongo.Controller;
 
-import com.achd.mongo.Entity.BDT.BDT;
-import com.achd.mongo.Service.BDT_Repository;
+import com.achd.mongo.Entity.BaseEntity;
+import com.achd.mongo.Service.BaseEntity_Repository;
 import com.achd.mongo.Service.User_Repository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import static com.achd.mongo.Utilities.Utility.injectUser;
 public class IndexController {
 
     @Autowired
-    private BDT_Repository BDTRepository;
+    private BaseEntity_Repository baseEntity_repository;
 
     @Autowired
     private User_Repository user_repository;
@@ -27,8 +27,8 @@ public class IndexController {
 
     @RequestMapping(value = "/BDT")
     @ResponseBody
-    public List<BDT> getAllBDT() {
-        return BDTRepository.findAll();
+    public List<BaseEntity> getAllBDT() {
+        return baseEntity_repository.findAll();
     }
 
 

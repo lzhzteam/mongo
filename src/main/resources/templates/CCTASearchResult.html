@@ -61,7 +61,7 @@
 
         <ul class="col-md-12 column">
 
-            <li class="card" th:each="CCTA:${CCTAList}" th:id="'CCTA'+${CCTA.gtNum()}">
+            <li class="card" th:class="row" th:each="CCTA:${CCTAList}" th:id="'CCTA'+${CCTA.gtNum()}">
 
                 <div>
                     <table class="table table-striped">
@@ -83,7 +83,7 @@
                     </table>
                 </div>
 
-                <div data-children=".item" th:id="'cctas'+${CCTA.gtNum()}">
+                <div class="col-md-6 column" data-children=".item" th:id="'cctas'+${CCTA.gtNum()}">
 
                     <div class="item card " th:each="CCTAs,Stat : ${CCTA.getCCTAs()}">
                         <div class="card-header">
@@ -107,24 +107,51 @@
                                 </tr>
                                 <tr>
                                     <th>冠状动脉CT是否异常</th>
-                                    <td th:text="${CCTAs.gtAge()}?'是':'否'">
+                                    <td th:text="${CCTAs.gtCoronaryArtery()}?'是':'否'">
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>病变位置</th>
-                                    <td th:text="${CCTAs.gtPosition()}">1</td>
+                                    <td th:switch="${CCTAs.gtPosition()}">
+                                        <div th:case="1">右冠中段</div>
+                                        <div th:case="2">右冠近段</div>
+                                        <div th:case="3">右冠远段</div>
+                                        <div th:case="4">右冠来源的后降支</div>
+                                        <div th:case="5">左主干</div>
+                                        <div th:case="6">前降支近段</div>
+                                        <div th:case="7">前降支中段</div>
+                                        <div th:case="8">前降支远段</div>
+                                        <div th:case="9">第一对角支</div>
+                                        <div th:case="10">第二对角支</div>
+                                        <div th:case="11">回旋支近段</div>
+                                        <div th:case="12">第一钝缘支</div>
+                                        <div th:case="13">回旋支远段</div>
+                                        <div th:case="14">第二钝缘支</div>
+                                        <div th:case="15">回旋支来源的后降支</div>
+                                        <div th:case="16">右冠来源的左室后支</div>
+                                        <div th:case="17">回旋支来源的左室后支</div>
+                                        <div th:case="18">中间支</div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>病变长度</th>
-                                    <td th:text="${CCTAs.gtAge()}">1</td>
+                                    <td th:switch="${CCTAs.gtLong()}">
+                                        <div th:case="1">局限（小于10mm）</div>
+                                        <div th:case="2">节段（10mm-20mm）</div>
+                                        <div th:case="3">弥漫（大于20mm）</div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>斑块特征</th>
-                                    <td>null</td>
+                                    <td th:switch="${CCTAs.gtFeature()}">
+                                        <div th:case="1">钙化斑块</div>
+                                        <div th:case="1">非钙化斑块</div>
+                                        <div th:case="1">混合斑块</div>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>狭窄度</th>
-                                    <td>
+                                    <td th:text="${CCTAs.gtNarrow()}+' mm'">
                                     </td>
                                 </tr>
                                 </tbody>
@@ -135,12 +162,95 @@
                     </div>
                 </div>
 
+                <div class="col-md-6 column" data-children=".item" th:id="'cctas'+${CCTA.gtNum()}">
 
-            </li>
+                    <div class="item card " th:each="CCTAs,Stat : ${CCTA.getCCTAs()}">
+                        <div class="card-header">
+                            <a aria-expanded="true" data-toggle="collapse"
+
+                               th:aria-controls="'collapse'+${CCTA.gtNum()}+${Stat.index}"
+                               th:data-parent="'#cctas'+${CCTA.gtNum()}"
+                               th:href="'#collapse'+${CCTA.gtNum()}+${Stat.index}"
+                               th:text="'CCTA检查'+${Stat.index}+'  点击展开'"
+                            >
+
+                            </a>
+                        </div>
+                        <div class="collapse card-body" role="tabpanel"
+                             th:id="'collapse'+${CCTA.gtNum()}+${Stat.index}">
+                            <table class="table table-bordered table-sm table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>年龄</th>
+                                    <td th:text="${CCTAs.gtAge()}">56</td>
+                                </tr>
+                                <tr>
+                                    <th>冠状动脉CT是否异常</th>
+                                    <td th:text="${CCTAs.gtCoronaryArtery()}?'是':'否'">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>病变位置</th>
+                                    <td th:switch="${CCTAs.gtPosition()}">
+                                        <div th:case="1">右冠中段</div>
+                                        <div th:case="2">右冠近段</div>
+                                        <div th:case="3">右冠远段</div>
+                                        <div th:case="4">右冠来源的后降支</div>
+                                        <div th:case="5">左主干</div>
+                                        <div th:case="6">前降支近段</div>
+                                        <div th:case="7">前降支中段</div>
+                                        <div th:case="8">前降支远段</div>
+                                        <div th:case="9">第一对角支</div>
+                                        <div th:case="10">第二对角支</div>
+                                        <div th:case="11">回旋支近段</div>
+                                        <div th:case="12">第一钝缘支</div>
+                                        <div th:case="13">回旋支远段</div>
+                                        <div th:case="14">第二钝缘支</div>
+                                        <div th:case="15">回旋支来源的后降支</div>
+                                        <div th:case="16">右冠来源的左室后支</div>
+                                        <div th:case="17">回旋支来源的左室后支</div>
+                                        <div th:case="18">中间支</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>病变长度</th>
+                                    <td th:switch="${CCTAs.gtLong()}">
+                                        <div th:case="1">局限（小于10mm）</div>
+                                        <div th:case="2">节段（10mm-20mm）</div>
+                                        <div th:case="3">弥漫（大于20mm）</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>斑块特征</th>
+                                    <td th:switch="${CCTAs.gtFeature()}">
+                                        <div th:case="1">钙化斑块</div>
+                                        <div th:case="1">非钙化斑块</div>
+                                        <div th:case="1">混合斑块</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>狭窄度</th>
+                                    <td th:text="${CCTAs.gtNarrow()}+' mm'">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
 
-        </ul>
+                    </div>
+                </div>
+
     </div>
+
+
+    </li>
+
+
+    </ul>
+
+
+</div>
 
 
 </div>

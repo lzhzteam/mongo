@@ -1,8 +1,8 @@
 package com.achd.mongo.Controller;
 
-import com.achd.mongo.Entity.BDT.BDT;
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
-import com.achd.mongo.Service.BDT_Repository;
+import com.achd.mongo.Entity.BaseEntity;
+import com.achd.mongo.Service.BaseEntity_Repository;
 import com.achd.mongo.Utilities.RequireAuth;
 import com.achd.mongo.Utilities.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -21,7 +20,7 @@ import static com.achd.mongo.Utilities.Utility.injectUser;
 @Controller
 public class BDTController {
     @Autowired
-    BDT_Repository bdt_repository;
+    BaseEntity_Repository baseEntity_repository;
 
     @RequireAuth
     @GetMapping("/BDTInsert")
@@ -32,22 +31,24 @@ public class BDTController {
 
     @RequireAuth
     @PostMapping("/BDTInsert")
-    @ResponseBody
-    public BDT post_BDTInsert(BDT bdt, HttpSession session, Model model) {
-        BDT hadUser = bdt_repository.findBDTBy编号(bdt.get编号());
-        if (hadUser == null) {
-            bdt_repository.save(bdt);
+    public String post_BDTInsert(BaseEntity baseEntity, HttpSession session, Model model) {
+        BaseEntity hadBaseEntity = baseEntity_repository.findBaseEntitiyBy编号(baseEntity.get编号());
+        if (hadBaseEntity == null) {
+            baseEntity_repository.save(baseEntity);
         } else {
-            List<BDTS> hadUserBDTs = hadUser.getBDTs();
-            hadUserBDTs.add(bdt.getBDTs().get(0));
-            bdt_repository.save(hadUser);
+            List<BDTS> hadUserBDTs = hadBaseEntity.getBDTs();
+            hadUserBDTs.add(baseEntity.getBDTs().get(0));
+            baseEntity_repository.save(hadBaseEntity);
         }
-        return bdt;
+
+
+        injectUser(session, model);
+        return "bdtinsert";
     }
 
     @RequireAuth
     @GetMapping("/BDTSearch")
-    public String get_CaseSearch(HttpSession session, Model model) {
+    public String get_BDTSearch(HttpSession session, Model model) {
 
         Utility.injectUser(session, model);
         model.addAttribute("type", "BDT");
@@ -58,10 +59,10 @@ public class BDTController {
 
     @RequireAuth
     @GetMapping("/BDTSearch/{search}")
-    public String get_CaseSearch_result(HttpSession session, Model model, @PathVariable("search") String search) {
+    public String get_BDTSearch_result(HttpSession session, Model model, @PathVariable("search") String search) {
         Utility.injectUser(session, model);
 
-        List<BDT> byId = bdt_repository.findBy编号ContainsOr姓名ContainsAllIgnoreCase(search, search);
+        List<BaseEntity> byId = baseEntity_repository.findBy编号ContainsOr姓名ContainsAllIgnoreCase(search, search);
 
         model.addAttribute("BDTList", byId);
         return "BDTSearchResult";

@@ -1,8 +1,16 @@
 package com.achd.mongo.Entity;
 
+import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-public class BaseEntity {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+
+@Document(collection = "BaseEntity")
+public class BaseEntity extends TableBase implements Serializable {
     @Id
     public String id;
 
@@ -77,4 +85,29 @@ public class BaseEntity {
     public String gtSex() {
         return 性别;
     }
+
+
+    /////////////BDT///////////
+    private ArrayList<BDTS> BDTs;
+    ///////////CCTA///////////
+    private ArrayList<com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs> CCTAs;
+
+    public ArrayList<BDTS> getBDTs() {
+        return BDTs;
+    }
+
+    public void setBDTs(ArrayList<BDTS> BDTs) {
+        this.BDTs = BDTs;
+    }
+
+    public ArrayList<CCTAs> getCCTAs() {
+        return CCTAs;
+    }
+
+    public void setCCTAs(ArrayList<CCTAs> CCTAs) {
+        this.CCTAs = CCTAs;
+    }
+
+
+
 }
