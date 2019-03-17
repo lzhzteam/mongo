@@ -1,11 +1,14 @@
 package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.BaseEntity;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAS;
 import com.achd.mongo.Service.BaseEntity_Repository;
 import com.achd.mongo.Service.Query_Repository;
 import com.achd.mongo.Utilities.RequireAuth;
 import com.achd.mongo.Utilities.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -65,8 +67,6 @@ public class SearchController {
         Utility.injectUser(session, model);
         String search1 = request.getParameter("search1");
         String search2 = request.getParameter("search2");
-
-        List<BaseEntity> baseEntities = new ArrayList<>();
 
         Query_Repository query_repository = new Query_Repository();
 
@@ -130,21 +130,79 @@ public class SearchController {
                 break;
         }
 
-        baseEntities = query_repository.getNum(name, value);
-
-        List<String> nums = new ArrayList<>();
-        for (int i = 0; i < baseEntities.size(); i++) {
-            nums.add(baseEntities.get(i).get编号());
+        // query1 病因+冠心病
+        Query query1 = new Query();
+        query1.addCriteria(Criteria.where("BDTs").elemMatch(
+                Criteria.where(name).is(value)
+        ));
+        query1.addCriteria(Criteria.where("CCTAs").elemMatch(
+                Criteria.where("冠状动脉CT是否异常").is(true)
+        ));
+        List<BaseEntity> baseEntities = query_repository.get(query1);
+        long num1 = baseEntities.size();
+        long[] location = new long[18];
+        long[] locationScore = new long[18];
+        long[] length = new long[3];
+        long[] lengthScore = new long[3];
+        long[] feature = new long[3];
+        long[] featureScore = new long[3];
+        for (int i = 0; i < num1; i++) {
+            List<CCTAS> cctas = baseEntities.get(i).getCCTAs();
+            CCTAS ccta = cctas.get(cctas.size() - 1);
+            location[ccta.get病变位置() - 1]++;
+            length[ccta.get病变长度() - 1]++;
+            feature[ccta.get斑块特征() - 1]++;
         }
 
-//        System.out.println(ccta_repository.countCCTABy编号InAAndCCTAs冠状动脉是否异常(
-//                nums,true
-//        ));
+        // 测试
+        for (int i = 0; i < 18; i++)
+            location[i] = (long) (Math.random() * 1000);
+        for (int i = 0; i < 3; i++) {
+            length[i] = (long) (Math.random() * 1000);
+            feature[i] = (long) (Math.random() * 1000);
+        }
 
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
-        model.addAttribute("aaaaa", list);
+        for (int i = 0; i < 18; i++)
+            locationScore[i] = location[i] / num1;
+        for (int i = 0; i < 3; i++) {
+            lengthScore[i] = length[i] / num1;
+            featureScore[i] = feature[i] / num1;
+        }
+
+        // query2 病因+非冠心病
+        Query query2 = new Query();
+        query2.addCriteria(Criteria.where("BDTs").elemMatch(
+                Criteria.where(name).is(value)
+        ));
+        query2.addCriteria(Criteria.where("CCTAs").elemMatch(
+                Criteria.where("冠状动脉CT是否异常").is(false)
+        ));
+        long num2 = query_repository.count(query2);
+
+        // query3 冠心病
+        Query query3 = new Query();
+        query3.addCriteria(Criteria.where("CCTAs").elemMatch(
+                Criteria.where("冠状动脉CT是否异常").is(true)
+        ));
+
+        // 非病因+冠心病
+        long num3 = query_repository.count(query3) - num1;
+
+        // 非病因+非冠心病
+        long num4 = baseEntity_repository.count() - num1 - num2 - num3;
+
+        model.addAttribute("search1", search1);
+        model.addAttribute("search2", search2);
+        model.addAttribute("num1", num1);
+        model.addAttribute("num2", num2);
+        model.addAttribute("num3", num3);
+        model.addAttribute("num4", num4);
+        model.addAttribute("location", location);
+        model.addAttribute("locationScore", locationScore);
+        model.addAttribute("length", length);
+        model.addAttribute("lengthScore", lengthScore);
+        model.addAttribute("feature", feature);
+        model.addAttribute("featureScore", featureScore);
 
         return "PathogenySearchResult";
     }
