@@ -50,6 +50,15 @@ public class UserController {
         } else if (hadUser.getPasswordMD5().equals(user.getPasswordMD5())) {
             session.setAttribute("user", hadUser);              //密码正确
         }
+
+        String lastUrl = (String) session.getAttribute("lastUrl");
+
+        session.removeAttribute("lastUrl");
+
+        if (lastUrl != null) {
+            String[] t = lastUrl.split("_");
+            return "redirect:/" + t[1];
+        }
         return "redirect:/";
     }
 

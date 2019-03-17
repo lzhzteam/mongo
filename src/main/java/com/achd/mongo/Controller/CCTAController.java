@@ -26,7 +26,7 @@ public class CCTAController {
 
     @RequireAuth
     @GetMapping("/CCTAInsert")
-    public String getCCTAInsert(HttpSession session, Model model) {
+    public String get_CCTAInsert(HttpSession session, Model model) {
         injectUser(session, model);
         return "cctainsert";
     }
@@ -34,7 +34,7 @@ public class CCTAController {
     @RequireAuth
     @PostMapping("/CCTAInsert")
     @ResponseBody
-    public CCTA CCTAInsertPost(CCTA ccta, HttpSession session, Model model) {
+    public CCTA post_CCTAInsert(CCTA ccta, HttpSession session, Model model) {
         CCTA hadCCTA = ccta_repository.findCCTABy编号(ccta.get编号());
         if (hadCCTA == null) {
             ccta_repository.save(ccta);
@@ -49,7 +49,7 @@ public class CCTAController {
 
     @RequestMapping(value = "/autoFillCCTA", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> autoFillCCTA(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> get_autoFillCCTA(HttpServletRequest request, HttpServletResponse response) {
         String num = request.getParameter("num");
         CCTA ccta = ccta_repository.findCCTABy编号(num);
         Map<String, Object> map = new HashMap<>();

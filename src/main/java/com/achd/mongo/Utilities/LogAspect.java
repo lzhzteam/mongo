@@ -24,6 +24,9 @@ public class LogAspect {
 
         if (session.getAttribute("user") == null) {
             session.setAttribute("logFailure", "请先登录");
+
+            session.setAttribute("lastUrl", joinPoint.getSignature().getName());
+            System.out.println(joinPoint.getSignature().getName());
             return "redirect:/logIn";
         }
 

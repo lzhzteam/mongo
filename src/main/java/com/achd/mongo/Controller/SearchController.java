@@ -29,7 +29,7 @@ public class SearchController {
 
     @RequireAuth
     @GetMapping("/PathogenySearch")
-    public String getPathogenySearch(HttpSession session, Model model) {
+    public String get_PathogenySearch(HttpSession session, Model model) {
         injectUser(session, model);
         return "PathogenySearch";
     }
@@ -42,7 +42,7 @@ public class SearchController {
 //    }
 
     @RequestMapping(value = "/PathogenySearchResult", method = RequestMethod.POST)
-    public String getPathogenySearchResult(HttpServletRequest request, HttpSession session, Model model) {
+    public String get_PathogenySearchResult(HttpServletRequest request, HttpSession session, Model model) {
         Utility.injectUser(session, model);
         System.out.println(request.getParameter("search1"));
 

@@ -26,7 +26,7 @@ public class BDTController {
 
     @RequireAuth
     @GetMapping("/BDTInsert")
-    public String getBDTInsert(HttpSession session, Model model) {
+    public String get_BDTInsert(HttpSession session, Model model) {
         injectUser(session, model);
         return "bdtinsert";
     }
@@ -34,7 +34,7 @@ public class BDTController {
     @RequireAuth
     @PostMapping("/BDTInsert")
     @ResponseBody
-    public BDT BDTInsertPost(BDT bdt, HttpSession session, Model model) {
+    public BDT post_BDTInsert(BDT bdt, HttpSession session, Model model) {
         BDT hadUser = bdt_repository.findBDTBy编号(bdt.get编号());
         if (hadUser == null) {
             bdt_repository.save(bdt);
@@ -48,7 +48,7 @@ public class BDTController {
 
     @RequestMapping(value = "/autoFillBDT", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> autoFillBDT(HttpServletRequest request, HttpServletResponse response) {
+    public Map<String, Object> get_autoFillBDT(HttpServletRequest request, HttpServletResponse response) {
         String num = request.getParameter("num");
         BDT bdt = bdt_repository.findBDTBy编号(num);
         Map<String, Object> map = new HashMap<>();
@@ -64,7 +64,7 @@ public class BDTController {
 
     @RequireAuth
     @GetMapping("/CaseSearch")
-    public String caseSearchGet(HttpSession session, Model model) {
+    public String get_CaseSearch(HttpSession session, Model model) {
 
         Utility.injectUser(session, model);
 
@@ -74,7 +74,7 @@ public class BDTController {
 
     @RequireAuth
     @GetMapping("/CaseSearch/{search}")
-    public String caseSearchResultGet(HttpSession session, Model model, @PathVariable("search") String search) {
+    public String get_CaseSearch_result(HttpSession session, Model model, @PathVariable("search") String search) {
         Utility.injectUser(session, model);
 
         List<BDT> byId = bdt_repository.findBy编号ContainsOr姓名ContainsAllIgnoreCase(search, search);
