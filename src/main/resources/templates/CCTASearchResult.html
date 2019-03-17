@@ -103,19 +103,20 @@
                                 <tbody>
                                 <tr>
                                     <th>年龄</th>
-                                    <td>56</td>
+                                    <td th:text="${CCTAs.gtAge()}">56</td>
                                 </tr>
                                 <tr>
                                     <th>冠状动脉CT是否异常</th>
-                                    <td>true</td>
+                                    <td th:text="${CCTAs.gtAge()}?'是':'否'">
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th>病变位置</th>
-                                    <td>1</td>
+                                    <td th:text="${CCTAs.gtPosition()}">1</td>
                                 </tr>
                                 <tr>
                                     <th>病变长度</th>
-                                    <td>1</td>
+                                    <td th:text="${CCTAs.gtAge()}">1</td>
                                 </tr>
                                 <tr>
                                     <th>斑块特征</th>
