@@ -63,24 +63,25 @@ public class BDTController {
     }
 
     @RequireAuth
-    @GetMapping("/CaseSearch")
+    @GetMapping("/BDTSearch")
     public String get_CaseSearch(HttpSession session, Model model) {
 
         Utility.injectUser(session, model);
+        model.addAttribute("type", "BDT");
 
         return "CaseSearch";
     }
 
 
     @RequireAuth
-    @GetMapping("/CaseSearch/{search}")
+    @GetMapping("/BDTSearch/{search}")
     public String get_CaseSearch_result(HttpSession session, Model model, @PathVariable("search") String search) {
         Utility.injectUser(session, model);
 
         List<BDT> byId = bdt_repository.findBy编号ContainsOr姓名ContainsAllIgnoreCase(search, search);
 
         model.addAttribute("BDTList", byId);
-        return "CaseSearchResult";
+        return "BDTSearchResult";
     }
 
 }

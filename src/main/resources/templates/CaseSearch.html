@@ -99,9 +99,14 @@
     </div>
 
 
-    <script>
+    <script th:if="${type}=='BDT'">
         function s() {
-            window.location = "/CaseSearch/" + $("#inputSearch").val();
+            window.location = "/BDTSearch/" + $("#inputSearch").val();
+        }
+    </script>
+    <script th:if="${type}=='CCTA'">
+        function s() {
+            window.location = "/CCTASearch/" + $("#inputSearch").val();
         }
     </script>
 

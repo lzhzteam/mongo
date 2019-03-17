@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <script crossorigin="anonymous"
+            integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script crossorigin="anonymous"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/bootstrap.css}"/>
+    <link rel="stylesheet" th:href="@{/bootstrap-4.2.1/css/doc.min.css}"/>
+    <script th:src="@{/bootstrap-4.2.1/js/bootstrap.min.js}"></script>
+
+
+    <style>
+        img {
+            height: 400px;
+        }
+
+        .object-fit_fill {
+            object-fit: fill
+        }
+
+        .object-fit_contain {
+            object-fit: contain
+        }
+
+        .object-fit_cover {
+            object-fit: cover
+        }
+
+        .object-fit_none {
+            object-fit: none
+        }
+
+        .object-fit_scale-down {
+            object-fit: scale-down
+        }
+
+        .card {
+            margin: 20px;
+        }
+    </style>
+
+
+</head>
+<body>
+
+<!-- 菜单 -->
+<!--/*@thymesVar id="user" type="com.achd.mongo.Entity.User"*/-->
+<header th:replace="Header::headerNav(search,${user})"></header>
+
+
+<div class="container">
+
+    <div class="row">
+
+        <ul class="col-md-12 column">
+
+            <li class="card" th:each="CCTA:${CCTAList}" th:id="'CCTA'+${CCTA.gtNum()}">
+
+                <div>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">编号</th>
+                            <th scope="col">姓名</th>
+                            <th scope="col">性别</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td scope="col" th:text="${CCTA.gtNum()}">0000000001</td>
+                            <td scope="col" th:text="${CCTA.gtName()}">Name</td>
+                            <td scope="col" th:text="${CCTA.gtSex()}">sex</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div data-children=".item" th:id="'cctas'+${CCTA.gtNum()}">
+
+                    <div class="item card " th:each="CCTAs,Stat : ${CCTA.getCCTAs()}">
+                        <div class="card-header">
+                            <a aria-expanded="true" data-toggle="collapse"
+
+                               th:aria-controls="'collapse'+${CCTA.gtNum()}+${Stat.index}"
+                               th:data-parent="'#cctas'+${CCTA.gtNum()}"
+                               th:href="'#collapse'+${CCTA.gtNum()}+${Stat.index}"
+                               th:text="'CCTA检查'+${Stat.index}+'  点击展开'"
+                            >
+
+                            </a>
+                        </div>
+                        <div class="collapse card-body" role="tabpanel"
+                             th:id="'collapse'+${CCTA.gtNum()}+${Stat.index}">
+                            <table class="table table-bordered table-sm table-striped">
+                                <tbody>
+                                <tr>
+                                    <th>年龄</th>
+                                    <td>56</td>
+                                </tr>
+                                <tr>
+                                    <th>冠状动脉CT是否异常</th>
+                                    <td>true</td>
+                                </tr>
+                                <tr>
+                                    <th>病变位置</th>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <th>病变长度</th>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <th>斑块特征</th>
+                                    <td>null</td>
+                                </tr>
+                                <tr>
+                                    <th>狭窄度</th>
+                                    <td>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+            </li>
+
+
+        </ul>
+    </div>
+
+
+</div>
+
+</body>
+</html>

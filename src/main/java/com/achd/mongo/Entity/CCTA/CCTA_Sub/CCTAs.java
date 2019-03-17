@@ -1,9 +1,10 @@
 package com.achd.mongo.Entity.CCTA.CCTA_Sub;
 
+import com.achd.mongo.Entity.TableBase;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class CCTAs {
+public class CCTAs extends TableBase {
     private Integer 年龄;
     private Boolean 冠状动脉CT是否异常;
     private Integer 病变位置;

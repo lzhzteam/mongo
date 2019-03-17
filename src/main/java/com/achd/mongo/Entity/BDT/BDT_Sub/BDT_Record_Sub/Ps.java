@@ -1,5 +1,6 @@
 package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
 
+import com.achd.mongo.Entity.TableBase;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document

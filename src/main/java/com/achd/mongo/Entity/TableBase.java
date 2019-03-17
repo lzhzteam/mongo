@@ -1,4 +1,4 @@
-package com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub;
+package com.achd.mongo.Entity;
 
 
 import java.lang.reflect.Field;

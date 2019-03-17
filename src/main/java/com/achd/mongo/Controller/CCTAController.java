@@ -4,6 +4,7 @@ import com.achd.mongo.Entity.CCTA.CCTA;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
 import com.achd.mongo.Service.CCTA_Repository;
 import com.achd.mongo.Utilities.RequireAuth;
+import com.achd.mongo.Utilities.Utility;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,4 +63,29 @@ public class CCTAController {
         }
         return map;
     }
+
+
+    @RequireAuth
+    @GetMapping("/CCTASearch")
+    public String get_CaseSearch(HttpSession session, Model model) {
+
+        Utility.injectUser(session, model);
+        model.addAttribute("type", "CCTA");
+
+        return "CaseSearch";
+    }
+
+
+    @RequireAuth
+    @GetMapping("/CCTASearch/{search}")
+    public String get_CaseSearch_result(HttpSession session, Model model, @PathVariable("search") String search) {
+        Utility.injectUser(session, model);
+
+        List<CCTA> byIdAndName = ccta_repository.findBy编号ContainsOr姓名ContainsAllIgnoreCase(search, search);
+
+        model.addAttribute("CCTAList", byIdAndName);
+        return "CCTASearchResult";
+    }
+
+
 }

@@ -33,7 +33,8 @@
         <ul class="navbar-nav bd-navbar-nav flex-row">
             <li class="nav-item active"
                 th:class="${activeUri=='index'?'nav-item active':'nav-item'}"><a class="nav-link" href="/">首页</a></li>
-            <li class="nav-item dropdown">
+            <li class="nav-item dropdown"
+                th:class="${activeUri=='insert'?'nav-item dropdown active':'nav-item dropdown'}">
                 <a aria-expanded="false" aria-haspopup="true"
                    class="nav-item nav-link dropdown-toggle mr-md-2"
                    data-toggle="dropdown" href="#" id="insert">
@@ -47,9 +48,19 @@
                 th:class="${activeUri=='analyse'?'nav-item active':'nav-item'}"><a class="nav-link"
                                                                                    href="/PathogenySearch">病因分析</a>
             </li>
-            <li class="nav-item"
-                th:class="${activeUri=='search'?'nav-item active':'nav-item'}"><a class="nav-link" href="/CaseSearch">病例查询</a>
+
+            <li class="nav-item dropdown"
+                th:class="${activeUri=='search'?'nav-item dropdown active':'nav-item dropdown'}">
+                <a aria-expanded="false" aria-haspopup="true"
+                   class="nav-item nav-link dropdown-toggle mr-md-2"
+                   data-toggle="dropdown" href="#" id="search">
+                    病例查询 </a>
+                <div aria-labelledby="search" class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" href="/BDTSearch">BDT</a>
+                    <a class="dropdown-item" href="/CCTASearch">CCTA</a>
+                </div>
             </li>
+
 
         </ul>
     </div>
