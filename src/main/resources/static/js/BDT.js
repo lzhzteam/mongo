@@ -15,7 +15,7 @@ function show1(obj)
 {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 3) {
+    if (radioValue === "3") {
     show = "<br>" +
     "&nbsp&nbsp&nbsp" +
         "目前用药：" +
@@ -43,7 +43,7 @@ function show1(obj)
 function show2(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 3) {
+    if (radioValue === "3") {
     show = "<br>" +
       "&nbsp&nbsp&nbsp" +
       "目前用药：" +
@@ -70,7 +70,7 @@ function show2(obj) {
 function show3(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 3) {
+    if (radioValue === "3") {
     show = "<br>" +
        "&nbsp&nbsp&nbsp" +
       "分型：" +
@@ -103,7 +103,7 @@ function show3(obj) {
 function show4(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 3) {
+    if (radioValue === "3") {
     show = "<br>" +
        "&nbsp&nbsp&nbsp" +
         "发生时间：" +
@@ -126,7 +126,7 @@ function show4(obj) {
 function show5(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 3) {
+    if (radioValue === "3") {
     show = "<br>" +
        "&nbsp&nbsp&nbsp" +
         "发生时间：" +
@@ -148,7 +148,7 @@ function show6(obj) {
   var showNothing = "";
     var show3 = "(戒烟<input type=\"text\" name=\"BDTs[0].吸烟史.过去吸年\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">年，如不满一年，<input type=\"text\" name=\"BDTs[0].吸烟史.过去吸月\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">月)";
   var radioValue = obj.value;
-    if (radioValue === 1) {
+    if (radioValue === "1") {
     document.all.showMessage6_1.innerHTML = show1;
     document.all.showMessage6_2.innerHTML = showNothing;
   } else if (radioValue === 3) {
@@ -177,7 +177,7 @@ function show7(obj) {
   var showNothing = "";
     var show3 = "(已戒酒<input type=\"text\" name=\"BDTs[0].饮酒史.过去饮年\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">年）";
   var radioValue = obj.value;
-    if (radioValue === 1) {
+    if (radioValue === "1") {
     document.all.showMessage7_1.innerHTML = show1;
     document.all.showMessage7_2.innerHTML = showNothing;
   } else if (radioValue === 3) {
@@ -194,7 +194,7 @@ function show7(obj) {
 function show8(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 2 || radioValue === 3) {
+    if (radioValue === "2" || radioValue === "3") {
     show = "<br>" +
        "&nbsp&nbsp&nbsp" +
         "每次锻炼时间：" +
@@ -209,7 +209,7 @@ function show8(obj) {
 function show9(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 2) {
+    if (radioValue === "2") {
     show = "&nbsp&nbsp&nbsp" +
         "最近一次心梗时间：" +
         "<input type=\"month\" name=\"BDTs[0].心肌梗死.年月\" style=\"width:140px;border:0;border-bottom:#000000 1px solid;\">";
@@ -232,7 +232,7 @@ function show10(obj) {
 function show11(obj) {
   var show = "";
   var radioValue = obj.value;
-    if (radioValue === 1) {
+    if (radioValue === "1") {
     show = "<br>" + 
       "&nbsp&nbsp&nbsp" +
         "<input type=\"checkbox\" name=\"BDTs[0].家族史.冠心病家族史.谁.父亲1\" value=\"1\" onclick=\"show12(this)\">父有" +
@@ -255,7 +255,7 @@ function show11(obj) {
 // 父有
 function show12(obj) {
   var show = "";
-    if (obj.checked === true) {
+    if (obj.checked == true) {
         show = "：（发病年龄<input type=\"text\" name=\"BDTs[0].家族史.冠心病家族史.谁.父亲\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">岁）";
   }
   document.all.showMessage12.innerHTML = show;
@@ -264,7 +264,7 @@ function show12(obj) {
 // 兄弟姐妹有
 function show13(obj) {
   var show = "";
-    if (obj.checked === true) {
+    if (obj.checked == true) {
         show = "：（最小发病年龄<input type=\"text\" name=\"BDTs[0].家族史.冠心病家族史.谁.母亲\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">岁）";
   }
   document.all.showMessage13.innerHTML = show;
@@ -273,7 +273,7 @@ function show13(obj) {
 // 母有
 function show14(obj) {
   var show = "";
-    if (obj.checked === true) {
+    if (obj.checked == true) {
         show = "：（发病年龄<input type=\"text\" name=\"BDTs[0].家族史.冠心病家族史.谁.兄弟姐妹\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">岁）";
   }
   document.all.showMessage14.innerHTML = show;
@@ -282,7 +282,7 @@ function show14(obj) {
 // 子女有
 function show15(obj) {
   var show = "";
-    if (obj.checked === true) {
+    if (obj.checked == true) {
         show = "：（最小发病年龄<input type=\"text\" name=\"BDTs[0].家族史.冠心病家族史.谁.子女\" style=\"width:30px;border:0;border-bottom:#000000 1px solid;\">岁）";
   }
   document.all.showMessage15.innerHTML = show;
