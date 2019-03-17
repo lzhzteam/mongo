@@ -1,7 +1,7 @@
 package com.achd.mongo.Entity;
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
-import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAS;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -90,7 +90,7 @@ public class BaseEntity extends TableBase implements Serializable {
     /////////////BDT///////////
     private ArrayList<BDTS> BDTs;
     ///////////CCTA///////////
-    private ArrayList<com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs> CCTAs;
+    private ArrayList<CCTAS> CCTAs;
 
     public ArrayList<BDTS> getBDTs() {
         return BDTs;
@@ -100,11 +100,11 @@ public class BaseEntity extends TableBase implements Serializable {
         this.BDTs = BDTs;
     }
 
-    public ArrayList<CCTAs> getCCTAs() {
+    public ArrayList<CCTAS> getCCTAs() {
         return CCTAs;
     }
 
-    public void setCCTAs(ArrayList<CCTAs> CCTAs) {
+    public void setCCTAs(ArrayList<CCTAS> CCTAs) {
         this.CCTAs = CCTAs;
     }
 

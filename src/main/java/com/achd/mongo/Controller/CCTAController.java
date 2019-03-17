@@ -1,7 +1,7 @@
 package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.BaseEntity;
-import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAs;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAS;
 import com.achd.mongo.Service.BaseEntity_Repository;
 import com.achd.mongo.Utilities.RequireAuth;
 import com.achd.mongo.Utilities.Utility;
@@ -37,8 +37,8 @@ public class CCTAController {
         if (hadBaseEntity == null) {
             baseEntity_repository.save(baseEntity);
         } else {
-            List<CCTAs> hadUserCCTAs = hadBaseEntity.getCCTAs();
-            hadUserCCTAs.add(baseEntity.getCCTAs().get(0));
+            List<CCTAS> hadUserCCTAS = hadBaseEntity.getCCTAs();
+            hadUserCCTAS.add(baseEntity.getCCTAs().get(0));
             baseEntity_repository.save(hadBaseEntity);
         }
 

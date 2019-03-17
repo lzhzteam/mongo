@@ -3,13 +3,14 @@ package com.achd.mongo.Entity.BDT.BDT_Sub;
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDT_Record_Sub.*;
 import com.achd.mongo.Entity.TableBase;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Document
+
 public class BDTS extends TableBase {
     private Integer 年龄;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date 检查时间;
     private Integer 心率;
     private String 血压;

@@ -1,10 +1,9 @@
 package com.achd.mongo.Entity.CCTA.CCTA_Sub;
 
 import com.achd.mongo.Entity.TableBase;
-import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class CCTAs extends TableBase {
+
+public class CCTAS extends TableBase {
     private Integer 年龄;
     private Boolean 冠状动脉CT是否异常;
     private Integer 病变位置;
@@ -12,10 +11,10 @@ public class CCTAs extends TableBase {
     private Integer 斑块特征;
     private Double 狭窄度;
 
-    public CCTAs() {
+    public CCTAS() {
     }
 
-    public CCTAs(Integer 年龄, Boolean 冠状动脉CT是否异常, Integer 病变位置, Integer 病变长度, Integer 斑块特征, Double 狭窄度) {
+    public CCTAS(Integer 年龄, Boolean 冠状动脉CT是否异常, Integer 病变位置, Integer 病变长度, Integer 斑块特征, Double 狭窄度) {
         this.年龄 = 年龄;
         this.冠状动脉CT是否异常 = 冠状动脉CT是否异常;
         this.病变位置 = 病变位置;

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.achd.mongo.Utilities.Utility.injectUser;
@@ -36,8 +37,12 @@ public class BDTController {
         if (hadBaseEntity == null) {
             baseEntity_repository.save(baseEntity);
         } else {
-            List<BDTS> hadUserBDTs = hadBaseEntity.getBDTs();
+            ArrayList<BDTS> hadUserBDTs = hadBaseEntity.getBDTs();
+            if (hadUserBDTs == null) {
+                hadUserBDTs = new ArrayList<>();
+            }
             hadUserBDTs.add(baseEntity.getBDTs().get(0));
+            hadBaseEntity.setBDTs(hadUserBDTs);
             baseEntity_repository.save(hadBaseEntity);
         }
 
