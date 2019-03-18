@@ -8,7 +8,7 @@
         var obj = document.getElementById("search1");
         var jiaArr = ["请选择", "检查目的", "高血压病", "血脂异常", "糖尿病史", "脑卒中病史", "外周血管病", "吸烟史", "饮酒史", "体育锻炼史", "心肌梗死", "其他疾病史", "家族史"];
         var exampleArr = [
-            [""],
+            [" "],
             ["典型心绞痛", "非典型胸部不适", "非胸痛症状", "心电图异常", "心脏超声异常"],//检查目的
             ["有"],//高血压病
             ["有"],//血脂异常
@@ -101,12 +101,16 @@
             <h3 style="margin: 50px">病因查询</h3>
 
             <form action="/PathogenySearchResult" method="post" onsubmit="return myCheck()">
-                <select class="selectpicker" data-live-search="true" id="search1" name="search1"
-                        onchange="ChangeExampleSelect(this.selectedIndex)">
-                </select>
-                <select class="selectpicker" id="search2" name="search2">
+                <div style="margin: 20px">
+                    <select class="selectpicker" data-live-search="true" id="search1" name="search1"
+                            onchange="ChangeExampleSelect(this.selectedIndex)">
+                    </select>
+                </div>
+                <div style="margin: 20px">
+                    <select class="selectpicker" id="search2" name="search2">
 
-                </select>
+                    </select>
+                </div>
 
                 <div align="center">
                     <button class="btn btn-primary" type="submit">确定</button>

@@ -31,7 +31,7 @@
     <div class="row clearfix">
         <div class="col-md-12 column">
             <!--对照表-->
-            <div>
+            <div style="margin-top: 50px;margin-bottom: 100px">
                 <h3 align="center">发病率对照表</h3>
 
                 <table class="table table-bordered" style="vertical-align: middle;text-align: center;">
@@ -94,13 +94,22 @@
             </div>
 
             <!--病变位置-->
-            <div>
+            <div style="margin: 100px">
                 <h3 align="center">病变位置统计图</h3>
 
-                <!--柱状图-->
-                <div id="loc1">
-                    <div>
-                        <h3>直方图</h3>
+                <ul class="nav nav-tabs" id="location" role="tablist">
+                    <li class="nav-item">
+                        <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab"
+                           href="#locChart1" id="loc1" role="tab">直方图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-controls="profile" aria-selected="false" class="nav-link" data-toggle="tab"
+                           href="#locChart2" id="loc2" role="tab">扇形图</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tab1" style="width: 100%;">
+                    <!--柱状图-->
+                    <div aria-labelledby="loc1" class="tab-pane fade show active" id="locChart1" role="tabpanel">
                         <div id="location1" style="width: 100%;height: 500px"></div>
                         <!-- 柱形图 -->
                         <script th:inline="javascript" type="text/javascript">
@@ -141,7 +150,7 @@
                                 visualMap: {
                                     orient: 'horizontal',
                                     left: 'center',
-                                    min: 10,
+                                    min: 0,
                                     max: 100,
                                     text: ['High Score', 'Low Score'],
                                     // Map the score column to color
@@ -167,15 +176,11 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
-                </div>
-
-                <!--扇形图-->
-                <div id="loc2">
-                    <div>
-                        <h3>扇形图</h3>
-                        <div id="location2" style="width: 100%;height: 500px"></div>
+                    <!--扇形图-->
+                    <div aria-labelledby="loc2" class="tab-pane fade" id="locChart2" role="tabpanel"
+                         style="width:  100%;">
+                        <div id="location2" style="width: 1000px;height: 500px"></div>
                         <script th:inline="javascript" type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
                             var myChart = echarts.init(document.getElementById('location2'));
@@ -183,10 +188,6 @@
                             var data = [[${location}]];
 
                             option = {
-                                title: {
-                                    text: '病变位置',
-                                    left: 'center'
-                                },
                                 tooltip: {
                                     trigger: 'item',
                                     formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -242,20 +243,28 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
                 </div>
             </div>
 
-
             <!--病变长度-->
-            <div>
+            <div style="margin:100px">
                 <h3 align="center">病变长度统计图</h3>
-                <!--柱状图-->
-                <div id="len1">
-                    <div>
-                        <h3>直方图</h3>
-                        <div id="length1" style="width: 100%;height: 500px"></div>
+
+                <ul class="nav nav-tabs" id="length" role="tablist">
+                    <li class="nav-item">
+                        <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab"
+                           href="#lenChart1" id="len1" role="tab">直方图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-controls="profile" aria-selected="false" class="nav-link" data-toggle="tab"
+                           href="#lenChart2" id="len2" role="tab">扇形图</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tab2" style="width: 100%;">
+                    <!--柱状图-->
+                    <div aria-labelledby="len1" class="tab-pane fade show active" id="lenChart1" role="tabpanel">
+                        <div id="length1" style="width: 100%;height: 300px"></div>
                         <!-- 柱形图 -->
                         <script th:inline="javascript" type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
@@ -306,15 +315,10 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
-                </div>
-
-                <!--扇形图-->
-                <div id="len2">
-                    <div>
-                        <h3>扇形图</h3>
-                        <div id="length2" style="width: 100%;height: 500px"></div>
+                    <!--扇形图-->
+                    <div aria-labelledby="len2" class="tab-pane fade" id="lenChart2" role="tabpanel">
+                        <div id="length2" style="width: 1000px;height: 300px"></div>
                         <script th:inline="javascript" type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
                             var myChart = echarts.init(document.getElementById('length2'));
@@ -322,10 +326,6 @@
                             var data = [[${length}]];
 
                             option = {
-                                title: {
-                                    text: '病变长度',
-                                    left: 'center'
-                                },
                                 tooltip: {
                                     trigger: 'item',
                                     formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -364,21 +364,29 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
                 </div>
             </div>
 
 
             <!--斑块特征-->
-            <div>
+            <div style="margin: 100px">
                 <h3 align="center">斑块特征统计图</h3>
-                <!--柱状图-->
-                <div id="fea1">
-                    <div>
-                        <h3>直方图</h3>
-                        <div id="feature1" style="width: 100%;height: 500px"></div>
-                        <!-- 柱形图 -->
+
+                <ul class="nav nav-tabs" id="feature" role="tablist">
+                    <li class="nav-item">
+                        <a aria-controls="home" aria-selected="true" class="nav-link active" data-toggle="tab"
+                           href="#featChart1" id="feat1" role="tab">直方图</a>
+                    </li>
+                    <li class="nav-item">
+                        <a aria-controls="profile" aria-selected="false" class="nav-link" data-toggle="tab"
+                           href="#featChart2" id="feat2" role="tab">扇形图</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="tab3" style="width: 100%;">
+                    <!--柱状图-->
+                    <div aria-labelledby="feat1" class="tab-pane fade show active" id="featChart1" role="tabpanel">
+                        <div id="feature1" style="width: 100%;height: 300px"></div>
                         <script th:inline="javascript" type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
                             var myChart = echarts.init(document.getElementById('feature1'));
@@ -428,15 +436,10 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
-                </div>
-
-                <!--扇形图-->
-                <div id="fea2">
-                    <div>
-                        <h3>扇形图</h3>
-                        <div id="feature2" style="width: 100%;height: 500px"></div>
+                    <!--扇形图-->
+                    <div aria-labelledby="feat2" class="tab-pane fade" id="featChart2" role="tabpanel">
+                        <div id="feature2" style="width: 1000px;height: 300px"></div>
                         <script th:inline="javascript" type="text/javascript">
                             // 基于准备好的dom，初始化echarts实例
                             var myChart = echarts.init(document.getElementById('feature2'));
@@ -444,10 +447,6 @@
                             var data = [[${feature}]];
 
                             option = {
-                                title: {
-                                    text: '斑块特征',
-                                    left: 'center'
-                                },
                                 tooltip: {
                                     trigger: 'item',
                                     formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -486,11 +485,9 @@
                             myChart.setOption(option);
 
                         </script>
-
                     </div>
                 </div>
             </div>
-
 
             <!--&lt;!&ndash;狭窄度&ndash;&gt;-->
             <!--&lt;!&ndash;折线图&ndash;&gt;-->
