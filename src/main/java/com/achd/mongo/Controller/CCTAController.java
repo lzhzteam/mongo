@@ -27,7 +27,7 @@ public class CCTAController {
     @GetMapping("/CCTAInsert")
     public String get_CCTAInsert(HttpSession session, Model model) {
         injectUser(session, model);
-        return "cctainsert";
+        return "CCTAInsert";
     }
 
     @RequireAuth
@@ -43,7 +43,7 @@ public class CCTAController {
         }
 
         injectUser(session, model);
-        return "cctainsert";
+        return "CCTAInsert";
     }
 
     @RequireAuth

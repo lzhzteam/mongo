@@ -38,7 +38,7 @@ public class IndexController {
         injectUser(session, model);
 
 
-        return "index";
+        return "Index";
     }
 
 

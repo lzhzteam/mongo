@@ -27,7 +27,7 @@ public class BDTController {
     @GetMapping("/BDTInsert")
     public String get_BDTInsert(HttpSession session, Model model) {
         injectUser(session, model);
-        return "bdtinsert";
+        return "BDTInsert";
     }
 
     @RequireAuth
@@ -48,7 +48,7 @@ public class BDTController {
 
 
         injectUser(session, model);
-        return "bdtinsert";
+        return "BDTInsert";
     }
 
     @RequireAuth
