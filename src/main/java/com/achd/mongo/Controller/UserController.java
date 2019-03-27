@@ -77,7 +77,7 @@ public class UserController {
 
         model.addAttribute("log", "Up"); //表明是注册
         model.addAttribute("logFailure", reason);
-        return "login";
+        return "logIn";
     }
 
 
