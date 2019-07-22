@@ -115,11 +115,15 @@ export const asyncRoutes = [
 
   {
     path: '/analyze',
-    component: () => import('@/views/ACHD/search/BDT/index'),
-    meta: {
-      title: '病因分析',
-      icon: 'lock'
-    }
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/ACHD/analyze/index'),
+        name: 'analyze',
+        meta: { title: '病因分析', icon: 'chart', noCache: true }
+      }
+    ]
   },
 
   {
