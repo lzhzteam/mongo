@@ -3,10 +3,10 @@
     <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
     <el-select
       ref="headerSearchSelect"
+      v-model="search"
       :remote-method="querySearch"
       class="header-search-select"
       default-first-option
-      v-model="search"
       filterable
       placeholder="Search"
       remote
