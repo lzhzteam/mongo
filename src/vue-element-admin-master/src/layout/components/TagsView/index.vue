@@ -2,8 +2,8 @@
   <div id="tags-view-container" class="tags-view-container">
     <scroll-pane ref="scrollPane" class="tags-view-wrapper">
       <router-link
-        :key="tag.path"
         v-for="tag in visitedViews"
+        :key="tag.path"
         ref="tag"
         :class="isActive(tag)?'active':''"
         :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
@@ -159,7 +159,7 @@ export default {
       } else {
         // now the default is to redirect to the home page if there is no tags-view,
         // you can adjust it according to your needs.
-        if (view.name === 'Dashboard') {
+        if (view.name === 'Home') {
           // to reload home page
           this.$router.replace({ path: '/redirect' + view.fullPath })
         } else {

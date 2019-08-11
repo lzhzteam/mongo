@@ -1,23 +1,43 @@
 <template>
   <div style="max-width: 1250px; margin-left: 50px;">
     <h1 align="center">冠心病患者基线资料表</h1>
-    <el-form ref="form" :model="ccta" label-width="100px" label-position="left">
-      <el-form-item label="编号">
+    <el-form ref="ccta" :model="ccta" label-width="100px" label-position="left">
+      <el-form-item
+        label="编号"
+        prop="编号"
+        :rules="[{ required: true, message: '编号不能为空'}]"
+      >
         <el-input v-model="ccta.编号" />
       </el-form-item>
-      <el-form :inline="true" class="demo-form-inline" label-width="100px">
-        <el-form-item label="姓名">
+      <el-form ref="ccta_inline" :model="ccta" :inline="true" class="demo-form-inline" label-width="100px">
+        <el-form-item
+          label="姓名"
+          prop="姓名"
+          :rules="[{ required: true, message: '姓名不能为空'}]"
+        >
           <el-input v-model="ccta.姓名" />
         </el-form-item>
-        <el-form-item label="性别">
-          <el-input v-model="ccta.性别" />
+        <el-form-item label="性别" label-width="50px" style="margin-left: 20px;margin-right: 20px">
+          <el-radio-group v-model="ccta.性别">
+            <el-radio label="男">男</el-radio>
+            <el-radio label="女">女</el-radio>
+          </el-radio-group>
         </el-form-item>
-        <el-form-item label="年龄">
-          <el-input v-model="ccta.年龄" />
+        <el-form-item
+          label="年龄"
+          prop="cctas[0].年龄"
+          label-width="50px"
+          style="margin-left: 20px;margin-right: 20px"
+          :rules="[
+            { required: true, message: '年龄不能为空'},
+            { type: 'number', message: '年龄必须为数字值'}
+          ]"
+        >
+          <el-input v-model.number="ccta.cctas[0].年龄" />
         </el-form-item>
-        <el-form-item label="检查时间">
+        <el-form-item label="检查时间" style="margin-left: 20px;margin-right: 20px">
           <el-date-picker
-            v-model="ccta.检查时间"
+            v-model="ccta.cctas[0].检查时间"
             align="center"
             type="date"
             placeholder="选择日期"
@@ -26,53 +46,60 @@
         </el-form-item>
       </el-form>
       <el-form-item label="冠状动脉CT是否异常" label-width="200px">
-        <el-radio-group v-model="ccta.冠状动脉CT是否异常">
+        <el-radio-group v-model="ccta.cctas[0].冠状动脉CT是否异常">
           <el-radio label="true">是</el-radio>
           <el-radio label="false">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <span v-if="ccta.冠状动脉CT是否异常 === 'true'">
-        <el-form-item label="病变位置">
-          <el-radio-group v-model="ccta.病变位置">
+      <span v-if="ccta.cctas[0].冠状动脉CT是否异常 === 'true'">
+        <el-form-item
+          label="病变位置"
+        >
+          <el-radio-group v-model="ccta.cctas[0].病变位置">
             <el-radio v-for="location in locationOptions" :key="location.value" :label="location.value" style="width: 150px; margin: 10px;">{{ location.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="病变长度">
-          <el-radio-group v-model="ccta.病变长度">
+          <el-radio-group v-model="ccta.cctas[0].病变长度">
             <el-radio v-for="length in lengthOptions" :key="length.value" :label="length.value" style="width: 150px; margin: 10px;">{{ length.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="斑块特征">
-          <el-radio-group v-model="ccta.斑块特征">
+          <el-radio-group v-model="ccta.cctas[0].斑块特征">
             <el-radio v-for="feature in featureOptions" :key="feature.value" :label="feature.value" style="width: 150px; margin: 10px;">{{ feature.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="狭窄度">
-          <el-input v-model="ccta.狭窄度" style="width: 100px;" /><span> mm </span>
+          <el-input v-model="ccta.cctas[0].狭窄度" type="number" style="width: 100px;" /><span> mm </span>
         </el-form-item>
       </span>
     </el-form>
     <div align="center">
-      <el-button type="primary" @click="submit">提交</el-button>
+      <el-button type="primary" :loading="loading" @click="submit">提交</el-button>
       <el-button type="primary" @click="reset">重置</el-button>
     </div>
   </div>
 </template>
 
 <script>
+import { insertCCTA } from '../../../../api/ACHD'
+
 export default {
   data() {
     return {
+      loading: false,
       ccta: {
         编号: '',
         姓名: '',
-        性别: '',
-        年龄: '',
-        检查时间: '',
-        冠状动脉CT是否异常: 'true',
-        病变位置: '',
-        病变长度: '',
-        斑块特征: ''
+        性别: '男',
+        cctas: [{
+          年龄: '',
+          检查时间: new Date(),
+          冠状动脉CT是否异常: 'true',
+          病变位置: 1,
+          病变长度: 1,
+          斑块特征: 1
+        }]
       },
       locationOptions: [{
         label: '右冠中端',
@@ -176,9 +203,25 @@ export default {
       }
     }
   },
+  mounted() {
+
+  },
   methods: {
     submit() {
       console.info(this.ccta)
+      this.$refs['ccta'].validate((valid) => {
+        if (valid) {
+          this.$refs['ccta_inline'].validate((valid) => {
+            if (valid) {
+              this.insert_ccta()
+            } else {
+              return false
+            }
+          })
+        } else {
+          return false
+        }
+      })
     },
     reset() {
       this.$confirm('重置将清楚所有输入无法恢复, 是否继续?', '提示', {
@@ -189,14 +232,29 @@ export default {
         this.ccta.编号 = ''
         this.ccta.姓名 = ''
         this.ccta.性别 = ''
-        this.ccta.年龄 = ''
-        this.ccta.检查时间 = ''
-        this.ccta.冠状动脉CT是否异常 = 'true'
-        this.ccta.病变位置 = ''
-        this.ccta.病变长度 = ''
-        this.ccta.斑块特征 = ''
+        this.ccta.cctas[0].年龄 = ''
+        this.ccta.cctas[0].检查时间 = ''
+        this.ccta.cctas[0].冠状动脉CT是否异常 = 'true'
+        this.ccta.cctas[0].病变位置 = ''
+        this.ccta.cctas[0].病变长度 = ''
+        this.ccta.cctas[0].斑块特征 = ''
       }).catch(() => {
 
+      })
+    },
+    insert_ccta() {
+      const that = this
+      that.loading = true
+      insertCCTA(that.ccta).then(response => {
+        that.loading = false
+        if (response) {
+          that.$message.success('成功')
+        } else {
+          that.$message.error('失败')
+        }
+      }).catch(error => {
+        that.loading = false
+        that.$message.error('错误')
       })
     }
   }

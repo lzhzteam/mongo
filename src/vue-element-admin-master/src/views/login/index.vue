@@ -34,12 +34,12 @@
             <svg-icon icon-class="password" />
           </span>
           <el-input
-            :key="passwordType"
             ref="password"
+            :key="passwordType"
+            v-model="loginForm.password"
             :type="passwordType"
             autocomplete="on"
             name="password"
-            v-model="loginForm.password"
             placeholder="Password"
             tabindex="2"
             @blur="capsTooltip = false"
@@ -60,29 +60,29 @@
       >Login
       </el-button>
 
-      <div style="position:relative">
-        <div class="tips">
-          <span>Username : admin</span>
-          <span>Password : any</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">Username : editor</span>
-          <span>Password : any</span>
-        </div>
+      <!--      <div style="position:relative">-->
+      <!--        <div class="tips">-->
+      <!--          <span>Username : admin</span>-->
+      <!--          <span>Password : any</span>-->
+      <!--        </div>-->
+      <!--        <div class="tips">-->
+      <!--          <span style="margin-right:18px;">Username : editor</span>-->
+      <!--          <span>Password : any</span>-->
+      <!--        </div>-->
 
-        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">
-          Or connect with
-        </el-button>
-      </div>
+      <!--        <el-button class="thirdparty-button" type="primary" @click="showDialog=true">-->
+      <!--          Or connect with-->
+      <!--        </el-button>-->
+      <!--      </div>-->
     </el-form>
 
-    <el-dialog :visible.sync="showDialog" title="Or connect with">
-      Can not be simulated on local, so please combine you own business simulation! ! !
-      <br>
-      <br>
-      <br>
-      <social-sign />
-    </el-dialog>
+    <!--    <el-dialog :visible.sync="showDialog" title="Or connect with">-->
+    <!--      Can not be simulated on local, so please combine you own business simulation! ! !-->
+    <!--      <br>-->
+    <!--      <br>-->
+    <!--      <br>-->
+    <!--      <social-sign />-->
+    <!--    </el-dialog>-->
   </div>
 </template>
 
@@ -95,23 +95,23 @@ export default {
   components: { SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
-        callback(new Error('Please enter the correct user name'))
+      if (value == null || value.length === 0) {
+        callback(new Error('请输入用户名'))
       } else {
         callback()
       }
     }
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('The password can not be less than 6 digits'))
+        callback(new Error('密码少于6位'))
       } else {
         callback()
       }
     }
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: 'yadeah',
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -126,13 +126,19 @@ export default {
     }
   },
   watch: {
+    // $route: {
+    //   handler: function(route) {
+    //     const query = route.query
+    //     if (query) {
+    //       this.redirect = query.redirect
+    //       this.otherQuery = this.getOtherQuery(query)
+    //     }
+    //   },
+    //   immediate: true
+    // }
     $route: {
       handler: function(route) {
-        const query = route.query
-        if (query) {
-          this.redirect = query.redirect
-          this.otherQuery = this.getOtherQuery(query)
-        }
+        this.redirect = route.query && route.query.redirect
       },
       immediate: true
     }
@@ -151,18 +157,18 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
-    checkCapslock({ shiftKey, key } = {}) {
-      if (key && key.length === 1) {
-        if (shiftKey && (key >= 'a' && key <= 'z') || !shiftKey && (key >= 'A' && key <= 'Z')) {
-          this.capsTooltip = true
-        } else {
-          this.capsTooltip = false
-        }
-      }
-      if (key === 'CapsLock' && this.capsTooltip === true) {
-        this.capsTooltip = false
-      }
-    },
+    // checkCapslock({ shiftKey, key } = {}) {
+    //   if (key && key.length === 1) {
+    //     if (shiftKey && (key >= 'a' && key <= 'z') || !shiftKey && (key >= 'A' && key <= 'Z')) {
+    //       this.capsTooltip = true
+    //     } else {
+    //       this.capsTooltip = false
+    //     }
+    //   }
+    //   if (key === 'CapsLock' && this.capsTooltip === true) {
+    //     this.capsTooltip = false
+    //   }
+    // },
     showPwd() {
       if (this.passwordType === 'password') {
         this.passwordType = ''
@@ -179,7 +185,7 @@ export default {
           this.loading = true
           this.$store.dispatch('user/login', this.loginForm)
             .then(() => {
-              this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
+              this.$router.push({ path: '/' })
               this.loading = false
             })
             .catch(() => {
@@ -190,33 +196,7 @@ export default {
           return false
         }
       })
-    },
-    getOtherQuery(query) {
-      return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== 'redirect') {
-          acc[cur] = query[cur]
-        }
-        return acc
-      }, {})
     }
-    // afterQRScan() {
-    //   if (e.key === 'x-admin-oauth-code') {
-    //     const code = getQueryObject(e.newValue)
-    //     const codeMap = {
-    //       wechat: 'code',
-    //       tencent: 'code'
-    //     }
-    //     const type = codeMap[this.auth_type]
-    //     const codeName = code[type]
-    //     if (codeName) {
-    //       this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
-    //         this.$router.push({ path: this.redirect || '/' })
-    //       })
-    //     } else {
-    //       alert('第三方登录失败')
-    //     }
-    //   }
-    // }
   }
 }
 </script>

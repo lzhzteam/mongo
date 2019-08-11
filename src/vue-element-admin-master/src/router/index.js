@@ -65,7 +65,7 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/',
+    path: '',
     component: Layout,
     redirect: '/home',
     children: [
@@ -120,7 +120,6 @@ export const asyncRoutes = [
       {
         path: 'index',
         component: () => import('@/views/ACHD/analyze/index'),
-        name: 'analyze',
         meta: { title: '病因分析', icon: 'chart', noCache: true }
       }
     ]

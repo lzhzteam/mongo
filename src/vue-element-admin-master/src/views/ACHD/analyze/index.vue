@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
-        查询类别<i class="el-icon-arrow-down el-icon--right"></i>
+        查询类别<i class="el-icon-arrow-down el-icon--right" />
       </span>
       <el-dropdown-menu slot="dropdown">
         <el-dropdown-item command="检查目的">检查目的</el-dropdown-item>
@@ -24,9 +24,8 @@
 </template>
 
 <script>
-
 export default {
-  name: 'analyze',
+  name: 'Analyze',
   data() {
     return {
       searchClass: null

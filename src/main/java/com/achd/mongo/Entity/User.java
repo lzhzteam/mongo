@@ -15,6 +15,12 @@ public class User implements Serializable {
 
     private String passwordMD5;
 
+    private String password;
+
+    private String name;
+
+    private String role;
+
     public User(String id, String username, String passwordMD5) {
         this.id = id;
         this.username = username;
@@ -48,4 +54,27 @@ public class User implements Serializable {
         this.passwordMD5 = passwordMD5;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
