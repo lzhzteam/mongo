@@ -2,14 +2,12 @@ package com.achd.mongo.Controller;
 
 import com.achd.mongo.Entity.User;
 import com.achd.mongo.Service.User_Repository;
+import com.achd.mongo.Utilities.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
-
-import static com.achd.mongo.Utilities.Utility.injectUser;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/user")
@@ -113,5 +111,16 @@ public class UserController {
 
         hadUser.setPassword(null);
         return user;
+    }
+
+    @PostMapping("/register")
+    public boolean register(@RequestBody User user) {
+        User hadUser =  user_repository.findByUsername(user.getUsername());
+        if (hadUser == null)
+            return false;
+
+        user.setPassword(SecurityUtils.SHAEncryption(user.getPassword()));
+        user_repository.insert(user);
+        return true;
     }
 }

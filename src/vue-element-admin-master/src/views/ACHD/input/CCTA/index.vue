@@ -25,7 +25,7 @@
         </el-form-item>
         <el-form-item
           label="年龄"
-          prop="cctas[0].年龄"
+          prop="CCTAs[0].年龄"
           label-width="50px"
           style="margin-left: 20px;margin-right: 20px"
           :rules="[
@@ -33,11 +33,11 @@
             { type: 'number', message: '年龄必须为数字值'}
           ]"
         >
-          <el-input v-model.number="ccta.cctas[0].年龄" />
+          <el-input v-model.number="ccta.CCTAs[0].年龄" />
         </el-form-item>
         <el-form-item label="检查时间" style="margin-left: 20px;margin-right: 20px">
           <el-date-picker
-            v-model="ccta.cctas[0].检查时间"
+            v-model="ccta.CCTAs[0].检查时间"
             align="center"
             type="date"
             placeholder="选择日期"
@@ -46,31 +46,46 @@
         </el-form-item>
       </el-form>
       <el-form-item label="冠状动脉CT是否异常" label-width="200px">
-        <el-radio-group v-model="ccta.cctas[0].冠状动脉CT是否异常">
+        <el-radio-group v-model="ccta.CCTAs[0].冠状动脉CT是否异常">
           <el-radio label="true">是</el-radio>
           <el-radio label="false">否</el-radio>
         </el-radio-group>
       </el-form-item>
-      <span v-if="ccta.cctas[0].冠状动脉CT是否异常 === 'true'">
+      <span v-if="ccta.CCTAs[0].冠状动脉CT是否异常 === 'true'">
         <el-form-item
           label="病变位置"
+          prop="CCTAs[0].病变位置"
+          :rules="[{ required: true, message: '请选择病变位置'}]"
         >
-          <el-radio-group v-model="ccta.cctas[0].病变位置">
+          <el-radio-group v-model="ccta.CCTAs[0].病变位置">
             <el-radio v-for="location in locationOptions" :key="location.value" :label="location.value" style="width: 150px; margin: 10px;">{{ location.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="病变长度">
-          <el-radio-group v-model="ccta.cctas[0].病变长度">
+        <el-form-item
+          label="病变长度"
+          prop="CCTAs[0].病变长度"
+          :rules="[{ required: true, message: '请选择病变长度'}]">
+          <el-radio-group v-model="ccta.CCTAs[0].病变长度">
             <el-radio v-for="length in lengthOptions" :key="length.value" :label="length.value" style="width: 150px; margin: 10px;">{{ length.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="斑块特征">
-          <el-radio-group v-model="ccta.cctas[0].斑块特征">
+        <el-form-item
+          label="斑块特征"
+          prop="CCTAs[0].斑块特征"
+          :rules="[{ required: true, message: '请选择斑块特征'}]">
+          <el-radio-group v-model="ccta.CCTAs[0].斑块特征">
             <el-radio v-for="feature in featureOptions" :key="feature.value" :label="feature.value" style="width: 150px; margin: 10px;">{{ feature.label }}</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="狭窄度">
-          <el-input v-model="ccta.cctas[0].狭窄度" type="number" style="width: 100px;" /><span> mm </span>
+        <el-form-item
+          label="狭窄度"
+          prop="CCTAs[0].狭窄度"
+          :rules="[
+              { required: true, message: '狭窄度不能为空'},
+              { type: 'number', message: '狭窄度必须为数字值'}
+            ]">
+          <el-input v-model.number="ccta.CCTAs[0].狭窄度" type="number" style="width: 100px;"/>
+          <span> mm </span>
         </el-form-item>
       </span>
     </el-form>
@@ -92,13 +107,14 @@ export default {
         编号: '',
         姓名: '',
         性别: '男',
-        cctas: [{
+        CCTAs: [{
           年龄: '',
           检查时间: new Date(),
           冠状动脉CT是否异常: 'true',
-          病变位置: 1,
-          病变长度: 1,
-          斑块特征: 1
+          病变位置: null,
+          病变长度: null,
+          斑块特征: null,
+          狭窄度: null
         }]
       },
       locationOptions: [{
@@ -208,7 +224,6 @@ export default {
   },
   methods: {
     submit() {
-      console.info(this.ccta)
       this.$refs['ccta'].validate((valid) => {
         if (valid) {
           this.$refs['ccta_inline'].validate((valid) => {
@@ -224,7 +239,7 @@ export default {
       })
     },
     reset() {
-      this.$confirm('重置将清楚所有输入无法恢复, 是否继续?', '提示', {
+      this.$confirm('重置将清除所有输入无法恢复, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -232,12 +247,13 @@ export default {
         this.ccta.编号 = ''
         this.ccta.姓名 = ''
         this.ccta.性别 = ''
-        this.ccta.cctas[0].年龄 = ''
-        this.ccta.cctas[0].检查时间 = ''
-        this.ccta.cctas[0].冠状动脉CT是否异常 = 'true'
-        this.ccta.cctas[0].病变位置 = ''
-        this.ccta.cctas[0].病变长度 = ''
-        this.ccta.cctas[0].斑块特征 = ''
+        this.ccta.CCTAs[0].年龄 = ''
+        this.ccta.CCTAs[0].检查时间 = ''
+        this.ccta.CCTAs[0].冠状动脉CT是否异常 = 'true'
+        this.ccta.CCTAs[0].病变位置 = null
+        this.ccta.CCTAs[0].病变长度 = null
+        this.ccta.CCTAs[0].斑块特征 = null
+        this.ccta.CCTAs[0].狭窄度 = null
       }).catch(() => {
 
       })
@@ -247,14 +263,16 @@ export default {
       that.loading = true
       insertCCTA(that.ccta).then(response => {
         that.loading = false
-        if (response) {
+        if (response.status === 0) {
           that.$message.success('成功')
-        } else {
+        } else if (response.status === -1) {
           that.$message.error('失败')
+        } else {
+          that.$message.error(response.data)
         }
       }).catch(error => {
         that.loading = false
-        that.$message.error('错误')
+        that.$message.error(error)
       })
     }
   }

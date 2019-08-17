@@ -33,7 +33,7 @@
             <el-dropdown-item>Profile</el-dropdown-item>
           </router-link>
           <router-link to="/">
-            <el-dropdown-item>Dashboard</el-dropdown-item>
+            <el-dropdown-item>Home</el-dropdown-item>
           </router-link>
           <a href="https://github.com/PanJiaChen/vue-element-admin/" target="_blank">
             <el-dropdown-item>Github</el-dropdown-item>

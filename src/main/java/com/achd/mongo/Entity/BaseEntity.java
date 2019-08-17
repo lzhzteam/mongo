@@ -1,28 +1,33 @@
 package com.achd.mongo.Entity;
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
-import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTAS;
+import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTA;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 
 @Document(collection = "BaseEntity")
-public class BaseEntity extends TableBase implements Serializable {
+public class BaseEntity implements Serializable {
     @Id
-    public String id;
+    private String id;
 
     //编号
-    public String 编号;
+    private String 编号;
 
     //姓名
-    public String 姓名;
+    private String 姓名;
 
     //性别
-    public String 性别;
+    private String 性别;
 
+    /////////////BDT///////////
+    public ArrayList<BDTS> BDTs = new ArrayList<>();
+    ///////////CCTA///////////
+    public ArrayList<CCTA> CCTAs = new ArrayList<>();
 
     public String getId() {
         return id;
@@ -35,7 +40,6 @@ public class BaseEntity extends TableBase implements Serializable {
     public String get编号() {
         return 编号;
     }
-
 
     public void set编号(String 编号) {
         this.编号 = 编号;
@@ -57,41 +61,6 @@ public class BaseEntity extends TableBase implements Serializable {
         this.性别 = 性别;
     }
 
-
-    public void stNum(String 编号) {
-        this.编号 = 编号;
-    }
-
-    public String gtNum() {
-        return 编号;
-    }
-
-
-    public void stName(String 姓名) {
-        this.姓名 = 姓名;
-    }
-
-
-    public String gtName() {
-        return 姓名;
-    }
-
-
-    public void stSex(String 性别) {
-        this.性别 = 性别;
-    }
-
-
-    public String gtSex() {
-        return 性别;
-    }
-
-
-    /////////////BDT///////////
-    private ArrayList<BDTS> BDTs;
-    ///////////CCTA///////////
-    private ArrayList<CCTAS> CCTAs;
-
     public ArrayList<BDTS> getBDTs() {
         return BDTs;
     }
@@ -100,14 +69,19 @@ public class BaseEntity extends TableBase implements Serializable {
         this.BDTs = BDTs;
     }
 
-    public ArrayList<CCTAS> getCCTAs() {
+    public void addBDTs(ArrayList<BDTS> BDTs) {
+        this.BDTs.addAll(BDTs);
+    }
+
+    public ArrayList<CCTA> getCCTAs() {
         return CCTAs;
     }
 
-    public void setCCTAs(ArrayList<CCTAS> CCTAs) {
+    public void setCCTAs(ArrayList<CCTA> CCTAs) {
         this.CCTAs = CCTAs;
     }
 
-
-
+    public void addCCTAs(ArrayList<CCTA> CCTAs) {
+        this.CCTAs.addAll(CCTAs);
+    }
 }
