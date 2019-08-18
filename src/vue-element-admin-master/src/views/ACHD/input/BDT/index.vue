@@ -402,27 +402,15 @@
               <el-radio v-model="bdt.BDTs[0].吸烟史.频率" label="1">经常吸</el-radio>
             </el-form-item>
           </el-col>
-          <span v-if="bdt.BDTs[0].吸烟史.频率 === '1'">
-            <el-col :span="1">
-              <el-form-item label-width="0">（每日</el-form-item>
-            </el-col>
-            <el-col :span="2">
+          <el-col v-if="bdt.BDTs[0].吸烟史.频率 === '1'" :span="19">
               <el-form-item label-width="0">
-                <el-input v-model="bdt.BDTs[0].吸烟史.经常吸支数" />
+                <span>（每日</span>
+                <el-input v-model="bdt.BDTs[0].吸烟史.经常吸支数" style="width: 100px;" />
+                <span>支，共</span>
+                <el-input v-model="bdt.BDTs[0].吸烟史.经常吸年" style="width: 100px;"/>
+                <span>年）</span>
               </el-form-item>
             </el-col>
-            <el-col :span="1">
-              <el-form-item label-width="0">支，共</el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-form-item label-width="0">
-                <el-input v-model="bdt.BDTs[0].吸烟史.经常吸年" />
-              </el-form-item>
-            </el-col>
-            <el-col :span="1">
-              <el-form-item label-width="0">年）</el-form-item>
-            </el-col>
-          </span>
         </el-row>
         <el-row>
           <el-col :span="3">
@@ -433,32 +421,20 @@
               <el-radio v-model="bdt.BDTs[0].吸烟史.频率" label="3">过去吸，现已戒烟</el-radio>
             </el-form-item>
           </el-col>
-          <span v-if="bdt.BDTs[0].吸烟史.频率 === '3'">
-            <el-col :span="1">
-              <el-form-item label-width="0">戒烟</el-form-item>
-            </el-col>
-            <el-col :span="2">
+          <el-col v-if="bdt.BDTs[0].吸烟史.频率 === '3'" :span="18">
               <el-form-item label-width="0">
-                <el-input v-model="bdt.BDTs[0].吸烟史.过去吸年" />
+                <span>（戒烟</span>
+                <el-input v-model="bdt.BDTs[0].吸烟史.过去吸年" style="width: 100px" />
+                <span>年</span>
+                <span v-if="bdt.BDTs[0].吸烟史.过去吸年 === null || bdt.BDTs[0].吸烟史.过去吸年 === ''">
+                  <span>，如不满一年</span>
+                  <el-input v-model="bdt.BDTs[0].吸烟史.过去吸月" style="width: 100px" />
+                  <span>月）</span>
+                </span>
+                <span v-else>）</span>
               </el-form-item>
             </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">年</el-form-item>
-            </el-col>
-            <span v-if="bdt.BDTs[0].吸烟史.过去吸年 === null || bdt.BDTs[0].吸烟史.过去吸年 === ''">
-              <el-col :span="1.5">
-                <el-form-item label-width="0">，如不满一年</el-form-item>
-              </el-col>
-              <el-col :span="2">
-                <el-form-item label-width="0">
-                  <el-input v-model="bdt.BDTs[0].吸烟史.过去吸月" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="1">
-                <el-form-item label-width="0">月）</el-form-item>
-              </el-col>
-            </span>
-          </span>
+
         </el-row>
         <el-row>
           <el-col :span="3">
@@ -475,7 +451,6 @@
             </el-form-item>
           </el-col>
         </el-row>
-
       </div>
 
       <!-- 饮酒史 -->
@@ -489,65 +464,51 @@
               <el-radio v-model="bdt.BDTs[0].饮酒史.频率" label="1">经常饮</el-radio>
             </el-form-item>
           </el-col>
-          <span v-if="bdt.BDTs[0].饮酒史.频率 === '1'">
-            <el-col :span="0.5">
-              <el-form-item label-width="0">白酒</el-form-item>
+            <el-col v-if="bdt.BDTs[0].饮酒史.频率 === '1'" :span="18">
+              <el-form-item label-width="0">
+                <span>白酒</span>
+                <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.白酒.毫升" style="width: 100px;" />
+                <span>mL/次，度数</span>
+                <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.白酒.度数" style="width: 100px;" />
+                <span>度</span>
+              </el-form-item>
             </el-col>
-            <el-col :span="2">
-              <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.白酒.毫升" />
-            </el-col>
-            <el-col :span="1.5">
-              <el-form-item label-width="0">mL/次，度数</el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.白酒.度数" />
-            </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">度</el-form-item>
-            </el-col>
-          </span>
         </el-row>
         <span v-if="bdt.BDTs[0].饮酒史.频率 === '1'">
           <el-row>
             <el-col :span="6">
               <el-form-item />
             </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">红酒</el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.红酒" />
-            </el-col>
-            <el-col :span="1.5">
-              <el-form-item label-width="0">mL/次</el-form-item>
+            <el-col v-if="bdt.BDTs[0].饮酒史.频率 === '1'" :span="18">
+              <el-form-item label-width="0">
+                <span>红酒</span>
+                <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.红酒" style="width: 100px;" />
+                <span>mL/次</span>
+              </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="6">
               <el-form-item />
             </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">啤酒</el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.啤酒" />
-            </el-col>
-            <el-col :span="1.5">
-              <el-form-item label-width="0">mL/次</el-form-item>
+            <el-col v-if="bdt.BDTs[0].饮酒史.频率 === '1'" :span="18">
+              <el-form-item label-width="0">
+                <span>啤酒</span>
+                <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.啤酒" style="width: 100px;" />
+                <span>mL/次</span>
+              </el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="6">
               <el-form-item />
             </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">黄酒</el-form-item>
-            </el-col>
-            <el-col :span="2">
-              <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.黄酒" />
-            </el-col>
-            <el-col :span="1.5">
-              <el-form-item label-width="0">mL/次</el-form-item>
+            <el-col v-if="bdt.BDTs[0].饮酒史.频率 === '1'" :span="18">
+              <el-form-item label-width="0">
+                <span>黄酒</span>
+                <el-input v-model="bdt.BDTs[0].饮酒史.经常饮.黄酒" style="width: 100px;" />
+                <span>mL/次</span>
+              </el-form-item>
             </el-col>
           </el-row>
         </span>
@@ -555,24 +516,18 @@
           <el-col :span="3">
             <el-form-item label="饮酒史" />
           </el-col>
-          <el-col :span="3">
+          <el-col :span="1.5">
             <el-form-item label-width="0">
               <el-radio v-model="bdt.BDTs[0].饮酒史.频率" label="3">过去饮</el-radio>
             </el-form-item>
           </el-col>
-          <span v-if="bdt.BDTs[0].饮酒史.频率 === '3'">
-            <el-col :span="1">
-              <el-form-item label-width="0">（戒酒</el-form-item>
-            </el-col>
-            <el-col :span="2">
+            <el-col v-if="bdt.BDTs[0].饮酒史.频率 === '3'" :span="18">
               <el-form-item label-width="0">
-                <el-input v-model="bdt.BDTs[0].吸烟史.过去饮年" />
+                <span>（戒酒</span>
+                <el-input v-model="bdt.BDTs[0].吸烟史.过去饮年" style="width: 100px;"/>
+                <spa>年）</spa>
               </el-form-item>
             </el-col>
-            <el-col :span="0.5">
-              <el-form-item label-width="0">年）</el-form-item>
-            </el-col>
-          </span>
         </el-row>
         <el-row>
           <el-col :span="3">
@@ -644,19 +599,143 @@
       <div class="block">
         <el-row>
           <el-col :span="3">
-            <el-form-item label="心肌梗死" />
+            <el-form-item label="目前服药" />
+          </el-col>
+          <el-col :span="21">
+            <el-form-item label-width="0">
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.阿司匹林">阿司匹林</el-checkbox>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.硫酸氢氯吡格雷">硫酸氢氯吡格雷</el-checkbox>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.硝酸酯类药物">硝酸酯类药物</el-checkbox>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.华法林等抗凝药">华法林等抗凝药</el-checkbox>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </div>
+
+      <!-- 其他疾病史 -->
+      <div class="block">
+        <el-row>
+          <el-col :span="3">
+            <el-form-item label="其他疾病史" />
           </el-col>
           <el-col :span="6">
             <el-form-item label-width="0">
-              <el-radio-group v-model="bdt.BDTs[0].心肌梗死.有无">
-                <el-radio label="1">无</el-radio>
-                <el-radio label="2">有</el-radio>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.肝功能不全">肝功能不全</el-checkbox>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.肾功能不全">肾功能不全</el-checkbox>
+              <el-checkbox v-model="bdt.BDTs[0].目前服药.肿瘤">肿瘤</el-checkbox>
+            </el-form-item>
+          </el-col>
+          <el-col :span="15">
+            <el-form-item>
+              <span>其它</span>
+              <el-input v-model="bdt.BDTs[0].目前服药.其它" style="width: 300px;"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </div>
+
+      <!-- 家族史 -->
+      <div class="block">
+        <el-row>
+          <el-col :span="3">
+            <el-form-item />
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="冠心病家族史" label-width="150px">
+              <el-radio-group v-model="bdt.BDTs[0].家族史.冠心病家族史.有无">
+                <el-radio label="1">是</el-radio>
+                <el-radio label="2">否</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
-          <el-col v-if="bdt.BDTs[0].心肌梗死.有无 === '2'" :span="6">
-            <el-form-item label="最近一次心梗时间" label-width="150px">
-              <el-date-picker v-model="bdt.BDTs[0].心肌梗死.年月" type="month" />
+          <span v-if="bdt.BDTs[0].家族史.冠心病家族史.有无 === '1'">
+            <el-col :span="1">
+            <el-form-item label-width="0px">
+              <el-checkbox v-model="checkbox.father">父有</el-checkbox>
+            </el-form-item>
+          </el-col>
+            <el-col v-if="checkbox.father" :span="6">
+            <el-form-item label-width="0px">
+              <span>(发病年龄</span>
+              <el-input v-model="bdt.BDTs[0].家族史.冠心病家族史.谁.父亲" style="width: 100px" />
+              <span>岁)</span>
+            </el-form-item>
+          </el-col>
+          </span>
+        </el-row>
+        <span v-if="bdt.BDTs[0].家族史.冠心病家族史.有无 === '1'">
+          <el-row>
+            <el-col :span="9">
+              <el-form-item />
+            </el-col>
+            <el-col :span="1">
+              <el-form-item label-width="0px">
+                <el-checkbox v-model="checkbox.mother">母有</el-checkbox>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="checkbox.mother" :span="6">
+              <el-form-item label-width="0px">
+                <span>(发病年龄</span>
+                <el-input v-model="bdt.BDTs[0].家族史.冠心病家族史.谁.母亲" style="width: 100px" />
+                <span>岁)</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="9">
+              <el-form-item />
+            </el-col>
+            <el-col :span="2">
+              <el-form-item label-width="0px">
+                <el-checkbox v-model="checkbox.brother">兄弟姐妹有</el-checkbox>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="checkbox.brother" :span="6">
+              <el-form-item label-width="0px">
+                <span>(最小发病年龄</span>
+                <el-input v-model="bdt.BDTs[0].家族史.冠心病家族史.谁.兄弟姐妹" style="width: 100px" />
+                <span>岁)</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="9">
+              <el-form-item />
+            </el-col>
+            <el-col :span="1.5">
+              <el-form-item label-width="0px">
+                <el-checkbox v-model="checkbox.child">子女有</el-checkbox>
+              </el-form-item>
+            </el-col>
+            <el-col v-if="checkbox.child" :span="6">
+              <el-form-item label-width="0px">
+                <span>(最小发病年龄</span>
+                <el-input v-model="bdt.BDTs[0].家族史.冠心病家族史.谁.子女" style="width: 100px" />
+                <span>岁)</span>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </span>
+        <el-row>
+          <el-col :span="3">
+            <el-form-item label="家族史" />
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="高脂血症家族史" label-width="150px">
+              <el-radio-group v-model="bdt.BDTs[0].家族史.高脂血症家族史">
+                <el-radio label="1">是</el-radio>
+                <el-radio label="2">否</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="3">
+            <el-form-item />
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="其它" label-width="150px">
+              <el-input v-model="bdt.BDTs[0].家族史.其它" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -751,10 +830,10 @@ export default {
             年月: null
           },
           目前服药: {
-            阿司匹林: 'false',
-            硫酸氢氯吡格雷: 'false',
-            硝酸酯类药物: 'false',
-            华法林等抗凝药: 'false'
+            阿司匹林: false,
+            硫酸氢氯吡格雷: false,
+            硝酸酯类药物: false,
+            华法林等抗凝药: false
           },
           其他疾病史: {
             肝功能不全: 'false',
@@ -776,6 +855,12 @@ export default {
             其它: null
           }
         }]
+      },
+      checkbox: {
+        father: false,
+        mother: false,
+        brother: false,
+        child: false
       },
       rules: {
         编号: [{ required: true, message: '编号不能为空' }],
@@ -817,10 +902,6 @@ export default {
     padding-top: 15px;
     padding-left: 30px;
     padding-right: 30px;
-  }
-
-  .tab {
-    align: center;
   }
 
   .input /deep/ {
