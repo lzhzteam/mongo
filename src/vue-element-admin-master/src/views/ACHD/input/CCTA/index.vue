@@ -1,12 +1,12 @@
 <template>
   <div>
     <h3 align="center">冠心病患者基线资料表</h3>
-    <el-form ref="ccta" :model="ccta" :rules="rules" label-width="100px"  label-position="left" class="input">
+    <el-form ref="ccta" :model="ccta" :rules="rules" label-width="100px" label-position="left" class="input">
       <div class="block">
         <el-row>
           <el-col :span="24">
             <el-form-item label="编号" prop="编号">
-              <el-input v-model="ccta.编号"/>
+              <el-input v-model="ccta.编号" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -17,7 +17,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="4">
-            <el-form-item label="性别" label-width="50px" style="padding-left: 20px;">
+            <el-form-item label="性别" prop="性别" label-width="50px" style="padding-left: 20px;">
               <el-radio-group v-model="ccta.性别">
                 <el-radio label="男">男</el-radio>
                 <el-radio label="女">女</el-radio>
@@ -30,7 +30,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="检查时间" style="padding-left: 20px">
+            <el-form-item label="检查时间" prop="CCTAs[0].检查时间" style="padding-left: 20px;">
               <el-date-picker
                 v-model="ccta.CCTAs[0].检查时间"
                 align="center"
@@ -70,15 +70,15 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="狭窄度" prop="CCTAs[0].狭窄度">
-          <el-input v-model.number="ccta.CCTAs[0].狭窄度" style="width: 200px;">
-            <template slot="suffix">mm</template>
-          </el-input>
-        </el-form-item>
+            <el-input v-model.number="ccta.CCTAs[0].狭窄度" style="width: 200px;">
+              <template slot="suffix">mm</template>
+            </el-input>
+          </el-form-item>
         </span>
       </div>
     </el-form>
     <div align="center" style="margin: 20px">
-      <el-button type="primary" :loading="loading" @click="submit">提交</el-button>
+      <el-button :loading="loading" type="primary" @click="submit">提交</el-button>
       <el-button type="primary" @click="reset">重置</el-button>
     </div>
   </div>
@@ -206,18 +206,18 @@ export default {
         }]
       },
       rules: {
-        编号: [{ required: true, message: '编号不能为空'}],
-        姓名: [{ required: true, message: '姓名不能为空'}],
+        编号: [{ required: true, message: '编号不能为空' }],
+        姓名: [{ required: true, message: '姓名不能为空' }],
         'CCTAs[0].年龄': [
-          { required: true, message: '年龄不能为空'},
-          { type: 'number', message: '年龄必须为数字值'}
+          { required: true, message: '年龄不能为空' },
+          { type: 'number', message: '年龄必须为数字值' }
         ],
-        'CCTAs[0].病变位置': [{ required: true, message: '请选择病变位置'}],
-        'CCTAs[0].病变长度': [{ required: true, message: '请选择病变长度'}],
-        'CCTAs[0].斑块特征': [{ required: true, message: '请选择斑块特征'}],
+        'CCTAs[0].病变位置': [{ required: true, message: '请选择病变位置' }],
+        'CCTAs[0].病变长度': [{ required: true, message: '请选择病变长度' }],
+        'CCTAs[0].斑块特征': [{ required: true, message: '请选择斑块特征' }],
         'CCTAs[0].狭窄度': [
-          { required: true, message: '狭窄度不能为空'},
-          { type: 'number', message: '狭窄度必须为数字值'}
+          { required: true, message: '狭窄度不能为空' },
+          { type: 'number', message: '狭窄度必须为数字值' }
         ]
       }
     }

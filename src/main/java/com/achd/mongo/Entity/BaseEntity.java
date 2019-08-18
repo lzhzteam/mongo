@@ -1,13 +1,12 @@
 package com.achd.mongo.Entity;
 
-import com.achd.mongo.Entity.BDT.BDT_Sub.BDTS;
+import com.achd.mongo.Entity.BDT.BDT_Sub.BDT;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTA;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @Document(collection = "BaseEntity")
@@ -25,7 +24,7 @@ public class BaseEntity implements Serializable {
     private String 性别;
 
     /////////////BDT///////////
-    public ArrayList<BDTS> BDTs = new ArrayList<>();
+    public ArrayList<BDT> BDTs = new ArrayList<>();
     ///////////CCTA///////////
     public ArrayList<CCTA> CCTAs = new ArrayList<>();
 
@@ -61,15 +60,15 @@ public class BaseEntity implements Serializable {
         this.性别 = 性别;
     }
 
-    public ArrayList<BDTS> getBDTs() {
+    public ArrayList<BDT> getBDTs() {
         return BDTs;
     }
 
-    public void setBDTs(ArrayList<BDTS> BDTs) {
+    public void setBDTs(ArrayList<BDT> BDTs) {
         this.BDTs = BDTs;
     }
 
-    public void addBDTs(ArrayList<BDTS> BDTs) {
+    public void addBDTs(ArrayList<BDT> BDTs) {
         this.BDTs.addAll(BDTs);
     }
 

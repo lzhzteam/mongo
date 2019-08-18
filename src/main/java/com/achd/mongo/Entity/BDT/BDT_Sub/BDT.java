@@ -8,7 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 
-public class BDTS extends TableBase {
+public class BDT extends TableBase {
     private Integer 年龄;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date 检查时间;
@@ -43,10 +43,10 @@ public class BDTS extends TableBase {
     //@DBRef
     private FamilyHistory 家族史;
 
-    public BDTS() {
+    public BDT() {
     }
 
-    public BDTS(Integer 年龄, Date 检查时间, Integer 心率, String 血压, Integer 身高, Integer 体重, Purpose 检查目的, Hypertension 高血压病, Dyslipidemia 血脂异常, Diabetes 糖尿病史, Stroke 脑卒中病史, PeripheralVascularDisease 外周血管病, Smoking 吸烟史, Drinking 饮酒史, Exercise 体育锻炼史, MyocardialInfarction 心肌梗死, Medication 目前服药, OtherDisease 其他疾病史, FamilyHistory 家族史) {
+    public BDT(Integer 年龄, Date 检查时间, Integer 心率, String 血压, Integer 身高, Integer 体重, Purpose 检查目的, Hypertension 高血压病, Dyslipidemia 血脂异常, Diabetes 糖尿病史, Stroke 脑卒中病史, PeripheralVascularDisease 外周血管病, Smoking 吸烟史, Drinking 饮酒史, Exercise 体育锻炼史, MyocardialInfarction 心肌梗死, Medication 目前服药, OtherDisease 其他疾病史, FamilyHistory 家族史) {
         this.年龄 = 年龄;
         this.检查时间 = 检查时间;
         this.心率 = 心率;
