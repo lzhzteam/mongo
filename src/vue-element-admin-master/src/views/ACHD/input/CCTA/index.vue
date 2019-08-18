@@ -1,95 +1,83 @@
 <template>
-  <div style="max-width: 1250px; margin-left: 50px;">
-    <h1 align="center">冠心病患者基线资料表</h1>
-    <el-form ref="ccta" :model="ccta" label-width="100px" label-position="left">
-      <el-form-item
-        label="编号"
-        prop="编号"
-        :rules="[{ required: true, message: '编号不能为空'}]"
-      >
-        <el-input v-model="ccta.编号" />
-      </el-form-item>
-      <el-form ref="ccta_inline" :model="ccta" :inline="true" class="demo-form-inline" label-width="100px">
-        <el-form-item
-          label="姓名"
-          prop="姓名"
-          :rules="[{ required: true, message: '姓名不能为空'}]"
-        >
-          <el-input v-model="ccta.姓名" />
+  <div>
+    <h3 align="center">冠心病患者基线资料表</h3>
+    <el-form ref="ccta" :model="ccta" :rules="rules" label-width="100px"  label-position="left" class="input">
+      <div class="block">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="编号" prop="编号">
+              <el-input v-model="ccta.编号"/>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="6">
+            <el-form-item label="姓名" prop="姓名">
+              <el-input v-model="ccta.姓名" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="4">
+            <el-form-item label="性别" label-width="50px" style="padding-left: 20px;">
+              <el-radio-group v-model="ccta.性别">
+                <el-radio label="男">男</el-radio>
+                <el-radio label="女">女</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+          <el-col :span="6">
+            <el-form-item label="年龄" prop="CCTAs[0].年龄" label-width="50px" style="padding-left: 20px;">
+              <el-input v-model.number="ccta.CCTAs[0].年龄" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="检查时间" style="padding-left: 20px">
+              <el-date-picker
+                v-model="ccta.CCTAs[0].检查时间"
+                align="center"
+                type="date"
+                placeholder="选择日期"
+                :picker-options="pickerOptions"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </div>
+      <div class="block">
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="冠状动脉CT是否异常" label-width="200px">
+              <el-radio-group v-model="ccta.CCTAs[0].冠状动脉CT是否异常">
+                <el-radio label="true">是</el-radio>
+                <el-radio label="false">否</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <span v-if="ccta.CCTAs[0].冠状动脉CT是否异常 === 'true'">
+          <el-form-item label="病变位置" prop="CCTAs[0].病变位置">
+            <el-radio-group v-model="ccta.CCTAs[0].病变位置">
+              <el-radio v-for="location in locationOptions" :key="location.value" :label="location.value" style="width: 150px; margin: 10px;">{{ location.label }}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="病变长度" prop="CCTAs[0].病变长度">
+            <el-radio-group v-model="ccta.CCTAs[0].病变长度">
+              <el-radio v-for="length in lengthOptions" :key="length.value" :label="length.value" style="width: 150px; margin: 10px;">{{ length.label }}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="斑块特征" prop="CCTAs[0].斑块特征">
+            <el-radio-group v-model="ccta.CCTAs[0].斑块特征">
+              <el-radio v-for="feature in featureOptions" :key="feature.value" :label="feature.value" style="width: 150px; margin: 10px;">{{ feature.label }}</el-radio>
+            </el-radio-group>
+          </el-form-item>
+          <el-form-item label="狭窄度" prop="CCTAs[0].狭窄度">
+          <el-input v-model.number="ccta.CCTAs[0].狭窄度" style="width: 200px;">
+            <template slot="suffix">mm</template>
+          </el-input>
         </el-form-item>
-        <el-form-item label="性别" label-width="50px" style="margin-left: 20px;margin-right: 20px">
-          <el-radio-group v-model="ccta.性别">
-            <el-radio label="男">男</el-radio>
-            <el-radio label="女">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item
-          label="年龄"
-          prop="CCTAs[0].年龄"
-          label-width="50px"
-          style="margin-left: 20px;margin-right: 20px"
-          :rules="[
-            { required: true, message: '年龄不能为空'},
-            { type: 'number', message: '年龄必须为数字值'}
-          ]"
-        >
-          <el-input v-model.number="ccta.CCTAs[0].年龄" />
-        </el-form-item>
-        <el-form-item label="检查时间" style="margin-left: 20px;margin-right: 20px">
-          <el-date-picker
-            v-model="ccta.CCTAs[0].检查时间"
-            align="center"
-            type="date"
-            placeholder="选择日期"
-            :picker-options="pickerOptions"
-          />
-        </el-form-item>
-      </el-form>
-      <el-form-item label="冠状动脉CT是否异常" label-width="200px">
-        <el-radio-group v-model="ccta.CCTAs[0].冠状动脉CT是否异常">
-          <el-radio label="true">是</el-radio>
-          <el-radio label="false">否</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <span v-if="ccta.CCTAs[0].冠状动脉CT是否异常 === 'true'">
-        <el-form-item
-          label="病变位置"
-          prop="CCTAs[0].病变位置"
-          :rules="[{ required: true, message: '请选择病变位置'}]"
-        >
-          <el-radio-group v-model="ccta.CCTAs[0].病变位置">
-            <el-radio v-for="location in locationOptions" :key="location.value" :label="location.value" style="width: 150px; margin: 10px;">{{ location.label }}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item
-          label="病变长度"
-          prop="CCTAs[0].病变长度"
-          :rules="[{ required: true, message: '请选择病变长度'}]">
-          <el-radio-group v-model="ccta.CCTAs[0].病变长度">
-            <el-radio v-for="length in lengthOptions" :key="length.value" :label="length.value" style="width: 150px; margin: 10px;">{{ length.label }}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item
-          label="斑块特征"
-          prop="CCTAs[0].斑块特征"
-          :rules="[{ required: true, message: '请选择斑块特征'}]">
-          <el-radio-group v-model="ccta.CCTAs[0].斑块特征">
-            <el-radio v-for="feature in featureOptions" :key="feature.value" :label="feature.value" style="width: 150px; margin: 10px;">{{ feature.label }}</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item
-          label="狭窄度"
-          prop="CCTAs[0].狭窄度"
-          :rules="[
-              { required: true, message: '狭窄度不能为空'},
-              { type: 'number', message: '狭窄度必须为数字值'}
-            ]">
-          <el-input v-model.number="ccta.CCTAs[0].狭窄度" type="number" style="width: 100px;"/>
-          <span> mm </span>
-        </el-form-item>
-      </span>
+        </span>
+      </div>
     </el-form>
-    <div align="center">
+    <div align="center" style="margin: 20px">
       <el-button type="primary" :loading="loading" @click="submit">提交</el-button>
       <el-button type="primary" @click="reset">重置</el-button>
     </div>
@@ -104,11 +92,11 @@ export default {
     return {
       loading: false,
       ccta: {
-        编号: '',
-        姓名: '',
+        编号: null,
+        姓名: null,
         性别: '男',
         CCTAs: [{
-          年龄: '',
+          年龄: null,
           检查时间: new Date(),
           冠状动脉CT是否异常: 'true',
           病变位置: null,
@@ -216,6 +204,21 @@ export default {
             picker.$emit('pick', date)
           }
         }]
+      },
+      rules: {
+        编号: [{ required: true, message: '编号不能为空'}],
+        姓名: [{ required: true, message: '姓名不能为空'}],
+        'CCTAs[0].年龄': [
+          { required: true, message: '年龄不能为空'},
+          { type: 'number', message: '年龄必须为数字值'}
+        ],
+        'CCTAs[0].病变位置': [{ required: true, message: '请选择病变位置'}],
+        'CCTAs[0].病变长度': [{ required: true, message: '请选择病变长度'}],
+        'CCTAs[0].斑块特征': [{ required: true, message: '请选择斑块特征'}],
+        'CCTAs[0].狭窄度': [
+          { required: true, message: '狭窄度不能为空'},
+          { type: 'number', message: '狭窄度必须为数字值'}
+        ]
       }
     }
   },
@@ -226,13 +229,7 @@ export default {
     submit() {
       this.$refs['ccta'].validate((valid) => {
         if (valid) {
-          this.$refs['ccta_inline'].validate((valid) => {
-            if (valid) {
-              this.insert_ccta()
-            } else {
-              return false
-            }
-          })
+          this.insert_ccta()
         } else {
           return false
         }
@@ -244,19 +241,17 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.ccta.编号 = ''
-        this.ccta.姓名 = ''
-        this.ccta.性别 = ''
-        this.ccta.CCTAs[0].年龄 = ''
-        this.ccta.CCTAs[0].检查时间 = ''
-        this.ccta.CCTAs[0].冠状动脉CT是否异常 = 'true'
-        this.ccta.CCTAs[0].病变位置 = null
-        this.ccta.CCTAs[0].病变长度 = null
-        this.ccta.CCTAs[0].斑块特征 = null
-        this.ccta.CCTAs[0].狭窄度 = null
+        this.resetData()
       }).catch(() => {
 
       })
+    },
+    resetData() {
+      this.$refs['ccta'].resetFields()
+      this.$refs['ccta_inline'].resetFields()
+      this.ccta.性别 = '男'
+      this.ccta.CCTAs[0].检查时间 = new Date()
+      this.ccta.CCTAs[0].冠状动脉CT是否异常 = 'true'
     },
     insert_ccta() {
       const that = this
@@ -265,6 +260,7 @@ export default {
         that.loading = false
         if (response.status === 0) {
           that.$message.success('成功')
+          this.resetData()
         } else if (response.status === -1) {
           that.$message.error('失败')
         } else {
@@ -278,3 +274,30 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .block {
+    border-bottom: 1px solid #d2d6de;
+    padding-top: 15px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  .input /deep/ {
+    .el-input__inner {
+      padding-right: 40px;
+      resize: none;
+      border: none;
+      border-radius: 0px;
+      border-bottom: 1px solid #bfcbd9;
+    }
+
+    .el-input__inner:focus {
+      padding-right: 40px;
+      resize: none;
+      border: none;
+      border-radius: 0px;
+      border-bottom: 1px solid #0011ff;
+    }
+  }
+</style>
