@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BaseEntity_Repository extends MongoRepository<BaseEntity, String> {
 
-    List<BaseEntity> findBy编号ContainsOr姓名ContainsAllIgnoreCase(String num, String name);
+    List<BaseEntity> findBy编号ContainsOr姓名ContainsIgnoreCase(String num, String name);
 
 
     BaseEntity findBaseEntitiyBy编号(String num);

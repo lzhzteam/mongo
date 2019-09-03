@@ -8,3 +8,11 @@ export function insertCCTA(data) {
     data
   })
 }
+// 搜索
+export function search(data) {
+  return request({
+    url: '/search',
+    method: 'post',
+    data
+  })
+}

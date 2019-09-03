@@ -1,24 +1,28 @@
 <template>
   <div class="app-container">
-    <el-dropdown @command="handleCommand">
-      <span class="el-dropdown-link">
-        查询类别<i class="el-icon-arrow-down el-icon--right" />
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="检查目的">检查目的</el-dropdown-item>
-        <el-dropdown-item command="高血压病">高血压病</el-dropdown-item>
-        <el-dropdown-item command="血脂异常">血脂异常</el-dropdown-item>
-        <el-dropdown-item command="糖尿病史">糖尿病史</el-dropdown-item>
-        <el-dropdown-item command="脑卒中病史">脑卒中病史</el-dropdown-item>
-        <el-dropdown-item command="外周血管病">外周血管病</el-dropdown-item>
-        <el-dropdown-item command="吸烟史">吸烟史</el-dropdown-item>
-        <el-dropdown-item command="饮酒史">饮酒史</el-dropdown-item>
-        <el-dropdown-item command="体育锻炼史">体育锻炼史</el-dropdown-item>
-        <el-dropdown-item command="心肌梗死">心肌梗死</el-dropdown-item>
-        <el-dropdown-item command="其他疾病史">其他疾病史</el-dropdown-item>
-        <el-dropdown-item command="家族史">家族史</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
+    <el-form ref="analyze" :model="analyze" label-width="80px">
+      <el-form-item label="查询类别">
+        <el-select v-model="analyze.searchClass" placeholder="请选择查询类别">
+          <el-option label="检查目的" value="检查目的" />
+          <el-option label="高血压病" value="高血压病" />
+          <el-option label="血脂异常" value="血脂异常" />
+          <el-option label="糖尿病史" value="糖尿病史" />
+          <el-option label="脑卒中病史" value="脑卒中病史" />
+          <el-option label="外周血管病" value="外周血管病" />
+          <el-option label="吸烟史" value="吸烟史" />
+          <el-option label="饮酒史" value="饮酒史" />
+          <el-option label="体育锻炼史" value="体育锻炼史" />
+          <el-option label="心肌梗死" value="心肌梗死" />
+          <el-option label="其他疾病史" value="其他疾病史" />
+          <el-option label="家族史" value="家族史" />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="查询类别">
+        {{ analyze.searchClass }}
+      </el-form-item>
+
+    </el-form>
 
   </div>
 </template>
@@ -28,17 +32,14 @@ export default {
   name: 'Analyze',
   data() {
     return {
-      searchClass: null
+      analyze: {
+        searchClass: ''
+      }
     }
   },
   created() {
 
   },
-  methods: {
-    handleCommand(command) {
-      // this.$message('click on item ' + command)
-      this.searchClass = command
-    }
-  }
+  methods: {}
 }
 </script>
