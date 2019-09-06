@@ -11,9 +11,10 @@
         </el-input>
       </el-form-item>
       <el-form-item label="搜索结果">
-        {{ searchResult }}
+        <el-tree
+          :data="searchResult"
+        />
       </el-form-item>
-
     </el-form>
 
   </div>
@@ -21,6 +22,7 @@
 
 <script>
 import { search } from '../../../../api/ACHD'
+import { jsonToTree } from '../../../../utils/jsonToTree'
 
 export default {
   data() {
@@ -29,7 +31,7 @@ export default {
       searchForm: {
         searchCondition: ''
       },
-      searchResult: ''
+      searchResult: []
     }
   },
   mounted() {
@@ -45,8 +47,8 @@ export default {
       search(this.searchForm).then(response => {
         that.loading = false
         if (response.status === 0) {
+          this.searchResult = jsonToTree(response.data).children
           that.$message.success('成功')
-          this.searchResult = response.data
         } else if (response.status === -1) {
           that.$message.error('失败')
         } else {
