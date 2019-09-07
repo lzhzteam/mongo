@@ -25,7 +25,7 @@ public class DataController {
         return dataService.insert(ccta);
     }
 
-    @GetMapping("/{searchCondition}")
+    @GetMapping("/search/{searchCondition}")
     public WebResponse searchPatient(@PathVariable("searchCondition") String searchCondition) {
         return dataService.search(searchCondition);
     }
