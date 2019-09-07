@@ -1,4 +1,5 @@
 import axios from 'axios'
+// eslint-disable-next-line no-unused-vars
 import { Message, MessageBox } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
@@ -88,7 +89,6 @@ service.interceptors.response.use(
     //   message: error.response.data.message
     // })
     if (error.response.status === 401) {
-      logout()
       return
     }
     return Promise.reject(error.response.data)

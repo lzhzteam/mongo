@@ -1,8 +1,8 @@
 import Mock from 'mockjs'
-import {deepClone} from '../../src/utils/index.js'
-import {asyncRoutes, constantRoutes} from './routes.js'
+import { deepClone } from '../../src/utils/index.js'
+import { asyncRoutes, constantRoutes } from './routes.js'
 
-const routes = deepClone([...constantRoutes, ...asyncRoutes]);
+const routes = deepClone([...constantRoutes, ...asyncRoutes])
 
 const roles = [
   {
@@ -28,12 +28,12 @@ const roles = [
         {
           path: 'home',
           name: 'Home',
-          meta: {title: '首页', icon: 'dashboard'}
+          meta: { title: '首页', icon: 'dashboard' }
         }
       ]
     }]
   }
-];
+]
 
 export default [
   // mock get all routes form server

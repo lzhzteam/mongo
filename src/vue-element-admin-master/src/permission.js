@@ -1,5 +1,6 @@
 import router from './router'
 import store from './store'
+// eslint-disable-next-line no-unused-vars
 import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
@@ -26,10 +27,16 @@ router.beforeEach(async(to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      const accessRoutes = await store.dispatch('permission/generateRoutes', 'admin')
-      router.addRoutes(accessRoutes)
-      next()
-
+      console.info(to.path)
+      const hasPermissions = store.getters.permission && store.getters.permission.length > 0
+      if (hasPermissions) {
+        next()
+      } else {
+        await store.dispatch('user/getPermissions')
+        const accessRoutes = await store.dispatch('permission/generateRoutes', 'admin')
+        router.addRoutes(accessRoutes)
+        next({ ...to, replace: true })
+      }
       // // determine whether the user has obtained his permission roles through getInfo
       // const hasLogin = store.getters.username
       // if (hasLogin) {

@@ -87,11 +87,13 @@
 </template>
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import { validUsername } from '@/utils/validate'
 import SocialSign from './components/SocialSignin'
 
 export default {
   name: 'Login',
+  // eslint-disable-next-line vue/no-unused-components
   components: { SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
