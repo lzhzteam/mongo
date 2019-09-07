@@ -79,7 +79,7 @@ export default {
     search_data() {
       const that = this
       that.loading = true
-      search(this.searchCondition).then(response => {
+      search(this.searchResult).then(response => {
         that.loading = false
         if (response.status === 0) {
           this.searchResult = jsonToTree(response.data).children
