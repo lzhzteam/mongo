@@ -95,6 +95,7 @@ export const asyncRoutes = [
       {
         path: 'BDT',
         component: () => import('@/views/ACHD/input/BDT/index'),
+        name: 'BDT',
         meta: {
           title: '基线资料表录入',
           icon: '',
@@ -104,6 +105,7 @@ export const asyncRoutes = [
       {
         path: 'CCTA',
         component: () => import('@/views/ACHD/input/CCTA/index'),
+        name: 'CCTA',
         meta: {
           title: 'CCTA报告录入',
           icon: '',
@@ -120,7 +122,12 @@ export const asyncRoutes = [
       {
         path: 'index',
         component: () => import('@/views/ACHD/analyze/index'),
-        meta: { title: '病因分析', icon: 'chart', noCache: true }
+        name: 'index',
+        meta: {
+          title: '病因分析',
+          icon: 'chart',
+          noCache: true
+        }
       }
     ]
   },
@@ -132,6 +139,7 @@ export const asyncRoutes = [
       {
         path: 'index',
         component: () => import('@/views/ACHD/search/index'),
+        name: 'search',
         meta: {
           title: '病例查询',
           icon: 'lock',
