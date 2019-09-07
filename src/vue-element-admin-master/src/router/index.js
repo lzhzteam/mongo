@@ -89,7 +89,7 @@ export const asyncRoutes = [
     component: Layout,
     meta: {
       title: '录入信息',
-      icon: 'lock'
+      icon: 'edit'
     },
     children: [
       {
@@ -142,7 +142,7 @@ export const asyncRoutes = [
         name: 'search',
         meta: {
           title: '病例查询',
-          icon: 'lock',
+          icon: 'search',
           noCache: true
         }
       }
