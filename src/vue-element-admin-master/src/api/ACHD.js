@@ -11,7 +11,7 @@ export function insertCCTA(data) {
 // 搜索
 export function search(data) {
   return request({
-    url: '/' + data,
+    url: '/search/' + data,
     method: 'get'
   })
 }
