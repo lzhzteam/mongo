@@ -10,26 +10,37 @@
           <el-button slot="append" icon="el-icon-search" @click="submit" />
         </el-input>
       </el-form-item>
-      <el-form-item label="搜索结果" class="custom-two-col">
-
-        <el-tree
-          :data="searchResult"
-        />
-
-        <el-timeline>
-          <el-timeline-item
-            v-for="(activity, index) in activities"
-            :key="index"
-            :icon="activity.icon"
-            :type="activity.type"
-            :color="activity.color"
-            :size="activity.size"
-            :timestamp="activity.timestamp"
-          >
-            {{ activity.content }}
-          </el-timeline-item>
-        </el-timeline>
-      </el-form-item>
+      <el-row>
+        <el-col :span="10">
+          <el-tree
+            ref="leftTree"
+            :data="searchResult"
+            highlight-current
+            show-checkbox
+            @check-change="handleCheckChange"
+          />
+        </el-col>
+        <el-col :span="14">
+          <el-timeline>
+            <el-timeline-item
+              v-for="(activity, index) in activities"
+              :key="index"
+              :icon="activity.icon"
+              :type="activity.type"
+              :color="activity.color"
+              :size="activity.size"
+              :timestamp="activity.timestamp"
+              placement="top"
+            >
+              <el-card>
+                <el-tree
+                  :data="activity.content"
+                />
+              </el-card>
+            </el-timeline-item>
+          </el-timeline>
+        </el-col>
+      </el-row>
     </el-form>
 
   </div>
@@ -37,36 +48,15 @@
 
 <script>
 import { search } from '../../../api/ACHD'
-import { jsonToTree } from '../../../utils/jsonToEtc'
+import { jsonToTree, treeNodeToTimeline } from '../../../utils/jsonToEtc'
 
 export default {
   data() {
     return {
       loading: false,
       searchCondition: '',
-      searchResult: []
-    }
-  },
-  computed: {
-    activities: function() {
-      const result = []
-      if (this.searchResult.size > 0) {
-        const son = this.searchResult[0].children
-        for (const grandson in son) {
-          if (grandson['label'] === 'cctas') {
-            const cctas = grandson.children
-            for (const ccta in cctas) {
-              const timestampStrings = ccta.label.split(' ')
-              // "label": "检查时间 : 2019-03-04T16:00:00.000+0000" 所以是按空格分隔第三个
-              result.push({
-                content: ccta,
-                timestamp: timestampStrings[2]
-              })
-            }
-          }
-        }
-      }
-      return result
+      searchResult: [],
+      activities: []
     }
   },
   mounted() {
@@ -90,6 +80,10 @@ export default {
         that.$message.error(error)
         that.loading = false
       })
+    },
+    handleCheckChange(data, checked, indeterminate) {
+      data = this.$refs.leftTree.getCheckedNodes()
+      this.activities = treeNodeToTimeline(data, checked, indeterminate)
     }
   }
 }

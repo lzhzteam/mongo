@@ -30,3 +30,18 @@ export function jsonToTree(
     }
   }
 }
+
+export function treeNodeToTimeline(treenodes, checked, indeterminate, labelProp = '检查时间') {
+  const result = []
+  for (const treenode in treenodes) {
+    if (treenodes[treenode].label.indexOf(labelProp) !== -1 &&
+      Object.keys(treenodes[treenode]).includes('children') &&
+      treenodes[treenode].children.length > 0) {
+      result.push({
+        content: [treenodes[treenode]],
+        timestamp: treenodes[treenode].label.split(' ')[2]
+      })
+    }
+  }
+  return result
+}
