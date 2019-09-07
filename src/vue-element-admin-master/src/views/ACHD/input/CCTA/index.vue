@@ -257,7 +257,6 @@ export default {
       const that = this
       that.loading = true
       insertCCTA(that.ccta).then(response => {
-        that.loading = false
         if (response.status === 0) {
           that.$message.success('成功')
           this.resetData()
@@ -266,9 +265,10 @@ export default {
         } else {
           that.$message.error(response.data)
         }
-      }).catch(error => {
         that.loading = false
+      }).catch(error => {
         that.$message.error(error)
+        that.loading = false
       })
     }
   }

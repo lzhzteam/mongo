@@ -8,6 +8,16 @@ export function insertCCTA(data) {
     data
   })
 }
+
+// BDT操作
+export function insertBDT(data) {
+  return request({
+    url: '/BDT',
+    method: 'post',
+    data
+  })
+}
+
 // 搜索
 export function search(data) {
   return request({

@@ -426,7 +426,7 @@
               <span>（戒烟</span>
               <el-input v-model="bdt.bdts[0].吸烟史.过去吸年" style="width: 100px" />
               <span>年</span>
-              <span v-if="bdt.bdts[0].吸烟史.过去吸年 === null || bdt.bdts[0].吸烟史.过去吸年 === ''">
+              <span v-if="bdt.bdts[0].吸烟史.过去吸年 === null || bdt.bdts[0].吸烟史.过去吸年.trim() === ''">
                 <span>，如不满一年</span>
                 <el-input v-model="bdt.bdts[0].吸烟史.过去吸月" style="width: 100px" />
                 <span>月）</span>
@@ -523,7 +523,7 @@
           <el-col v-if="bdt.bdts[0].饮酒史.频率 === '3'" :span="18">
             <el-form-item label-width="0">
               <span>（戒酒</span>
-              <el-input v-model="bdt.bdts[0].吸烟史.过去饮年" style="width: 100px;" />
+              <el-input v-model="bdt.bdts[0].饮酒史.过去饮年" style="width: 100px;" />
               <span>年）</span>
             </el-form-item>
           </el-col>
@@ -748,6 +748,7 @@
 </template>
 
 <script>
+import { insertBDT } from "../../../../api/ACHD";
 
 export default {
   data() {
@@ -773,42 +774,42 @@ export default {
             其它: null
           },
           高血压病: {
-            有无: null,
+            有无: '1',
             目前用药: null,
             用药后达标情况: null
           },
           血脂异常: {
-            有无: null,
+            有无: '1',
             目前用药: null,
             用药后控制情况: null
           },
           糖尿病史: {
-            有无: null,
+            有无: '1',
             分型: null,
             目前用药: null,
             用药后控制情况: null
           },
           脑卒中病史: {
-            有无: null,
+            有无: '1',
             发生时间: null,
             发生部位: null,
             类型: null
           },
           外周血管病: {
-            有无: null,
+            有无: '1',
             发生时间: null,
             发生部位: null,
             类型: null
           },
           吸烟史: {
-            频率: null,
+            频率: '1',
             经常吸支数: null,
             经常吸年: null,
             过去吸年: null,
             过去吸月: null
           },
           饮酒史: {
-            频率: null,
+            频率: '1',
             经常饮: {
               白酒: {
                 毫升: null,
@@ -821,11 +822,11 @@ export default {
             过去饮年: null
           },
           体育锻炼史: {
-            频率: null,
+            频率: '1',
             时长: null
           },
           心肌梗死: {
-            有无: null,
+            有无: '1',
             年月: null
           },
           目前服药: {
@@ -842,7 +843,7 @@ export default {
           },
           家族史: {
             冠心病家族史: {
-              有无: null,
+              有无: '2',
               谁: {
                 父亲: null,
                 母亲: null,
@@ -850,7 +851,7 @@ export default {
                 子女: null
               }
             },
-            高脂血症家族史: null,
+            高脂血症家族史: '2',
             其它: null
           }
         }]
@@ -881,6 +882,31 @@ export default {
           { required: true, message: '体重不能为空' },
           { type: 'number', message: '体重必须为数字' }
         ]
+      },
+      pickerOptions: {
+        disabledDate(time) {
+          return time.getTime() > Date.now()
+        },
+        shortcuts: [{
+          text: '今天',
+          onClick(picker) {
+            picker.$emit('pick', new Date())
+          }
+        }, {
+          text: '昨天',
+          onClick(picker) {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24)
+            picker.$emit('pick', date)
+          }
+        }, {
+          text: '一周前',
+          onClick(picker) {
+            const date = new Date()
+            date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
+            picker.$emit('pick', date)
+          }
+        }]
       }
     }
   },
@@ -889,7 +915,167 @@ export default {
   },
   methods: {
     submit() {
+      this.$refs['bdt'].validate((valid) => {
+        if (!valid) {
+          return false
+        }
+      })
+      if (this.bdt.bdts[0].检查目的.典型心绞痛 === 'false' &&
+        this.bdt.bdts[0].检查目的.非典型性胸部不适 === 'false' &&
+        this.bdt.bdts[0].检查目的.非胸痛症状 === 'false' &&
+        this.bdt.bdts[0].检查目的.心电图异常 === 'false' &&
+        this.bdt.bdts[0].检查目的.心脏超声异常 === 'false' &&
+        (this.bdt.bdts[0].检查目的.其它 === null || this.bdt.bdts[0].检查目的.其它.trim() === '')) {
+        this.$message.warning('请选择检查目的')
+        return false
+      }
+      if (this.bdt.bdts[0].高血压病.有无 === '3' && this.bdt.bdts[0].高血压病.目前用药 !== null && this.bdt.bdts[0].高血压病.用药后达标情况 === null) {
+        this.$message.warning('请选择服用高血压病药后达标情况')
+        return false
+      }
+      if (this.bdt.bdts[0].血脂异常.有无 === '3' && this.bdt.bdts[0].血脂异常.目前用药 !== null && this.bdt.bdts[0].血脂异常.用药后控制情况 === null) {
+        this.$message.warning('请选择服用血脂异常病药后控制情况')
+        return false
+      }
+      if (this.bdt.bdts[0].糖尿病史.有无 === '3') {
+        if (this.bdt.bdts[0].糖尿病史.分型 === null) {
+          this.$message.warning('请选择服用糖尿病类型')
+          return false
+        }
+        if (this.bdt.bdts[0].糖尿病史.目前用药 !== null && this.bdt.bdts[0].糖尿病史.用药后控制情况 === null) {
+          this.$message.warning('请选择服用糖尿病药后控制情况')
+          return false
+        }
+      }
+      // 脑卒中病史
+      if (this.bdt.bdts[0].脑卒中病史.有无 === '3') {
+        if (this.bdt.bdts[0].脑卒中病史.发生时间 === null) {
+          this.$message.warning('请选择脑卒中病发生时间')
+          return false
+        }
+        if (this.bdt.bdts[0].脑卒中病史.发生时间 > Date.now()) {
+          this.$message.warning('脑卒中病发生时间大于当前时间')
+          return false
+        }
+        if (this.isEmpty(this.bdt.bdts[0].脑卒中病史.发生部位)) {
+          this.$message.warning('请选择脑卒中病发生部位')
+          return false
+        }
+        if (this.bdt.bdts[0].脑卒中病史.类型 === null) {
+          this.$message.warning('请选择脑卒中病类型')
+          return false
+        }
+      }
+      // 外周血管病
+      if (this.bdt.bdts[0].外周血管病.有无 === '3') {
+        if (this.bdt.bdts[0].外周血管病.发生时间 === null) {
+          this.$message.warning('请选择外周血管病发生时间')
+          return false
+        }
+        if (this.bdt.bdts[0].外周血管病.发生时间 > Date.now()) {
+          this.$message.warning('外周血管病发生时间大于当前时间')
+          return false
+        }
+        if (this.isEmpty(this.bdt.bdts[0].外周血管病.发生部位) || this.bdt.bdts[0].外周血管病.类型 === null) {
+          this.$message.warning('请选择外周血管病发生部位')
+          return false
+        }
+      }
+      // 吸烟史
+      if (this.bdt.bdts[0].吸烟史.频率 === '1' && (this.isEmpty(this.bdt.bdts[0].吸烟史.经常吸支数) || this.isEmpty(this.bdt.bdts[0].吸烟史.经常吸年))) {
+        this.$message.warning('请填写吸烟史具体信息')
+        return false
+      }
+      if (this.bdt.bdts[0].吸烟史.频率 === '3' && this.isEmpty(this.bdt.bdts[0].吸烟史.过去吸年) && this.isEmpty(this.bdt.bdts[0].吸烟史.过去吸月)) {
+        this.$message.warning('请填写吸烟史具体信息')
+        return false
+      }
+      // 饮酒史
+      if (this.bdt.bdts[0].饮酒史.频率 === '1') {
+        if (this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.白酒.毫升) &&
+          this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.红酒) &&
+          this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.啤酒) &&
+          this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.黄酒)) {
+          this.$message.warning('请填写饮酒史具体信息')
+          return false
+        }
+        if (!this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.白酒.毫升) && this.isEmpty(this.bdt.bdts[0].饮酒史.经常饮.白酒.度数)) {
+          this.$message.warning('请填写白酒度数')
+          return false
+        }
+      }
+      if (this.bdt.bdts[0].饮酒史.频率 === '3' && this.isEmpty(this.bdt.bdts[0].饮酒史.过去饮年)) {
+        this.$message.warning('请填写饮酒史具体信息')
+        return false
+      }
+      // 体育锻炼史
+      if ((this.bdt.bdts[0].体育锻炼史.频率 === '2' || this.bdt.bdts[0].体育锻炼史.频率 === '3') && this.bdt.bdts[0].体育锻炼史.时长 === null) {
+        this.$message.warning('请填写体育锻炼史时常')
+        return false
+      }
+      // 心肌梗死
+      if (this.bdt.bdts[0].心肌梗死.有无 === '2') {
+        if (this.bdt.bdts[0].心肌梗死.年月 === null) {
+          this.$message.warning('请填写心肌梗死时间')
+          return false
+        }
+        if (this.bdt.bdts[0].心肌梗死.年月 > Date.now()) {
+          this.$message.warning('心肌梗死时间大于当前时间')
+          return false
+        }
+      }
+      // 冠心病家族史
+      if (this.bdt.bdts[0].家族史.冠心病家族史.有无 === '1') {
+        if (!this.checkbox.father &&
+          !this.checkbox.mother &&
+          !this.checkbox.brother &&
+          !this.checkbox.child) {
+          this.$message.warning('请选择家族患病者')
+          return false
+        }
+        if (this.checkbox.father && this.isEmpty(this.bdt.bdts[0].家族史.冠心病家族史.谁.父亲)) {
+          this.$message.warning('请填写父亲发病年龄')
+          return false
+        }
+        if (this.checkbox.mother && this.isEmpty(this.bdt.bdts[0].家族史.冠心病家族史.谁.母亲)) {
+          this.$message.warning('请填写母亲发病年龄')
+          return false
+        }
+        if (this.checkbox.brother && this.isEmpty(this.bdt.bdts[0].家族史.冠心病家族史.谁.兄弟姐妹)) {
+          this.$message.warning('请填写兄弟姐妹发病年龄')
+          return false
+        }
+        if (this.checkbox.child && this.isEmpty(this.bdt.bdts[0].家族史.冠心病家族史.谁.子女)) {
+          this.$message.warning('请填写子女发病年龄')
+          return false
+        }
+      }
+      this.insertBDT()
+    },
+    reset() {
       console.info(this.bdt.bdts[0].血压)
+    },
+    isEmpty(str) {
+      str = str === null ? '' : str.trim()
+      return str === null || str === ''
+    },
+    insertBDT() {
+      const that = this
+      that.loading = true
+      insertBDT(that.bdt).then((response) => {
+        if (response.status === 0) {
+          that.$message.success('成功')
+          this.resetData()
+        } else if (response.status === -1) {
+          that.$message.error('失败')
+        } else {
+          that.$message.error(response.data)
+        }
+        that.loading = false
+      }).catch(error => {
+        that.$message.error(error)
+        that.loading = false
+      })
     }
   }
 }
