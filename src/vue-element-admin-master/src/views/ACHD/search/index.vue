@@ -80,18 +80,15 @@ export default {
       const that = this
       that.loading = true
       search(this.searchCondition).then(response => {
-        that.loading = false
         if (response.status === 0) {
           this.searchResult = jsonToTree(response.data).children
-          that.$message.success('成功')
-        } else if (response.status === -1) {
-          that.$message.error('失败')
         } else {
-          that.$message.error(response.data)
+          that.$message.error('失败')
         }
-      }).catch(error => {
         that.loading = false
+      }).catch(error => {
         that.$message.error(error)
+        that.loading = false
       })
     }
   }
