@@ -1,7 +1,8 @@
 // 转json到element-tree所需要的格式
 // idProp 到 childrenProp 都是那个位置的属性名 可以修改
 // labelAvailables 是可以在条目上label位置展示的子内容里的条目属性名 从前到后优先级递增
-export function jsonToTree(dataObject,
+export function jsonToTree(
+  dataObject,
   count = 0,
   name = 'undef',
   idProp = 'id',
