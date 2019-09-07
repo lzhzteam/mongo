@@ -3,11 +3,6 @@ spring:
     mongodb:
       uri: mongodb://101.132.120.236:27017/ACHD
 
-  mvc:
-    view:
-      prefix: classpasth:/templates/
-      suffix: .html
-
   thymeleaf:
     cache: false
 server:
