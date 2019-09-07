@@ -21,8 +21,8 @@
 </template>
 
 <script>
-import { search } from '../../../../api/ACHD'
-import { jsonToTree } from '../../../../utils/jsonToTree'
+import { search } from '../../../api/ACHD'
+import { jsonToTree } from '../../../utils/jsonToTree'
 
 export default {
   data() {

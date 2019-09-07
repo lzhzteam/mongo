@@ -24,9 +24,9 @@ public class BaseEntity implements Serializable {
     private String 性别;
 
     /////////////BDT///////////
-    private ArrayList<BDT> BDTs;
+    private ArrayList<BDT> BDTs = new ArrayList<>();
     ///////////CCTA///////////
-    private ArrayList<CCTA> CCTAs;
+    private ArrayList<CCTA> CCTAs = new ArrayList<>();
 
     public String getId() {
         return id;

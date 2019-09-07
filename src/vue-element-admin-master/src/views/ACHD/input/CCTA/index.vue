@@ -25,14 +25,14 @@
             </el-form-item>
           </el-col>
           <el-col :span="6">
-            <el-form-item label="年龄" prop="CCTAs[0].年龄" label-width="50px" style="padding-left: 20px;">
-              <el-input v-model.number="ccta.CCTAs[0].年龄" />
+            <el-form-item label="年龄" prop="cctas[0].年龄" label-width="50px" style="padding-left: 20px;">
+              <el-input v-model.number="ccta.cctas[0].年龄" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="检查时间" prop="CCTAs[0].检查时间" style="padding-left: 20px;">
+            <el-form-item label="检查时间" prop="cctas[0].检查时间" style="padding-left: 20px;">
               <el-date-picker
-                v-model="ccta.CCTAs[0].检查时间"
+                v-model="ccta.cctas[0].检查时间"
                 align="center"
                 type="date"
                 placeholder="选择日期"
@@ -46,31 +46,31 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="冠状动脉CT是否异常" label-width="200px">
-              <el-radio-group v-model="ccta.CCTAs[0].冠状动脉CT是否异常">
+              <el-radio-group v-model="ccta.cctas[0].冠状动脉CT是否异常">
                 <el-radio label="true">是</el-radio>
                 <el-radio label="false">否</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
         </el-row>
-        <span v-if="ccta.CCTAs[0].冠状动脉CT是否异常 === 'true'">
-          <el-form-item label="病变位置" prop="CCTAs[0].病变位置">
-            <el-radio-group v-model="ccta.CCTAs[0].病变位置">
+        <span v-if="ccta.cctas[0].冠状动脉CT是否异常 === 'true'">
+          <el-form-item label="病变位置" prop="cctas[0].病变位置">
+            <el-radio-group v-model="ccta.cctas[0].病变位置">
               <el-radio v-for="location in locationOptions" :key="location.value" :label="location.value" style="width: 150px; margin: 10px;">{{ location.label }}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="病变长度" prop="CCTAs[0].病变长度">
-            <el-radio-group v-model="ccta.CCTAs[0].病变长度">
+          <el-form-item label="病变长度" prop="cctas[0].病变长度">
+            <el-radio-group v-model="ccta.cctas[0].病变长度">
               <el-radio v-for="length in lengthOptions" :key="length.value" :label="length.value" style="width: 150px; margin: 10px;">{{ length.label }}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="斑块特征" prop="CCTAs[0].斑块特征">
-            <el-radio-group v-model="ccta.CCTAs[0].斑块特征">
+          <el-form-item label="斑块特征" prop="cctas[0].斑块特征">
+            <el-radio-group v-model="ccta.cctas[0].斑块特征">
               <el-radio v-for="feature in featureOptions" :key="feature.value" :label="feature.value" style="width: 150px; margin: 10px;">{{ feature.label }}</el-radio>
             </el-radio-group>
           </el-form-item>
-          <el-form-item label="狭窄度" prop="CCTAs[0].狭窄度">
-            <el-input v-model.number="ccta.CCTAs[0].狭窄度" style="width: 200px;">
+          <el-form-item label="狭窄度" prop="cctas[0].狭窄度">
+            <el-input v-model.number="ccta.cctas[0].狭窄度" style="width: 200px;">
               <template slot="suffix">mm</template>
             </el-input>
           </el-form-item>
@@ -95,7 +95,7 @@ export default {
         编号: null,
         姓名: null,
         性别: '男',
-        CCTAs: [{
+        cctas: [{
           年龄: null,
           检查时间: new Date(),
           冠状动脉CT是否异常: 'true',
@@ -208,14 +208,14 @@ export default {
       rules: {
         编号: [{ required: true, message: '编号不能为空' }],
         姓名: [{ required: true, message: '姓名不能为空' }],
-        'CCTAs[0].年龄': [
+        'cctas[0].年龄': [
           { required: true, message: '年龄不能为空' },
           { type: 'number', message: '年龄必须为数字值' }
         ],
-        'CCTAs[0].病变位置': [{ required: true, message: '请选择病变位置' }],
-        'CCTAs[0].病变长度': [{ required: true, message: '请选择病变长度' }],
-        'CCTAs[0].斑块特征': [{ required: true, message: '请选择斑块特征' }],
-        'CCTAs[0].狭窄度': [
+        'cctas[0].病变位置': [{ required: true, message: '请选择病变位置' }],
+        'cctas[0].病变长度': [{ required: true, message: '请选择病变长度' }],
+        'cctas[0].斑块特征': [{ required: true, message: '请选择斑块特征' }],
+        'cctas[0].狭窄度': [
           { required: true, message: '狭窄度不能为空' },
           { type: 'number', message: '狭窄度必须为数字值' }
         ]
@@ -250,8 +250,8 @@ export default {
       this.$refs['ccta'].resetFields()
       this.$refs['ccta_inline'].resetFields()
       this.ccta.性别 = '男'
-      this.ccta.CCTAs[0].检查时间 = new Date()
-      this.ccta.CCTAs[0].冠状动脉CT是否异常 = 'true'
+      this.ccta.cctas[0].检查时间 = new Date()
+      this.ccta.cctas[0].冠状动脉CT是否异常 = 'true'
     },
     insert_ccta() {
       const that = this

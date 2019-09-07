@@ -128,26 +128,13 @@ export const asyncRoutes = [
   {
     path: '/search',
     component: Layout,
-    meta: {
-      title: '病例查询',
-      icon: 'lock'
-    },
     children: [
       {
-        path: 'BDT',
-        component: () => import('@/views/ACHD/search/BDT/index'),
+        path: 'index',
+        component: () => import('@/views/ACHD/search/index'),
         meta: {
-          title: '基线资料表查询',
-          icon: '',
-          noCache: true
-        }
-      },
-      {
-        path: 'CCTA',
-        component: () => import('@/views/ACHD/search/CCTA/index'),
-        meta: {
-          title: 'CCTA报告查询',
-          icon: '',
+          title: '病例查询',
+          icon: 'lock',
           noCache: true
         }
       }
