@@ -48,7 +48,7 @@
 
 <script>
 import { search } from '../../../api/ACHD'
-import { jsonToTree, treeNodeToTimeline } from '../../../utils/jsonToEtc'
+import { jsonToTree, treeNodeToTimeline, dbJsonToFrontJson } from '../../../utils/jsonToEtc'
 
 export default {
   data() {
@@ -71,7 +71,7 @@ export default {
       that.loading = true
       search(this.searchCondition).then(response => {
         if (response.status === 0) {
-          this.searchResult = jsonToTree(response.data).children
+          this.searchResult = jsonToTree(dbJsonToFrontJson(response.data)).children
         } else {
           that.$message.error('失败')
         }
