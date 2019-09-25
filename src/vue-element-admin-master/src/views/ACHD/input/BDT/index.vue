@@ -748,7 +748,7 @@
 </template>
 
 <script>
-import { insertBDT } from "../../../../api/ACHD";
+import { insertBDT } from '../../../../api/ACHD'
 
 export default {
   data() {
