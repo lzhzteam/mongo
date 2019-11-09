@@ -1,21 +1,13 @@
 package com.achd.mongo.Service;
 
 import com.achd.mongo.Entity.BaseEntity;
+import com.achd.mongo.Entity.BaseEntityCurrent;
 import com.mongodb.BasicDBObject;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
-import com.mongodb.util.JSON;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.aggregation.Aggregation;
-import org.springframework.data.mongodb.core.aggregation.AggregationResults;
-import org.springframework.data.mongodb.core.aggregation.TypedAggregation;
-import org.springframework.data.mongodb.core.query.BasicQuery;
-import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
-import java.util.Iterator;
 import java.util.List;
 
 @Repository
@@ -60,11 +52,11 @@ public class Query_Repository {
         System.out.println(object);
     }
 
-    public List<BaseEntity> select(Query query) {
-        return mongoTemplate.find(query, BaseEntity.class);
+    public List<BaseEntityCurrent> select(Query query) {
+        return mongoTemplate.find(query, BaseEntityCurrent.class);
     }
 
-    public long count(Query query) {
-        return mongoTemplate.count(query, BaseEntity.class);
+    public Long count(Query query) {
+        return mongoTemplate.count(query, BaseEntityCurrent.class);
     }
 }

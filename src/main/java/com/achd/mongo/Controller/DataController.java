@@ -35,7 +35,12 @@ public class DataController {
     @GetMapping("/analyze/{key}/{value}")
     public AnalyzeEntity analyze(@PathVariable("key") String key,
                                  @PathVariable("value") Object value) {
-        System.out.println(dataService.analyze(key,value));
-        return dataService.analyze(key, value);
+//        return dataService.analyze(key, value);
+        return dataService.getTestData();
+    }
+
+    @GetMapping("/analyze/all")
+    public AnalyzeEntity analyze() {
+        return dataService.analyze();
     }
 }

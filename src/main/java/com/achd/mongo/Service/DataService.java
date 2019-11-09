@@ -5,6 +5,7 @@ import com.achd.mongo.Entity.BaseEntity;
 import com.achd.mongo.Entity.BaseEntityCurrent;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTA;
 import com.achd.mongo.Entity.WebResponse;
+import com.achd.mongo.Utilities.NumberUtils;
 import com.achd.mongo.Utilities.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class DataService {
@@ -82,42 +84,133 @@ public class DataService {
     }
 
     public AnalyzeEntity analyze(String key, Object value) {
+        String bingyin = String.format("bdt.%s", key);
+        String guanxinbing = "ccta.冠状动脉CT是否异常";
+
         // 病因 且 冠状动脉CT异常
-        Query query = new Query(Criteria.where(String.format("BDTs.%s", key)).is(value)
-                .and("CCTAs.冠状动脉CT是否异常").is(true));
-        List<BaseEntity> testData = query_repository.select(query);
+        Query query = new Query(Criteria.where(bingyin).is(value)
+                .and(guanxinbing).is(true));
+        List<BaseEntityCurrent> testData = query_repository.select(query);
         Long testTrue = query_repository.count(query);
 
         // 病因 且 非冠状动脉CT异常
-        query = new Query(Criteria.where(String.format("BDTs.%s", key)).is(value)
-                .and("CCTAs.冠状动脉CT是否异常").is(false));
+        query = new Query(Criteria.where(bingyin).is(value)
+                .and(guanxinbing).is(false));
         Long testFalse = query_repository.count(query);
 
+        Long testTotal = testTrue + testFalse;
+        Double testRate = testTotal == 0 ? 0.0 : NumberUtils.getTwoDecimalPlace(((double)testTrue / (double)testTotal) * 100.0);
+
         // 非病因 且 冠状动脉CT异常
-        query = new Query(Criteria.where(String.format("BDTs.%s", key)).ne(value)
-                .and("CCTAs.冠状动脉CT是否异常").is(true));
+        query = new Query(Criteria.where(bingyin).ne(value)
+                .and(guanxinbing).is(true));
         Long controlTrue = query_repository.count(query);
 
         // 非病因 且 冠状动脉CT异常
-        query = new Query(Criteria.where(String.format("BDTs.%s", key)).ne(value)
-                .and("CCTAs.冠状动脉CT是否异常").is(false));
+        query = new Query(Criteria.where(bingyin).ne(value)
+                .and(guanxinbing).is(false));
         Long controlFalse = query_repository.count(query);
 
-        Long[] position = new Long[18];
-        Long[] length = new Long[3];
-        Long[] feature = new Long[3];
+        Long controlTotal = controlTrue + controlFalse;
+        Double controlRate = controlTotal == 0 ? 0.0 :NumberUtils.getTwoDecimalPlace( ((double)controlTrue / (double)controlTotal) * 100.0);
 
-        for (BaseEntity baseEntity : testData) {
-            if (baseEntity.getCCTAs() == null || baseEntity.getCCTAs().isEmpty()) {
+        String scale = NumberUtils.getScale(testTrue, controlTrue);
+        Double RR = controlRate == 0 ? 0.0 : NumberUtils.getTwoDecimalPlace(testRate/controlRate);
+        Double AR = testRate - controlRate;
+        Double PAR = 0.0102 - controlRate;
+
+        Long[] position = {0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L};
+        Long[] length = {0L, 0L, 0L};
+        Long[] feature = {0L, 0L, 0L};
+
+        for (BaseEntityCurrent baseEntityCurrent : testData) {
+            CCTA ccta = baseEntityCurrent.getCcta();
+            if (ccta == null || !ccta.get冠状动脉CT是否异常()) {
                 continue;
             }
-
-            CCTA ccta = baseEntity.getCCTAs().get(baseEntity.getCCTAs().size() - 1);
             position[ccta.get病变位置() - 1]++;
             length[ccta.get病变长度() - 1]++;
             feature[ccta.get斑块特征() - 1]++;
         }
 
-        return new AnalyzeEntity(testTrue, testFalse, controlTrue, controlFalse, position, length, feature);
+        return new AnalyzeEntity(testTrue, testFalse, testTotal, testRate,
+                controlTrue, controlFalse, controlTotal, controlRate,
+                scale, RR, AR, PAR, position, length, feature);
+    }
+
+    public AnalyzeEntity analyze() {
+        String guanxinbing = "ccta.冠状动脉CT是否异常";
+
+        Query query = new Query(Criteria.where(guanxinbing).is(true));
+        List<BaseEntityCurrent> datas = query_repository.select(query);
+
+        Long[] position = {0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L};
+        Long[] length = {0L, 0L, 0L};
+        Long[] feature = {0L, 0L, 0L};
+
+        for (BaseEntityCurrent baseEntityCurrent : datas) {
+            CCTA ccta = baseEntityCurrent.getCcta();
+            if (ccta == null || !ccta.get冠状动脉CT是否异常()) {
+                continue;
+            }
+            position[ccta.get病变位置() - 1]++;
+            length[ccta.get病变长度() - 1]++;
+            feature[ccta.get斑块特征() - 1]++;
+        }
+
+        return new AnalyzeEntity(0L, 0L, 0L, 0.0,
+                0L, 0L, 0L, 0.0,
+                "", 0.0, 0.0, 0.0,
+                position, length, feature);
+
+    }
+
+    public AnalyzeEntity getTestData() {
+        Random random = new Random();
+
+        // 总人数 200000
+        int total = 200000;
+
+        // 实验组人数 100000-200000
+        int testTotal = random.nextInt(100000) + 100000;
+        int testTrue =random.nextInt(testTotal);
+        int testFalse = testTotal - testTrue;
+        double testRate = NumberUtils.getTwoDecimalPlace((double)testTrue/(double)testTotal);
+
+        // 对照组人数
+        int controlTotal = total - testTotal;
+        int controlTrue = random.nextInt(controlTotal);
+        int controlFalse = controlTotal - controlTrue;
+        double controlRate = NumberUtils.getTwoDecimalPlace((double)controlTrue/(double)controlTotal);
+
+        String scale = NumberUtils.getScale((long) testTrue, (long) controlTrue);
+        double RR = controlRate == 0 ? 0.0 : NumberUtils.getTwoDecimalPlace(testRate/controlRate);
+        double AR = testRate - controlRate;
+        double PAR = 0.0102 - controlRate;
+
+        Long[] position = {0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L};
+        Long positionTotal = (long) testTotal;
+        for (int i = 0; i < 17; i++) {
+            position[i] = (long) random.nextInt(Math.toIntExact(positionTotal));
+            positionTotal -= position[i];
+        }
+        position[17] = positionTotal;
+
+        Long[] length = {0L, 0L, 0L};
+        Long[] feature = {0L, 0L, 0L};
+        Long lengthTotal = (long) testTotal;
+        Long featureTotal = (long) testTotal;
+        for (int i = 0; i < 2; i++) {
+            length[i] = (long) random.nextInt(Math.toIntExact(lengthTotal));
+            lengthTotal -= length[i];
+            feature[i] = (long) random.nextInt(Math.toIntExact(featureTotal));
+            featureTotal -= feature[i];
+        }
+        length[2] = lengthTotal;
+        feature[2] = featureTotal;
+
+        return new AnalyzeEntity((long) testTrue, (long) testFalse, (long) testTotal, testRate,
+                (long) controlTrue, (long) controlFalse, (long) controlTotal, controlRate,
+                scale, RR, AR, PAR, position, length, feature);
     }
 }
