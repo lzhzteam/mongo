@@ -1,13 +1,21 @@
 <template>
   <div class="app-container">
-    <el-cascader
-      v-model="value"
-      :options="options"
-      placeholder="请选择查询要素"
-      change-on-select
-      style="width: 280px"
-      clearable
-    />
+    <div>
+      <span v-for="(value, index) in values" :key="value" :class="values[index]">
+        <el-cascader
+          v-model="values[index]"
+          :options="options"
+          placeholder="请选择查询要素"
+          change-on-select
+          clearable
+          size="mini"
+        />
+      </span>
+      <el-button v-if="values.length <= 5" icon="el-icon-plus" circle size="mini" @click="addSearch" />
+      <el-button v-else icon="el-icon-plus" circle disabled size="mini" />
+      <el-button type="primary" icon="el-icon-search" circle size="mini" @click="search" />
+    </div>
+
   </div>
 </template>
 
@@ -152,7 +160,7 @@ export default {
           ]
         }
       ],
-      value: '',
+      values: [''],
       analyze: {
         searchClass: ''
       }
@@ -161,6 +169,13 @@ export default {
   created() {
 
   },
-  methods: {}
+  methods: {
+    addSearch() {
+      this.values.push('')
+    },
+    search() {
+      console.info(this.values)
+    }
+  }
 }
 </script>
