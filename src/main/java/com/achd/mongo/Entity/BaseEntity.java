@@ -2,13 +2,16 @@ package com.achd.mongo.Entity;
 
 import com.achd.mongo.Entity.BDT.BDT_Sub.BDT;
 import com.achd.mongo.Entity.CCTA.CCTA_Sub.CCTA;
+import lombok.Data;
+import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+@Data
+@ToString
 @Document(collection = "BaseEntity")
 public class BaseEntity implements Serializable {
     @Id

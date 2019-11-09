@@ -1,5 +1,6 @@
 package com.achd.mongo.Controller;
 
+import com.achd.mongo.Entity.AnalyzeEntity;
 import com.achd.mongo.Entity.BaseEntity;
 import com.achd.mongo.Entity.WebResponse;
 import com.achd.mongo.Service.DataService;
@@ -7,6 +8,7 @@ import com.achd.mongo.Utilities.ResponseUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @RestController
@@ -28,5 +30,12 @@ public class DataController {
     @GetMapping("/search/{searchCondition}")
     public WebResponse searchPatient(@PathVariable("searchCondition") String searchCondition) {
         return dataService.search(searchCondition);
+    }
+
+    @GetMapping("/analyze/{key}/{value}")
+    public AnalyzeEntity analyze(@PathVariable("key") String key,
+                                 @PathVariable("value") Object value) {
+        System.out.println(dataService.analyze(key,value));
+        return dataService.analyze(key, value);
     }
 }
