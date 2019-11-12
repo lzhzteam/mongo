@@ -1,5 +1,6 @@
 package com.achd.mongo.Controller;
 
+import com.achd.mongo.Entity.AnalyzeCommand;
 import com.achd.mongo.Entity.AnalyzeEntity;
 import com.achd.mongo.Entity.BaseEntity;
 import com.achd.mongo.Entity.WebResponse;
@@ -32,11 +33,10 @@ public class DataController {
         return dataService.search(searchCondition);
     }
 
-    @GetMapping("/analyze/{key}/{value}")
-    public AnalyzeEntity analyze(@PathVariable("key") String key,
-                                 @PathVariable("value") Object value) {
-//        return dataService.analyze(key, value);
-        return dataService.getTestData();
+    @PostMapping("/analyze")
+    public AnalyzeEntity analyze(@RequestBody AnalyzeCommand command) {
+        return dataService.analyze(command.getKey(), command.getValue());
+//        return dataService.getTestData();
     }
 
     @GetMapping("/analyze/all")

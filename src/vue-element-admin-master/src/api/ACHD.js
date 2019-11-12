@@ -29,8 +29,9 @@ export function search(data) {
 // 病因分析
 export function analyze(data) {
   return request({
-    url: '/analyze/' + data.key + '/' + data.value,
-    method: 'get'
+    url: '/analyze',
+    method: 'post',
+    data
   })
 }
 
