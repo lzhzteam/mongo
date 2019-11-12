@@ -44,14 +44,14 @@ export default {
   data() {
     return {
       options: [
-        {
-          value: '年龄',
-          label: '年龄'
-        },
-        {
-          value: '性别',
-          label: '性别'
-        },
+        // {
+        //   value: '年龄',
+        //   label: '年龄'
+        // },
+        // {
+        //   value: '性别',
+        //   label: '性别'
+        // },
         {
           value: '检查目的',
           label: '检查目的',
@@ -168,18 +168,18 @@ export default {
           },
           label: '外周血管病'
         },
-        {
-          value: '吸烟史',
-          label: '吸烟史'
-        },
-        {
-          value: '饮酒史',
-          label: '饮酒史'
-        },
-        {
-          value: '体育锻炼史',
-          label: '体育锻炼史'
-        },
+        // {
+        //   value: '吸烟史',
+        //   label: '吸烟史'
+        // },
+        // {
+        //   value: '饮酒史',
+        //   label: '饮酒史'
+        // },
+        // {
+        //   value: '体育锻炼史',
+        //   label: '体育锻炼史'
+        // },
         {
           value: {
             key: '心肌梗死.有无',
